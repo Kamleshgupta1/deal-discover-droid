@@ -1,6 +1,7 @@
 import { Category } from '@/types';
 
 export const categories: Category[] = [
+  // Food Delivery
   {
     id: 'food',
     name: 'Food Delivery',
@@ -49,6 +50,8 @@ export const categories: Category[] = [
       }
     ]
   },
+  
+  // Grocery Delivery
   {
     id: 'grocery',
     name: 'Grocery',
@@ -97,6 +100,8 @@ export const categories: Category[] = [
       }
     ]
   },
+
+  // Travel Booking
   {
     id: 'travel',
     name: 'Travel Booking',
@@ -136,6 +141,8 @@ export const categories: Category[] = [
       }
     ]
   },
+
+  // Hotels & Stays
   {
     id: 'hotels',
     name: 'Hotels & Stays',
@@ -175,6 +182,8 @@ export const categories: Category[] = [
       }
     ]
   },
+
+  // Tickets & Transport
   {
     id: 'tickets',
     name: 'Tickets & Transport',
@@ -211,6 +220,198 @@ export const categories: Category[] = [
         deepLink: 'bookmyshow://movies',
         appLink: 'bookmyshow://movies',
         webLink: 'https://bookmyshow.com'
+      }
+    ]
+  },
+
+  // Fuel Stations
+  {
+    id: 'fuel',
+    name: 'Fuel Stations',
+    icon: '⛽',
+    color: 'from-yellow-500 to-orange-500',
+    description: 'Compare fuel prices and offers from IOCL, HP, BPCL',
+    platforms: [
+      {
+        id: 'iocl',
+        name: 'Indian Oil',
+        logo: '🛢️',
+        rating: 4.1,
+        discounts: ['IOCL loyalty points', 'Digital payment discounts'],
+        deepLink: 'iocl://fuel',
+        appLink: 'iocl://fuel',
+        webLink: 'https://iocl.com'
+      },
+      {
+        id: 'hp',
+        name: 'HP',
+        logo: '⚡',
+        rating: 4.0,
+        discounts: ['HP Pay rewards', 'Credit card offers'],
+        deepLink: 'hp://fuel',
+        appLink: 'hp://fuel',
+        webLink: 'https://hindustanpetroleum.com'
+      },
+      {
+        id: 'bpcl',
+        name: 'BPCL',
+        logo: '🔥',
+        rating: 3.9,
+        discounts: ['SmartDrive rewards', 'UPI cashback'],
+        deepLink: 'bpcl://fuel',
+        appLink: 'bpcl://fuel',
+        webLink: 'https://bharatpetroleum.com'
+      }
+    ]
+  },
+
+  // Credit & Debit Cards
+  {
+    id: 'cards',
+    name: 'Cards & Banking',
+    icon: '💳',
+    color: 'from-purple-500 to-blue-500',
+    description: 'Compare credit cards, debit cards from banks',
+    platforms: [
+      {
+        id: 'hdfc',
+        name: 'HDFC Bank',
+        logo: '🏦',
+        rating: 4.3,
+        discounts: ['Cashback on online purchases', 'Travel rewards'],
+        deepLink: 'hdfc://cards',
+        appLink: 'hdfc://cards',
+        webLink: 'https://hdfcbank.com'
+      },
+      {
+        id: 'icici',
+        name: 'ICICI Bank',
+        logo: '💰',
+        rating: 4.2,
+        discounts: ['Reward points on every purchase', 'Fuel surcharge waiver'],
+        deepLink: 'icici://cards',
+        appLink: 'icici://cards',
+        webLink: 'https://icicibank.com'
+      },
+      {
+        id: 'sbi',
+        name: 'SBI',
+        logo: '🏛️',
+        rating: 4.0,
+        discounts: ['Low annual fees', 'EMI conversion facility'],
+        deepLink: 'sbi://cards',
+        appLink: 'sbi://cards',
+        webLink: 'https://sbi.co.in'
+      }
+    ]
+  },
+
+  // Clothing & Fashion
+  {
+    id: 'clothes',
+    name: 'Clothing & Fashion',
+    icon: '👕',
+    color: 'from-pink-500 to-purple-500',
+    description: 'Shop fashion from Myntra, Ajio, Flipkart Fashion',
+    platforms: [
+      {
+        id: 'myntra',
+        name: 'Myntra',
+        logo: '👗',
+        rating: 4.4,
+        deliveryTime: '2-5 days',
+        discounts: ['End of season sale up to 70%', 'Free delivery above ₹799'],
+        deepLink: 'myntra://fashion',
+        appLink: 'myntra://fashion',
+        webLink: 'https://myntra.com'
+      },
+      {
+        id: 'ajio',
+        name: 'Ajio',
+        logo: '👖',
+        rating: 4.2,
+        deliveryTime: '3-7 days',
+        discounts: ['Buy 2 Get 1 Free', 'Extra 20% off on app'],
+        deepLink: 'ajio://fashion',
+        appLink: 'ajio://fashion',
+        webLink: 'https://ajio.com'
+      },
+      {
+        id: 'flipkart-fashion',
+        name: 'Flipkart Fashion',
+        logo: '👚',
+        rating: 4.1,
+        deliveryTime: '2-4 days',
+        discounts: ['Fashion days sale', 'Flipkart Plus benefits'],
+        deepLink: 'flipkart://fashion',
+        appLink: 'flipkart://fashion',
+        webLink: 'https://flipkart.com/clothing'
+      },
+      {
+        id: 'meesho',
+        name: 'Meesho',
+        logo: '🛍️',
+        rating: 4.0,
+        deliveryTime: '5-7 days',
+        discounts: ['Lowest prices guaranteed', 'Free delivery'],
+        deepLink: 'meesho://fashion',
+        appLink: 'meesho://fashion',
+        webLink: 'https://meesho.com'
+      }
+    ]
+  },
+
+  // Electronics & Gadgets
+  {
+    id: 'electronics',
+    name: 'Electronics & Gadgets',
+    icon: '📱',
+    color: 'from-blue-500 to-cyan-500',
+    description: 'Compare electronics from Amazon, Flipkart, Croma',
+    platforms: [
+      {
+        id: 'amazon',
+        name: 'Amazon',
+        logo: '📦',
+        rating: 4.5,
+        deliveryTime: '1-2 days',
+        discounts: ['Great Indian Festival', 'Prime member benefits'],
+        deepLink: 'amazon://electronics',
+        appLink: 'amazon://electronics',
+        webLink: 'https://amazon.in'
+      },
+      {
+        id: 'flipkart',
+        name: 'Flipkart',
+        logo: '🛒',
+        rating: 4.3,
+        deliveryTime: '2-4 days',
+        discounts: ['Big Billion Days', 'Flipkart Plus benefits'],
+        deepLink: 'flipkart://electronics',
+        appLink: 'flipkart://electronics',
+        webLink: 'https://flipkart.com'
+      },
+      {
+        id: 'croma',
+        name: 'Croma',
+        logo: '💻',
+        rating: 4.1,
+        deliveryTime: '3-5 days',
+        discounts: ['Store pickup discounts', 'Extended warranty'],
+        deepLink: 'croma://electronics',
+        appLink: 'croma://electronics',
+        webLink: 'https://croma.com'
+      },
+      {
+        id: 'vijaysales',
+        name: 'Vijay Sales',
+        logo: '📺',
+        rating: 4.0,
+        deliveryTime: '3-7 days',
+        discounts: ['Festival offers', 'Exchange benefits'],
+        deepLink: 'vijaysales://electronics',
+        appLink: 'vijaysales://electronics',
+        webLink: 'https://vijaysales.com'
       }
     ]
   }
