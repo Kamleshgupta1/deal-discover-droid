@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Category } from '@/types';
 import { categories } from '@/data/categories';
 import { ComparisonResults } from '@/components/ComparisonResults';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Search, TrendingUp, Users, Star } from 'lucide-react';
 import appIcon from '@/assets/app-icon.png';
 import { APP_CONFIG } from '@/constants';
 import { useSearch } from '@/hooks/useSearch';
@@ -10,6 +10,10 @@ import { handlePlatformLink } from '@/utils/linkUtils';
 import { CategoryGrid } from '@/components/features/CategoryGrid';
 import { SearchSection } from '@/components/features/SearchSection';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
+import { WelcomeTour } from '@/components/tour/WelcomeTour';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
@@ -31,29 +35,134 @@ const Index = () => {
     clearResults();
   };
 
+  const stats = [
+    { icon: Users, label: 'Happy Users', value: '50K+' },
+    { icon: TrendingUp, label: 'Deals Found', value: '1M+' },
+    { icon: Star, label: 'User Rating', value: '4.9' },
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-subtle">
-      <div className="container mx-auto px-4 py-6 max-w-4xl">
-        {/* Header */}
-        <div className="text-center mb-8 animate-slide-up">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <img src={appIcon} alt={APP_CONFIG.name} className="w-12 h-12 rounded-xl" />
-            <h1 className="text-4xl font-bold bg-gradient-hero bg-clip-text text-transparent">
-              {APP_CONFIG.name}
-            </h1>
-            <Sparkles className="h-8 w-8 text-primary animate-glow" />
-          </div>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            {APP_CONFIG.description}
-          </p>
-        </div>
-
-        {/* Main Content */}
+      <WelcomeTour />
+      
+      <div className="container mx-auto px-4 py-6 max-w-6xl">
         {!selectedCategory ? (
-          <CategoryGrid 
-            categories={categories}
-            onCategorySelect={handleCategorySelect}
-          />
+          <div className="space-y-8">
+            {/* Welcome Section */}
+            <div className="text-center space-y-6 animate-slide-up">
+              <div className="flex items-center justify-center gap-4 mb-6">
+                <div className="relative">
+                  <img src={appIcon} alt={APP_CONFIG.name} className="w-16 h-16 rounded-2xl shadow-lg" />
+                  <div className="absolute -top-2 -right-2 bg-primary text-white rounded-full p-1">
+                    <Sparkles className="h-4 w-4" />
+                  </div>
+                </div>
+                <div className="text-left">
+                  <h1 className="text-3xl md:text-4xl font-bold bg-gradient-hero bg-clip-text text-transparent">
+                    Welcome!
+                  </h1>
+                  <p className="text-muted-foreground text-lg">Find the best deals</p>
+                </div>
+              </div>
+
+              {/* Search Bar */}
+              <div className="max-w-2xl mx-auto">
+                <div className="relative">
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                  <Input
+                    type="text"
+                    placeholder="Search your destination here..."
+                    className="w-full pl-12 pr-4 py-4 text-lg bg-background/80 backdrop-blur-sm border-border/50 rounded-2xl shadow-sm focus:shadow-md transition-all"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Categories Grid - Mobile Optimized */}
+            <div className="space-y-4">
+              <div className="text-center">
+                <h2 className="text-xl md:text-2xl font-bold mb-2">Choose a Category</h2>
+                <p className="text-muted-foreground">Select what you want to compare</p>
+              </div>
+              
+              {/* Categories in rows of 4 for mobile, responsive for larger screens */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                {categories.slice(0, 8).map((category, index) => (
+                  <Card 
+                    key={category.id}
+                    className="group cursor-pointer hover:shadow-lg transition-all duration-300 hover-scale bg-primary text-white border-0"
+                    onClick={() => handleCategorySelect(category)}
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    <CardContent className="p-4 text-center space-y-3">
+                      <div className="flex items-center justify-center">
+                        <div className="p-3 bg-white/20 rounded-2xl">
+                          {React.createElement(category.icon, { className: "h-6 w-6 text-white" })}
+                        </div>
+                      </div>
+                      <h3 className="font-semibold text-sm text-white">{category.name}</h3>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              {/* See More Button */}
+              {categories.length > 8 && (
+                <div className="text-center pt-4">
+                  <Button variant="outline" className="rounded-full px-6">
+                    See More Categories
+                  </Button>
+                </div>
+              )}
+            </div>
+
+            {/* Recommendations Section */}
+            <div className="space-y-6">
+              <div className="text-center">
+                <h2 className="text-xl md:text-2xl font-bold mb-2">Recommendations</h2>
+                <p className="text-muted-foreground">Popular deals and trending products</p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card className="overflow-hidden hover:shadow-lg transition-all duration-300">
+                  <div className="aspect-video bg-gradient-primary relative">
+                    <div className="absolute inset-0 bg-black/20" />
+                    <div className="absolute bottom-4 left-4 text-white">
+                      <h3 className="font-bold text-lg">TRENDING DEALS</h3>
+                      <p className="text-sm opacity-90">Up to 70% off electronics</p>
+                    </div>
+                  </div>
+                </Card>
+                
+                <Card className="overflow-hidden hover:shadow-lg transition-all duration-300">
+                  <div className="aspect-video bg-gradient-secondary relative">
+                    <div className="absolute inset-0 bg-black/20" />
+                    <div className="absolute bottom-4 left-4 text-white">
+                      <h3 className="font-bold text-lg">FLASH SALES</h3>
+                      <p className="text-sm opacity-90">Limited time offers</p>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            </div>
+
+            {/* Stats Section */}
+            <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto">
+              {stats.map((stat, index) => (
+                <Card key={index} className="text-center p-4 hover:shadow-md transition-all">
+                  <CardContent className="p-0 space-y-2">
+                    <div className="flex justify-center">
+                      <div className="p-2 bg-primary/10 rounded-full">
+                        <stat.icon className="h-5 w-5 text-primary" />
+                      </div>
+                    </div>
+                    <div className="font-bold text-lg text-primary">{stat.value}</div>
+                    <div className="text-xs text-muted-foreground">{stat.label}</div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
         ) : (
           <div className="space-y-6">
             <SearchSection
@@ -82,13 +191,6 @@ const Index = () => {
             )}
           </div>
         )}
-
-        {/* Footer */}
-        <div className="text-center mt-12 pt-8 border-t border-border">
-          <p className="text-sm text-muted-foreground">
-            Made with ❤️ for smart shoppers • Compare • Save • Enjoy
-          </p>
-        </div>
       </div>
     </div>
   );

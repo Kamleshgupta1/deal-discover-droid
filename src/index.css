@@ -136,6 +136,25 @@
     --shadow-soft: 0 4px 20px hsl(var(--primary) / 0.2);
     --shadow-strong: 0 8px 32px hsl(var(--primary) / 0.3);
     --shadow-glow: 0 0 40px hsl(var(--primary) / 0.4);
+    
+    /* Enhanced gradients for better visual appeal */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--accent)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted)/0.3));
+    
+    /* Enhanced shadows with theme colors */
+    --shadow-elegant: 0 10px 30px -10px hsl(var(--primary) / 0.3);
+    --shadow-glow: 0 0 40px hsl(var(--primary-light) / 0.4);
+    
+    /* Enhanced transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    /* Mobile-first responsive breakpoints */
+    --mobile-max: 767px;
+    --tablet-max: 1023px;
+    --desktop-min: 1024px;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -233,6 +252,19 @@
   
   .shadow-glow {
     box-shadow: var(--shadow-glow);
+  }
+  
+  .shadow-elegant {
+    box-shadow: var(--shadow-elegant);
+  }
+  
+  /* Interactive Elements */
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-105;
+  }
+  
+  .story-link {
+    @apply relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left;
   }
 }
 

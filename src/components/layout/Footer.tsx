@@ -93,22 +93,19 @@ export const Footer = () => {
                 ))}
               </div>
 
-              {/* Newsletter */}
+              {/* Quick Stats */}
               <div className="space-y-3">
-                <h4 className="font-semibold text-sm">Stay Updated</h4>
-                <div className="flex gap-2">
-                  <Input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="flex-1 bg-background"
-                  />
-                  <Button size="sm" className="btn-gradient">
-                    Subscribe
-                  </Button>
+                <h4 className="font-semibold text-sm">Platform Stats</h4>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="text-center p-3 bg-primary/5 rounded-lg">
+                    <div className="text-lg font-bold text-primary">50K+</div>
+                    <div className="text-xs text-muted-foreground">Products</div>
+                  </div>
+                  <div className="text-center p-3 bg-primary/5 rounded-lg">
+                    <div className="text-lg font-bold text-primary">25+</div>
+                    <div className="text-xs text-muted-foreground">Platforms</div>
+                  </div>
                 </div>
-                <p className="text-xs text-muted-foreground">
-                  Get the latest deals and updates delivered to your inbox.
-                </p>
               </div>
             </div>
 

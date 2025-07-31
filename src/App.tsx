@@ -11,6 +11,9 @@ import Index from "./pages/Index";
 import { Login } from "./pages/auth/Login";
 import { Register } from "./pages/auth/Register";
 import { ForgotPassword } from "./pages/auth/ForgotPassword";
+import { PrivacyPolicy } from "./pages/legal/PrivacyPolicy";
+import { TermsOfService } from "./pages/legal/TermsOfService";
+import { ContactUs } from "./pages/ContactUs";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +34,9 @@ const App = () => (
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<TermsOfService />} />
+              <Route path="/contact" element={<ContactUs />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
