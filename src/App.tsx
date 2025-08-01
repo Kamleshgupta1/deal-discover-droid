@@ -8,6 +8,7 @@ import { InstallPrompt } from "@/components/pwa/InstallPrompt";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import Index from "./pages/Index";
+import AllCategories from "./pages/AllCategories";
 import { Login } from "./pages/auth/Login";
 import { Register } from "./pages/auth/Register";
 import { ForgotPassword } from "./pages/auth/ForgotPassword";
@@ -31,6 +32,7 @@ const App = () => (
           <main className="flex-1">
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/categories" element={<AllCategories />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />

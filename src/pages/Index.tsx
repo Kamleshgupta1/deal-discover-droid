@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Category } from '@/types';
-import { categories } from '@/data/categories';
+import { getHighPriorityCategories, getRemainingCategories } from '@/data/categories';
 import { ComparisonResults } from '@/components/ComparisonResults';
 import { Sparkles, Search, TrendingUp, Users, Star } from 'lucide-react';
 import appIcon from '@/assets/app-icon.png';
@@ -18,6 +19,7 @@ import { Input } from '@/components/ui/input';
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const { searchResults, isLoading, handleSearch, clearResults } = useSearch();
+  const navigate = useNavigate();
 
   const handleCategorySelect = (category: Category) => {
     setSelectedCategory(category);
@@ -58,10 +60,10 @@ const Index = () => {
                   </div>
                 </div>
                 <div className="text-left">
-                  <h1 className="text-3xl md:text-4xl font-bold bg-gradient-hero bg-clip-text text-transparent">
-                    Welcome!
+                  <h1 className="text-3xl md:text-4xl font-bold bg-gradient-hero bg-clip-text text-transparent animate-fade-in">
+                    First Look
                   </h1>
-                  <p className="text-muted-foreground text-lg">Find the best deals</p>
+                  <p className="text-muted-foreground text-lg">Get your first look at the best deals</p>
                 </div>
               </div>
 
@@ -85,9 +87,9 @@ const Index = () => {
                 <p className="text-muted-foreground">Select what you want to compare</p>
               </div>
               
-              {/* Categories in rows of 4 for mobile, responsive for larger screens */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
-                {categories.slice(0, 8).map((category, index) => (
+              {/* Categories in rows of 3 for mobile, responsive for larger screens */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4 max-w-3xl mx-auto">
+                {getHighPriorityCategories().map((category, index) => (
                   <Card 
                     key={category.id}
                     className="group cursor-pointer hover:shadow-lg transition-all duration-300 hover-scale bg-primary text-white border-0"
@@ -107,9 +109,13 @@ const Index = () => {
               </div>
 
               {/* See More Button */}
-              {categories.length > 8 && (
+              {getRemainingCategories().length > 0 && (
                 <div className="text-center pt-4">
-                  <Button variant="outline" className="rounded-full px-6">
+                  <Button 
+                    variant="outline" 
+                    className="rounded-full px-6"
+                    onClick={() => navigate('/categories')}
+                  >
                     See More Categories
                   </Button>
                 </div>

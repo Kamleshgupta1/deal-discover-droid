@@ -26,13 +26,13 @@ export const CategoryCard = ({ category, onSelect, delay = 0 }: CategoryCardProp
         
         <h3 className="text-xl font-bold mb-2 text-foreground">{category.name}</h3>
         <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-          {category.description}
+          Compare prices and deals across multiple platforms
         </p>
         
         <div className="flex flex-wrap gap-2 mb-4">
           {category.platforms.slice(0, 3).map((platform, idx) => (
-            <div key={platform.id} className="flex items-center gap-1 text-xs bg-muted px-2 py-1 rounded-full">
-              <span>{platform.logo}</span>
+            <div key={platform.name} className="flex items-center gap-1 text-xs bg-muted px-2 py-1 rounded-full">
+              <span className="w-2 h-2 rounded-full" style={{ backgroundColor: platform.color }}></span>
               <span>{platform.name}</span>
             </div>
           ))}

@@ -4,23 +4,15 @@ export interface Category {
   id: string;
   name: string;
   icon: LucideIcon;
-  color: string;
-  description: string;
+  priority?: number;
   platforms: Platform[];
 }
 
 export interface Platform {
-  id: string;
   name: string;
-  logo: string;
-  rating: number;
-  deliveryTime?: string;
-  minOrder?: number;
-  deliveryFee?: number;
-  discounts?: string[];
-  deepLink: string;
-  appLink?: string;
-  webLink: string;
+  url: string;
+  color: string;
+  features: string[];
 }
 
 export interface SearchQuery {

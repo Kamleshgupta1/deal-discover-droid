@@ -48,6 +48,12 @@ export const Header = () => {
     if (searchQuery.trim()) {
       navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
     }
+    setIsMobileMenuOpen(false);
+  };
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -133,11 +139,11 @@ export const Header = () => {
               <DropdownMenuContent align="end" className="w-48">
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => navigate('/login')}>
+                <DropdownMenuItem onClick={() => handleNavigation('/login')}>
                   <User className="h-4 w-4 mr-2" />
                   Sign In
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate('/register')}>
+                <DropdownMenuItem onClick={() => handleNavigation('/register')}>
                   <Shield className="h-4 w-4 mr-2" />
                   Sign Up
                 </DropdownMenuItem>
@@ -203,10 +209,10 @@ export const Header = () => {
 
               {/* Mobile Actions */}
               <div className="flex items-center justify-between px-2 pt-4 border-t border-border">
-                <Button variant="outline" size="sm" onClick={() => navigate('/login')}>
+                <Button variant="outline" size="sm" onClick={() => handleNavigation('/login')}>
                   Sign In
                 </Button>
-                <Button size="sm" onClick={() => navigate('/register')}>
+                <Button size="sm" onClick={() => handleNavigation('/register')}>
                   Sign Up
                 </Button>
               </div>

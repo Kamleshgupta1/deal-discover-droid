@@ -1,6 +1,6 @@
 export const APP_CONFIG = {
-  name: 'CompareAll',
-  description: 'Compare prices, delivery times, and offers across all major platforms in one place',
+  name: 'First Look',
+  description: 'Get your first look at the best deals - Compare prices, delivery times, and offers across all major platforms in one place',
   version: '1.0.0',
   maxSearchResults: 10,
   defaultAnimationDelay: 100,

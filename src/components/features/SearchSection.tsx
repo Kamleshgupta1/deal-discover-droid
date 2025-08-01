@@ -30,7 +30,7 @@ export const SearchSection = ({ category, onSearch, onBack }: SearchSectionProps
           </div>
         </div>
         <h2 className="text-3xl font-bold mb-2">{category.name}</h2>
-        <p className="text-muted-foreground">{category.description}</p>
+        <p className="text-muted-foreground">Compare prices and deals across multiple platforms</p>
       </div>
 
       {/* Search */}

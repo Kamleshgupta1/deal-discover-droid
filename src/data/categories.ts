@@ -1,430 +1,363 @@
-import { Category } from '@/types';
 import { 
-  UtensilsCrossed, 
+  Car, 
+  Utensils, 
   ShoppingCart, 
   Plane, 
-  Building2, 
+  Building, 
   Ticket, 
-  Fuel, 
-  CreditCard, 
-  Shirt, 
-  Smartphone,
-  LucideIcon
+  Package,
+  MapPin,
+  Stethoscope,
+  Film,
+  Truck,
+  Heart,
+  Gamepad2,
+  GraduationCap,
+  Home
 } from 'lucide-react';
+import { Category } from '@/types';
 
 export const categories: Category[] = [
-  // Food Delivery
   {
-    id: 'food',
+    id: 'food-delivery',
     name: 'Food Delivery',
-    icon: UtensilsCrossed,
-    color: 'from-orange-500 to-red-500',
-    description: 'Compare food delivery across Swiggy, Zomato, and more',
+    icon: Utensils,
+    priority: 1,
     platforms: [
-      {
-        id: 'swiggy',
-        name: 'Swiggy',
-        logo: '🛵',
-        rating: 4.3,
-        deliveryTime: '30-45 min',
-        minOrder: 99,
-        deliveryFee: 29,
-        discounts: ['50% off on first order', 'Free delivery above ₹199'],
-        deepLink: 'swiggy://restaurant',
-        appLink: 'swiggy://restaurant',
-        webLink: 'https://swiggy.com'
+      { 
+        name: 'Swiggy', 
+        url: 'https://www.swiggy.com', 
+        color: '#FC8A06',
+        features: ['Fast Delivery', 'Wide Selection', 'Live Tracking']
       },
-      {
-        id: 'zomato',
-        name: 'Zomato',
-        logo: '🍅',
-        rating: 4.1,
-        deliveryTime: '35-50 min',
-        minOrder: 149,
-        deliveryFee: 39,
-        discounts: ['60% off up to ₹120', 'Zomato Gold benefits'],
-        deepLink: 'zomato://restaurant',
-        appLink: 'zomato://restaurant',
-        webLink: 'https://zomato.com'
+      { 
+        name: 'Zomato', 
+        url: 'https://www.zomato.com', 
+        color: '#E23744',
+        features: ['Quality Food', 'Restaurant Reviews', 'Gold Membership']
       },
-      {
-        id: 'ubereats',
-        name: 'Uber Eats',
-        logo: '🚗',
-        rating: 4.0,
-        deliveryTime: '25-40 min',
-        minOrder: 99,
-        deliveryFee: 19,
-        discounts: ['Buy 1 Get 1 Free', 'Free delivery on Uber One'],
-        deepLink: 'ubereats://restaurant',
-        appLink: 'ubereats://restaurant',
-        webLink: 'https://ubereats.com'
+      { 
+        name: 'Uber Eats', 
+        url: 'https://www.ubereats.com', 
+        color: '#000000',
+        features: ['Global Brands', 'Quick Service', 'Uber Integration']
       }
     ]
   },
-  
-  // Grocery Delivery
   {
     id: 'grocery',
     name: 'Grocery',
     icon: ShoppingCart,
-    color: 'from-green-500 to-emerald-500',
-    description: 'Quick grocery delivery from Blinkit, Zepto, Instamart',
+    priority: 2,
     platforms: [
-      {
-        id: 'blinkit',
-        name: 'Blinkit',
-        logo: '⚡',
-        rating: 4.2,
-        deliveryTime: '10-15 min',
-        minOrder: 199,
-        deliveryFee: 25,
-        discounts: ['₹100 off on first order', 'Free delivery above ₹299'],
-        deepLink: 'blinkit://products',
-        appLink: 'blinkit://products',
-        webLink: 'https://blinkit.com'
+      { 
+        name: 'Blinkit', 
+        url: 'https://blinkit.com', 
+        color: '#FFDD00',
+        features: ['10-min Delivery', 'Fresh Produce', '24/7 Service']
       },
-      {
-        id: 'zepto',
-        name: 'Zepto',
-        logo: '🔥',
-        rating: 4.4,
-        deliveryTime: '10 min',
-        minOrder: 149,
-        deliveryFee: 29,
-        discounts: ['Save ₹150 on first order', 'Daily deals'],
-        deepLink: 'zepto://products',
-        appLink: 'zepto://products',
-        webLink: 'https://zepto.com'
+      { 
+        name: 'BigBasket', 
+        url: 'https://www.bigbasket.com', 
+        color: '#84C225',
+        features: ['Bulk Orders', 'Scheduled Delivery', 'Organic Options']
       },
-      {
-        id: 'instamart',
-        name: 'Instamart',
-        logo: '📦',
-        rating: 4.1,
-        deliveryTime: '15-30 min',
-        minOrder: 99,
-        deliveryFee: 19,
-        discounts: ['40% off up to ₹80', 'Swiggy One benefits'],
-        deepLink: 'swiggy://instamart',
-        appLink: 'swiggy://instamart',
-        webLink: 'https://swiggy.com/instamart'
+      { 
+        name: 'Amazon Fresh', 
+        url: 'https://www.amazon.in/fresh', 
+        color: '#FF9900',
+        features: ['Prime Benefits', 'Same Day Delivery', 'Wide Range']
       }
     ]
   },
-
-  // Travel Booking
   {
     id: 'travel',
-    name: 'Travel Booking',
+    name: 'Travel',
     icon: Plane,
-    color: 'from-blue-500 to-purple-500',
-    description: 'Compare flights, hotels from MakeMyTrip, Goibibo, Cleartrip',
+    priority: 3,
     platforms: [
-      {
-        id: 'makemytrip',
-        name: 'MakeMyTrip',
-        logo: '🧳',
-        rating: 4.0,
-        discounts: ['Up to ₹10,000 off on flights', 'Hotel bookings from ₹999'],
-        deepLink: 'makemytrip://flights',
-        appLink: 'makemytrip://flights',
-        webLink: 'https://makemytrip.com'
+      { 
+        name: 'MakeMyTrip', 
+        url: 'https://www.makemytrip.com', 
+        color: '#E73C7E',
+        features: ['Flight Booking', 'Holiday Packages', 'Travel Insurance']
       },
-      {
-        id: 'goibibo',
-        name: 'Goibibo',
-        logo: '🎒',
-        rating: 4.2,
-        discounts: ['Flat ₹3000 off on international flights', 'goCash+ rewards'],
-        deepLink: 'goibibo://flights',
-        appLink: 'goibibo://flights',
-        webLink: 'https://goibibo.com'
+      { 
+        name: 'Goibibo', 
+        url: 'https://www.goibibo.com', 
+        color: '#F79F1F',
+        features: ['Bus Booking', 'Hotel Deals', 'goCash Rewards']
       },
-      {
-        id: 'cleartrip',
-        name: 'Cleartrip',
-        logo: '🎫',
-        rating: 4.1,
-        discounts: ['Expressway to savings', 'No convenience fee'],
-        deepLink: 'cleartrip://flights',
-        appLink: 'cleartrip://flights',
-        webLink: 'https://cleartrip.com'
+      { 
+        name: 'Cleartrip', 
+        url: 'https://www.cleartrip.com', 
+        color: '#FF6B35',
+        features: ['Easy Booking', 'Flexible Dates', 'Clean Interface']
       }
     ]
   },
-
-  // Hotels & Stays
+  {
+    id: 'ride-booking',
+    name: 'Ride Booking',
+    icon: Car,
+    priority: 4,
+    platforms: [
+      { 
+        name: 'Uber', 
+        url: 'https://www.uber.com', 
+        color: '#000000',
+        features: ['Global Service', 'Multiple Options', 'Ride Sharing']
+      },
+      { 
+        name: 'Ola', 
+        url: 'https://www.olacabs.com', 
+        color: '#00D100',
+        features: ['Local Focus', 'Auto Rickshaw', 'Outstation']
+      },
+      { 
+        name: 'Rapido', 
+        url: 'https://rapido.bike', 
+        color: '#FFD700',
+        features: ['Bike Taxi', 'Quick Rides', 'Traffic Beating']
+      }
+    ]
+  },
+  {
+    id: 'medicine',
+    name: 'Medicine',
+    icon: Stethoscope,
+    priority: 5,
+    platforms: [
+      { 
+        name: 'PharmEasy', 
+        url: 'https://pharmeasy.in', 
+        color: '#1B8F47',
+        features: ['Medicine Delivery', 'Lab Tests', 'Health Records']
+      },
+      { 
+        name: 'Apollo Pharmacy', 
+        url: 'https://www.apollopharmacy.in', 
+        color: '#00A859',
+        features: ['Prescription Upload', 'Genuine Medicines', 'Expert Consultation']
+      },
+      { 
+        name: '1mg', 
+        url: 'https://www.1mg.com', 
+        color: '#FF6F61',
+        features: ['Medicine Info', 'Health Articles', 'Quick Delivery']
+      }
+    ]
+  },
+  {
+    id: 'entertainment',
+    name: 'Entertainment',
+    icon: Film,
+    priority: 6,
+    platforms: [
+      { 
+        name: 'BookMyShow', 
+        url: 'https://in.bookmyshow.com', 
+        color: '#DC2626',
+        features: ['Movie Tickets', 'Event Booking', 'Seat Selection']
+      },
+      { 
+        name: 'Netflix', 
+        url: 'https://www.netflix.com', 
+        color: '#E50914',
+        features: ['Streaming', 'Original Content', 'Multiple Devices']
+      },
+      { 
+        name: 'Amazon Prime', 
+        url: 'https://www.primevideo.com', 
+        color: '#00A8E1',
+        features: ['Prime Video', 'Free Delivery', 'Music Streaming']
+      }
+    ]
+  },
   {
     id: 'hotels',
-    name: 'Hotels & Stays',
-    icon: Building2,
-    color: 'from-pink-500 to-rose-500',
-    description: 'Book hotels, rooms with OYO, Treebo, FabHotels',
+    name: 'Hotels',
+    icon: Building,
+    priority: 7,
     platforms: [
-      {
-        id: 'oyo',
-        name: 'OYO',
-        logo: '🏠',
-        rating: 3.8,
-        discounts: ['Up to 50% off on bookings', 'OYO Money rewards'],
-        deepLink: 'oyo://hotels',
-        appLink: 'oyo://hotels',
-        webLink: 'https://oyorooms.com'
+      { 
+        name: 'OYO', 
+        url: 'https://www.oyorooms.com', 
+        color: '#E60023',
+        features: ['Budget Stays', 'Standardized Rooms', 'Easy Booking']
       },
-      {
-        id: 'treebo',
-        name: 'Treebo',
-        logo: '🌳',
-        rating: 4.0,
-        discounts: ['Book 2 Nights, Pay for 1', 'TCommission rewards'],
-        deepLink: 'treebo://hotels',
-        appLink: 'treebo://hotels',
-        webLink: 'https://treebo.com'
+      { 
+        name: 'Booking.com', 
+        url: 'https://www.booking.com', 
+        color: '#003580',
+        features: ['Free Cancellation', 'Verified Reviews', 'Best Price Guarantee']
       },
-      {
-        id: 'fabhotels',
-        name: 'FabHotels',
-        logo: '⭐',
-        rating: 4.1,
-        discounts: ['Flat 25% off on weekend stays', 'FabCash rewards'],
-        deepLink: 'fabhotels://hotels',
-        appLink: 'fabhotels://hotels',
-        webLink: 'https://fabhotels.com'
+      { 
+        name: 'Agoda', 
+        url: 'https://www.agoda.com', 
+        color: '#B71C1C',
+        features: ['Asia Focus', 'Member Discounts', 'Instant Confirmation']
       }
     ]
   },
-
-  // Tickets & Transport
   {
-    id: 'tickets',
-    name: 'Tickets & Transport',
-    icon: Ticket,
-    color: 'from-indigo-500 to-blue-500',
-    description: 'Book train, bus, movie tickets from IRCTC, BookMyShow',
+    id: 'ecommerce',
+    name: 'Shopping',
+    icon: Package,
+    priority: 8,
     platforms: [
-      {
-        id: 'irctc',
-        name: 'IRCTC',
-        logo: '🚄',
-        rating: 3.9,
-        discounts: ['Cashback on UPI payments', 'Senior citizen discounts'],
-        deepLink: 'irctc://tickets',
-        appLink: 'irctc://tickets',
-        webLink: 'https://irctc.co.in'
+      { 
+        name: 'Amazon', 
+        url: 'https://www.amazon.in', 
+        color: '#FF9900',
+        features: ['Prime Delivery', 'Vast Selection', 'Easy Returns']
       },
-      {
-        id: 'redbus',
-        name: 'RedBus',
-        logo: '🚌',
-        rating: 4.2,
-        discounts: ['Up to ₹300 off on bus bookings', 'Red Deals'],
-        deepLink: 'redbus://buses',
-        appLink: 'redbus://buses',
-        webLink: 'https://redbus.in'
+      { 
+        name: 'Flipkart', 
+        url: 'https://www.flipkart.com', 
+        color: '#2874F0',
+        features: ['Big Billion Days', 'Plus Membership', 'No Cost EMI']
       },
-      {
-        id: 'bookmyshow',
-        name: 'BookMyShow',
-        logo: '🎬',
-        rating: 4.3,
-        discounts: ['Movie tickets from ₹99', 'Stream unlimited'],
-        deepLink: 'bookmyshow://movies',
-        appLink: 'bookmyshow://movies',
-        webLink: 'https://bookmyshow.com'
+      { 
+        name: 'Myntra', 
+        url: 'https://www.myntra.com', 
+        color: '#FF3F6C',
+        features: ['Fashion Focus', 'Brand Variety', 'Easy Returns']
       }
     ]
   },
-
-  // Fuel Stations
   {
-    id: 'fuel',
-    name: 'Fuel Stations',
-    icon: Fuel,
-    color: 'from-yellow-500 to-orange-500',
-    description: 'Compare fuel prices and offers from IOCL, HP, BPCL',
+    id: 'fitness',
+    name: 'Fitness',
+    icon: Heart,
+    priority: 9,
     platforms: [
-      {
-        id: 'iocl',
-        name: 'Indian Oil',
-        logo: '🛢️',
-        rating: 4.1,
-        discounts: ['IOCL loyalty points', 'Digital payment discounts'],
-        deepLink: 'iocl://fuel',
-        appLink: 'iocl://fuel',
-        webLink: 'https://iocl.com'
+      { 
+        name: 'Cult.fit', 
+        url: 'https://www.cult.fit', 
+        color: '#FF4757',
+        features: ['Gym Workouts', 'Home Fitness', 'Mental Wellness']
       },
-      {
-        id: 'hp',
-        name: 'HP',
-        logo: '⚡',
-        rating: 4.0,
-        discounts: ['HP Pay rewards', 'Credit card offers'],
-        deepLink: 'hp://fuel',
-        appLink: 'hp://fuel',
-        webLink: 'https://hindustanpetroleum.com'
-      },
-      {
-        id: 'bpcl',
-        name: 'BPCL',
-        logo: '🔥',
-        rating: 3.9,
-        discounts: ['SmartDrive rewards', 'UPI cashback'],
-        deepLink: 'bpcl://fuel',
-        appLink: 'bpcl://fuel',
-        webLink: 'https://bharatpetroleum.com'
+      { 
+        name: 'Fitpass', 
+        url: 'https://www.fitpass.co.in', 
+        color: '#2ECC71',
+        features: ['Multiple Gyms', 'Flexible Plans', 'Fitness Tracking']
       }
     ]
   },
-
-  // Credit & Debit Cards
   {
-    id: 'cards',
-    name: 'Cards & Banking',
-    icon: CreditCard,
-    color: 'from-purple-500 to-blue-500',
-    description: 'Compare credit cards, debit cards from banks',
+    id: 'education',
+    name: 'Education',
+    icon: GraduationCap,
+    priority: 10,
     platforms: [
-      {
-        id: 'hdfc',
-        name: 'HDFC Bank',
-        logo: '🏦',
-        rating: 4.3,
-        discounts: ['Cashback on online purchases', 'Travel rewards'],
-        deepLink: 'hdfc://cards',
-        appLink: 'hdfc://cards',
-        webLink: 'https://hdfcbank.com'
+      { 
+        name: 'BYJU\'S', 
+        url: 'https://byjus.com', 
+        color: '#800080',
+        features: ['Personalized Learning', 'Video Lessons', 'Test Prep']
       },
-      {
-        id: 'icici',
-        name: 'ICICI Bank',
-        logo: '💰',
-        rating: 4.2,
-        discounts: ['Reward points on every purchase', 'Fuel surcharge waiver'],
-        deepLink: 'icici://cards',
-        appLink: 'icici://cards',
-        webLink: 'https://icicibank.com'
-      },
-      {
-        id: 'sbi',
-        name: 'SBI',
-        logo: '🏛️',
-        rating: 4.0,
-        discounts: ['Low annual fees', 'EMI conversion facility'],
-        deepLink: 'sbi://cards',
-        appLink: 'sbi://cards',
-        webLink: 'https://sbi.co.in'
+      { 
+        name: 'Unacademy', 
+        url: 'https://unacademy.com', 
+        color: '#08BD80',
+        features: ['Live Classes', 'Expert Educators', 'Competitive Exams']
       }
     ]
   },
-
-  // Clothing & Fashion
   {
-    id: 'clothes',
-    name: 'Clothing & Fashion',
-    icon: Shirt,
-    color: 'from-pink-500 to-purple-500',
-    description: 'Shop fashion from Myntra, Ajio, Flipkart Fashion',
+    id: 'gaming',
+    name: 'Gaming',
+    icon: Gamepad2,
+    priority: 11,
     platforms: [
-      {
-        id: 'myntra',
-        name: 'Myntra',
-        logo: '👗',
-        rating: 4.4,
-        deliveryTime: '2-5 days',
-        discounts: ['End of season sale up to 70%', 'Free delivery above ₹799'],
-        deepLink: 'myntra://fashion',
-        appLink: 'myntra://fashion',
-        webLink: 'https://myntra.com'
+      { 
+        name: 'Steam', 
+        url: 'https://store.steampowered.com', 
+        color: '#171A21',
+        features: ['PC Gaming', 'Game Library', 'Community Features']
       },
-      {
-        id: 'ajio',
-        name: 'Ajio',
-        logo: '👖',
-        rating: 4.2,
-        deliveryTime: '3-7 days',
-        discounts: ['Buy 2 Get 1 Free', 'Extra 20% off on app'],
-        deepLink: 'ajio://fashion',
-        appLink: 'ajio://fashion',
-        webLink: 'https://ajio.com'
-      },
-      {
-        id: 'flipkart-fashion',
-        name: 'Flipkart Fashion',
-        logo: '👚',
-        rating: 4.1,
-        deliveryTime: '2-4 days',
-        discounts: ['Fashion days sale', 'Flipkart Plus benefits'],
-        deepLink: 'flipkart://fashion',
-        appLink: 'flipkart://fashion',
-        webLink: 'https://flipkart.com/clothing'
-      },
-      {
-        id: 'meesho',
-        name: 'Meesho',
-        logo: '🛍️',
-        rating: 4.0,
-        deliveryTime: '5-7 days',
-        discounts: ['Lowest prices guaranteed', 'Free delivery'],
-        deepLink: 'meesho://fashion',
-        appLink: 'meesho://fashion',
-        webLink: 'https://meesho.com'
+      { 
+        name: 'Epic Games', 
+        url: 'https://www.epicgames.com', 
+        color: '#313131',
+        features: ['Free Weekly Games', 'Exclusive Titles', 'Creator Support']
       }
     ]
   },
-
-  // Electronics & Gadgets
   {
-    id: 'electronics',
-    name: 'Electronics & Gadgets',
-    icon: Smartphone,
-    color: 'from-blue-500 to-cyan-500',
-    description: 'Compare electronics from Amazon, Flipkart, Croma',
+    id: 'logistics',
+    name: 'Logistics',
+    icon: Truck,
+    priority: 12,
     platforms: [
-      {
-        id: 'amazon',
-        name: 'Amazon',
-        logo: '📦',
-        rating: 4.5,
-        deliveryTime: '1-2 days',
-        discounts: ['Great Indian Festival', 'Prime member benefits'],
-        deepLink: 'amazon://electronics',
-        appLink: 'amazon://electronics',
-        webLink: 'https://amazon.in'
+      { 
+        name: 'Porter', 
+        url: 'https://porter.in', 
+        color: '#FF6B35',
+        features: ['Goods Transport', 'City & Intercity', 'Live Tracking']
       },
-      {
-        id: 'flipkart',
-        name: 'Flipkart',
-        logo: '🛒',
-        rating: 4.3,
-        deliveryTime: '2-4 days',
-        discounts: ['Big Billion Days', 'Flipkart Plus benefits'],
-        deepLink: 'flipkart://electronics',
-        appLink: 'flipkart://electronics',
-        webLink: 'https://flipkart.com'
+      { 
+        name: 'Pickrr', 
+        url: 'https://www.pickrr.com', 
+        color: '#FF9500',
+        features: ['Shipping Solutions', 'Multiple Carriers', 'API Integration']
+      }
+    ]
+  },
+  {
+    id: 'hyperlocal',
+    name: 'Hyperlocal',
+    icon: MapPin,
+    priority: 13,
+    platforms: [
+      { 
+        name: 'Dunzo', 
+        url: 'https://www.dunzo.com', 
+        color: '#0093FF',
+        features: ['Anything Delivery', 'Pet Supplies', 'Quick Errands']
       },
-      {
-        id: 'croma',
-        name: 'Croma',
-        logo: '💻',
-        rating: 4.1,
-        deliveryTime: '3-5 days',
-        discounts: ['Store pickup discounts', 'Extended warranty'],
-        deepLink: 'croma://electronics',
-        appLink: 'croma://electronics',
-        webLink: 'https://croma.com'
+      { 
+        name: 'Urban Company', 
+        url: 'https://www.urbancompany.com', 
+        color: '#6B46C1',
+        features: ['Home Services', 'Professional Care', 'Trusted Partners']
+      }
+    ]
+  },
+  {
+    id: 'home-services',
+    name: 'Home Services',
+    icon: Home,
+    priority: 14,
+    platforms: [
+      { 
+        name: 'Urban Company', 
+        url: 'https://www.urbancompany.com', 
+        color: '#6B46C1',
+        features: ['Professional Services', 'Verified Partners', 'Quality Assurance']
       },
-      {
-        id: 'vijaysales',
-        name: 'Vijay Sales',
-        logo: '📺',
-        rating: 4.0,
-        deliveryTime: '3-7 days',
-        discounts: ['Festival offers', 'Exchange benefits'],
-        deepLink: 'vijaysales://electronics',
-        appLink: 'vijaysales://electronics',
-        webLink: 'https://vijaysales.com'
+      { 
+        name: 'Housejoy', 
+        url: 'https://www.housejoy.in', 
+        color: '#FF6B6B',
+        features: ['Home Repairs', 'Cleaning Services', 'Installation']
       }
     ]
   }
 ];
+
+// Helper function to get high priority categories (top 6)
+export const getHighPriorityCategories = () => {
+  return categories
+    .filter(cat => cat.priority && cat.priority <= 6)
+    .sort((a, b) => (a.priority || 0) - (b.priority || 0));
+};
+
+// Helper function to get remaining categories
+export const getRemainingCategories = () => {
+  return categories
+    .filter(cat => !cat.priority || cat.priority > 6)
+    .sort((a, b) => (a.priority || 99) - (b.priority || 99));
+};

@@ -14,11 +14,13 @@ export const PlatformComparison = ({ platforms, onPlatformClick }: PlatformCompa
       <h4 className="font-semibold text-sm">Compare Across Platforms</h4>
       {platforms.map((platformResult) => (
         <div 
-          key={platformResult.platform.id} 
+          key={platformResult.platform.name} 
           className="flex items-center justify-between p-3 bg-muted/50 rounded-lg hover:bg-muted/70 transition-colors"
         >
           <div className="flex items-center gap-3">
-            <div className="text-2xl">{platformResult.platform.logo}</div>
+            <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: platformResult.platform.color }}>
+              <span className="text-white text-xs font-bold">{platformResult.platform.name.charAt(0)}</span>
+            </div>
             <div>
               <div className="font-medium text-sm">{platformResult.platform.name}</div>
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -51,7 +53,7 @@ export const PlatformComparison = ({ platforms, onPlatformClick }: PlatformCompa
             
             <Button 
               size="sm" 
-              onClick={() => onPlatformClick(platformResult.platform.webLink)}
+              onClick={() => onPlatformClick(platformResult.platform.url)}
               className="shrink-0"
             >
               <ExternalLink className="h-3 w-3 mr-1" />
