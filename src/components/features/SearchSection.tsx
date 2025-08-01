@@ -24,7 +24,11 @@ export const SearchSection = ({ category, onSearch, onBack }: SearchSectionProps
 
       {/* Category Header */}
       <div className="text-center animate-slide-up">
-        <div className="text-5xl mb-2">{category.icon}</div>
+        <div className="mb-2 flex justify-center">
+          <div className="p-4 bg-primary/10 rounded-2xl">
+            <category.icon className="h-12 w-12 text-primary" />
+          </div>
+        </div>
         <h2 className="text-3xl font-bold mb-2">{category.name}</h2>
         <p className="text-muted-foreground">{category.description}</p>
       </div>

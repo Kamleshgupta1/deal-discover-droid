@@ -80,21 +80,25 @@ export const useTheme = () => {
 
   useEffect(() => {
     const root = document.documentElement;
-    const theme = themes[currentTheme];
     
-    // Apply theme variables
+    // Remove any existing theme classes and data attributes
+    root.classList.remove('dark');
+    root.removeAttribute('data-theme');
+    
+    // Apply the appropriate theme
+    if (currentTheme === 'dark') {
+      root.classList.add('dark');
+    } else if (currentTheme !== 'light') {
+      root.setAttribute('data-theme', currentTheme);
+    }
+    
+    // Apply theme variables from themes object
+    const theme = themes[currentTheme];
     Object.entries(theme).forEach(([key, value]) => {
       if (key !== 'name') {
         root.style.setProperty(`--${key}`, value);
       }
     });
-
-    // Apply dark class for dark themes
-    if (currentTheme === 'dark') {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
 
     localStorage.setItem('theme', currentTheme);
   }, [currentTheme]);

@@ -1,11 +1,23 @@
 import { Category } from '@/types';
+import { 
+  UtensilsCrossed, 
+  ShoppingCart, 
+  Plane, 
+  Building2, 
+  Ticket, 
+  Fuel, 
+  CreditCard, 
+  Shirt, 
+  Smartphone,
+  LucideIcon
+} from 'lucide-react';
 
 export const categories: Category[] = [
   // Food Delivery
   {
     id: 'food',
     name: 'Food Delivery',
-    icon: '🍔',
+    icon: UtensilsCrossed,
     color: 'from-orange-500 to-red-500',
     description: 'Compare food delivery across Swiggy, Zomato, and more',
     platforms: [
@@ -55,7 +67,7 @@ export const categories: Category[] = [
   {
     id: 'grocery',
     name: 'Grocery',
-    icon: '🛒',
+    icon: ShoppingCart,
     color: 'from-green-500 to-emerald-500',
     description: 'Quick grocery delivery from Blinkit, Zepto, Instamart',
     platforms: [
@@ -105,7 +117,7 @@ export const categories: Category[] = [
   {
     id: 'travel',
     name: 'Travel Booking',
-    icon: '✈️',
+    icon: Plane,
     color: 'from-blue-500 to-purple-500',
     description: 'Compare flights, hotels from MakeMyTrip, Goibibo, Cleartrip',
     platforms: [
@@ -146,7 +158,7 @@ export const categories: Category[] = [
   {
     id: 'hotels',
     name: 'Hotels & Stays',
-    icon: '🏨',
+    icon: Building2,
     color: 'from-pink-500 to-rose-500',
     description: 'Book hotels, rooms with OYO, Treebo, FabHotels',
     platforms: [
@@ -187,7 +199,7 @@ export const categories: Category[] = [
   {
     id: 'tickets',
     name: 'Tickets & Transport',
-    icon: '🚆',
+    icon: Ticket,
     color: 'from-indigo-500 to-blue-500',
     description: 'Book train, bus, movie tickets from IRCTC, BookMyShow',
     platforms: [
@@ -228,7 +240,7 @@ export const categories: Category[] = [
   {
     id: 'fuel',
     name: 'Fuel Stations',
-    icon: '⛽',
+    icon: Fuel,
     color: 'from-yellow-500 to-orange-500',
     description: 'Compare fuel prices and offers from IOCL, HP, BPCL',
     platforms: [
@@ -269,7 +281,7 @@ export const categories: Category[] = [
   {
     id: 'cards',
     name: 'Cards & Banking',
-    icon: '💳',
+    icon: CreditCard,
     color: 'from-purple-500 to-blue-500',
     description: 'Compare credit cards, debit cards from banks',
     platforms: [
@@ -310,7 +322,7 @@ export const categories: Category[] = [
   {
     id: 'clothes',
     name: 'Clothing & Fashion',
-    icon: '👕',
+    icon: Shirt,
     color: 'from-pink-500 to-purple-500',
     description: 'Shop fashion from Myntra, Ajio, Flipkart Fashion',
     platforms: [
@@ -365,7 +377,7 @@ export const categories: Category[] = [
   {
     id: 'electronics',
     name: 'Electronics & Gadgets',
-    icon: '📱',
+    icon: Smartphone,
     color: 'from-blue-500 to-cyan-500',
     description: 'Compare electronics from Amazon, Flipkart, Croma',
     platforms: [

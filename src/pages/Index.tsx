@@ -97,7 +97,7 @@ const Index = () => {
                     <CardContent className="p-4 text-center space-y-3">
                       <div className="flex items-center justify-center">
                         <div className="p-3 bg-white/20 rounded-2xl">
-                          {React.createElement(category.icon, { className: "h-6 w-6 text-white" })}
+                          <category.icon className="h-6 w-6 text-white" />
                         </div>
                       </div>
                       <h3 className="font-semibold text-sm text-white">{category.name}</h3>

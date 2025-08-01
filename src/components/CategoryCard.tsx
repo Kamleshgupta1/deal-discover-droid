@@ -18,8 +18,8 @@ export const CategoryCard = ({ category, onSelect, delay = 0 }: CategoryCardProp
     >
       <CardContent className="p-6">
         <div className="flex items-start justify-between mb-4">
-          <div className={`text-4xl mb-2 animate-float`} style={{ animationDelay: `${delay + 200}ms` }}>
-            {category.icon}
+          <div className={`text-4xl mb-2 animate-float p-3 bg-primary/10 rounded-2xl`} style={{ animationDelay: `${delay + 200}ms` }}>
+            <category.icon className="h-8 w-8 text-primary" />
           </div>
           <ChevronRight className="h-5 w-5 text-muted-foreground" />
         </div>
