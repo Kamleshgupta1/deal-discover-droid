@@ -35,7 +35,6 @@ export const Header = () => {
 
   const navigationItems = [
     { label: 'Home', path: '/' },
-    { label: 'Categories', path: '/categories' },
     { label: 'Deals', path: '/deals' },
     { label: 'About', path: '/about' },
     { label: 'Contact', path: '/contact' },

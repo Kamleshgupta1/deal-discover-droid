@@ -12,6 +12,7 @@ import { CategoryGrid } from '@/components/features/CategoryGrid';
 import { SearchSection } from '@/components/features/SearchSection';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 import { WelcomeTour } from '@/components/tour/WelcomeTour';
+import { AppDownloadPopup } from '@/components/pwa/AppDownloadPopup';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -46,6 +47,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-subtle">
       <WelcomeTour />
+      <AppDownloadPopup />
       
       <div className="container mx-auto px-4 py-6 max-w-6xl">
         {!selectedCategory ? (
@@ -152,21 +154,54 @@ const Index = () => {
               </div>
             </div>
 
+            {/* Features Section */}
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="text-center p-6 rounded-2xl bg-gradient-subtle border border-border/50">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">🔍</span>
+                </div>
+                <h3 className="font-bold text-lg mb-2">Smart Comparison</h3>
+                <p className="text-muted-foreground text-sm">Compare features, prices, and reviews across multiple platforms instantly</p>
+              </div>
+              
+              <div className="text-center p-6 rounded-2xl bg-gradient-subtle border border-border/50">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">⚡</span>
+                </div>
+                <h3 className="font-bold text-lg mb-2">Fast & Reliable</h3>
+                <p className="text-muted-foreground text-sm">Get accurate results in seconds with our advanced comparison engine</p>
+              </div>
+              
+              <div className="text-center p-6 rounded-2xl bg-gradient-subtle border border-border/50">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">💰</span>
+                </div>
+                <h3 className="font-bold text-lg mb-2">Best Deals</h3>
+                <p className="text-muted-foreground text-sm">Find exclusive offers and save money on your favorite services</p>
+              </div>
+            </div>
+
             {/* Stats Section */}
-            <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto">
-              {stats.map((stat, index) => (
-                <Card key={index} className="text-center p-4 hover:shadow-md transition-all">
-                  <CardContent className="p-0 space-y-2">
-                    <div className="flex justify-center">
-                      <div className="p-2 bg-primary/10 rounded-full">
-                        <stat.icon className="h-5 w-5 text-primary" />
-                      </div>
-                    </div>
-                    <div className="font-bold text-lg text-primary">{stat.value}</div>
-                    <div className="text-xs text-muted-foreground">{stat.label}</div>
-                  </CardContent>
-                </Card>
-              ))}
+            <div className="bg-gradient-primary rounded-3xl p-8 text-white text-center">
+              <h2 className="text-3xl font-bold mb-6">Trusted by Millions</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                  <div className="text-4xl font-bold mb-2">10M+</div>
+                  <div className="text-white/80">Happy Users</div>
+                </div>
+                <div>
+                  <div className="text-4xl font-bold mb-2">500+</div>
+                  <div className="text-white/80">Platforms</div>
+                </div>
+                <div>
+                  <div className="text-4xl font-bold mb-2">25+</div>
+                  <div className="text-white/80">Categories</div>
+                </div>
+                <div>
+                  <div className="text-4xl font-bold mb-2">99.9%</div>
+                  <div className="text-white/80">Uptime</div>
+                </div>
+              </div>
             </div>
           </div>
         ) : (

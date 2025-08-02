@@ -23,21 +23,46 @@ const AllCategories = () => {
         </div>
 
         {/* All Categories Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {categories.map((category, index) => (
             <Card 
               key={category.id}
-              className="group cursor-pointer hover:shadow-lg transition-all duration-300 hover-scale bg-primary text-white border-0"
+              className="group cursor-pointer hover:shadow-strong transition-all duration-300 hover-scale border-0 overflow-hidden"
               style={{ animationDelay: `${index * 50}ms` }}
             >
-              <CardContent className="p-4 text-center space-y-3">
-                <div className="flex items-center justify-center">
+              <div className="bg-gradient-primary p-6">
+                <div className="flex items-center gap-4 mb-4">
                   <div className="p-3 bg-white/20 rounded-2xl">
-                    <category.icon className="h-6 w-6 text-white" />
+                    <category.icon className="h-8 w-8 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg text-white">{category.name}</h3>
+                    <p className="text-white/80 text-sm">{category.platforms.length} platforms available</p>
                   </div>
                 </div>
-                <h3 className="font-semibold text-sm text-white">{category.name}</h3>
-              </CardContent>
+                
+                <div className="space-y-2">
+                  <p className="text-white/90 text-sm font-medium">Popular Platforms:</p>
+                  <div className="flex flex-wrap gap-2">
+                    {category.platforms.slice(0, 3).map((platform) => (
+                      <div 
+                        key={platform.name}
+                        className="px-3 py-1 bg-white/20 rounded-full text-xs text-white font-medium"
+                      >
+                        {platform.name}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                <div className="mt-4 pt-4 border-t border-white/20">
+                  <div className="flex items-center gap-2 text-white/80 text-xs">
+                    <span>✨ Compare features</span>
+                    <span>•</span>
+                    <span>📊 Find best deals</span>
+                  </div>
+                </div>
+              </div>
             </Card>
           ))}
         </div>

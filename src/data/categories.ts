@@ -13,7 +13,20 @@ import {
   Heart,
   Gamepad2,
   GraduationCap,
-  Home
+  Home,
+  CreditCard,
+  Banknote,
+  TrendingUp,
+  Shield,
+  Phone,
+  Wifi,
+  Zap,
+  Wrench,
+  Users,
+  BookOpen,
+  Music,
+  Camera,
+  Coffee
 } from 'lucide-react';
 import { Category } from '@/types';
 
@@ -343,6 +356,344 @@ export const categories: Category[] = [
         url: 'https://www.housejoy.in', 
         color: '#FF6B6B',
         features: ['Home Repairs', 'Cleaning Services', 'Installation']
+      }
+    ]
+  },
+  {
+    id: 'banking',
+    name: 'Banking',
+    icon: Banknote,
+    priority: 15,
+    platforms: [
+      { 
+        name: 'HDFC Bank', 
+        url: 'https://www.hdfcbank.com', 
+        color: '#004C8F',
+        features: ['Digital Banking', 'Loan Services', 'Credit Cards']
+      },
+      { 
+        name: 'ICICI Bank', 
+        url: 'https://www.icicibank.com', 
+        color: '#F37020',
+        features: ['Net Banking', 'Investment Options', 'Quick Loans']
+      },
+      { 
+        name: 'SBI', 
+        url: 'https://www.onlinesbi.com', 
+        color: '#1F4E79',
+        features: ['Government Services', 'Rural Banking', 'Pension Schemes']
+      }
+    ]
+  },
+  {
+    id: 'financial-services',
+    name: 'Financial Services',
+    icon: CreditCard,
+    priority: 16,
+    platforms: [
+      { 
+        name: 'Paytm', 
+        url: 'https://paytm.com', 
+        color: '#00BAF2',
+        features: ['Digital Payments', 'Bill Payments', 'Wallet Services']
+      },
+      { 
+        name: 'PhonePe', 
+        url: 'https://www.phonepe.com', 
+        color: '#5F259F',
+        features: ['UPI Payments', 'Money Transfer', 'Merchant Services']
+      },
+      { 
+        name: 'Google Pay', 
+        url: 'https://pay.google.com', 
+        color: '#4285F4',
+        features: ['Quick Payments', 'Rewards', 'Security']
+      }
+    ]
+  },
+  {
+    id: 'mutual-funds',
+    name: 'Mutual Funds',
+    icon: TrendingUp,
+    priority: 17,
+    platforms: [
+      { 
+        name: 'Groww', 
+        url: 'https://groww.in', 
+        color: '#00D09C',
+        features: ['Zero Commission', 'SIP Investment', 'Portfolio Tracking']
+      },
+      { 
+        name: 'Zerodha Coin', 
+        url: 'https://coin.zerodha.com', 
+        color: '#387ED1',
+        features: ['Direct Funds', 'No Transaction Fees', 'Goal Planning']
+      },
+      { 
+        name: 'Kuvera', 
+        url: 'https://kuvera.in', 
+        color: '#2E7D32',
+        features: ['Free Investment', 'Tax Planning', 'Family Portfolio']
+      }
+    ]
+  },
+  {
+    id: 'insurance',
+    name: 'Insurance',
+    icon: Shield,
+    priority: 18,
+    platforms: [
+      { 
+        name: 'PolicyBazaar', 
+        url: 'https://www.policybazaar.com', 
+        color: '#ED1C24',
+        features: ['Compare Policies', 'Instant Quotes', 'Expert Advice']
+      },
+      { 
+        name: 'Acko', 
+        url: 'https://www.acko.com', 
+        color: '#FF6B35',
+        features: ['Digital Insurance', 'Zero Paperwork', 'Quick Claims']
+      },
+      { 
+        name: 'Digit Insurance', 
+        url: 'https://www.godigit.com', 
+        color: '#FF6B6B',
+        features: ['General Insurance', 'Mobile App', 'Easy Claims']
+      }
+    ]
+  },
+  {
+    id: 'telecom',
+    name: 'Telecom',
+    icon: Phone,
+    priority: 19,
+    platforms: [
+      { 
+        name: 'Jio', 
+        url: 'https://www.jio.com', 
+        color: '#0066CC',
+        features: ['5G Network', 'Digital Services', 'Affordable Plans']
+      },
+      { 
+        name: 'Airtel', 
+        url: 'https://www.airtel.in', 
+        color: '#E60000',
+        features: ['Premium Network', 'Xstream Services', 'International Roaming']
+      },
+      { 
+        name: 'Vi', 
+        url: 'https://www.myvi.in', 
+        color: '#662D91',
+        features: ['Data Plans', 'Voice Services', 'Entertainment']
+      }
+    ]
+  },
+  {
+    id: 'internet',
+    name: 'Internet & Broadband',
+    icon: Wifi,
+    priority: 20,
+    platforms: [
+      { 
+        name: 'Jio Fiber', 
+        url: 'https://www.jio.com/fiber', 
+        color: '#0066CC',
+        features: ['High Speed Internet', 'TV Streaming', 'Security Services']
+      },
+      { 
+        name: 'Airtel Xstream Fiber', 
+        url: 'https://www.airtel.in/broadband', 
+        color: '#E60000',
+        features: ['Unlimited Data', 'Premium Support', 'Smart Home']
+      },
+      { 
+        name: 'BSNL Broadband', 
+        url: 'https://www.bsnl.co.in', 
+        color: '#FFD700',
+        features: ['Government Service', 'Rural Coverage', 'Affordable Plans']
+      }
+    ]
+  },
+  {
+    id: 'utilities',
+    name: 'Utilities',
+    icon: Zap,
+    priority: 21,
+    platforms: [
+      { 
+        name: 'BESCOM', 
+        url: 'https://bescom.karnataka.gov.in', 
+        color: '#2E7D32',
+        features: ['Electricity Bills', 'Online Services', 'Power Management']
+      },
+      { 
+        name: 'Paytm Bills', 
+        url: 'https://paytm.com/bill-payment', 
+        color: '#00BAF2',
+        features: ['All Bill Payments', 'Instant Payments', 'Cashback Offers']
+      },
+      { 
+        name: 'Amazon Pay Bills', 
+        url: 'https://www.amazon.in/bill-payments', 
+        color: '#FF9900',
+        features: ['Multiple Utilities', 'Rewards', 'Auto Pay']
+      }
+    ]
+  },
+  {
+    id: 'social-media',
+    name: 'Social Media',
+    icon: Users,
+    priority: 22,
+    platforms: [
+      { 
+        name: 'Facebook', 
+        url: 'https://www.facebook.com', 
+        color: '#1877F2',
+        features: ['Social Networking', 'Marketplace', 'Business Pages']
+      },
+      { 
+        name: 'Instagram', 
+        url: 'https://www.instagram.com', 
+        color: '#E4405F',
+        features: ['Photo Sharing', 'Stories', 'Reels']
+      },
+      { 
+        name: 'Twitter', 
+        url: 'https://twitter.com', 
+        color: '#1DA1F2',
+        features: ['Microblogging', 'News Updates', 'Trending Topics']
+      }
+    ]
+  },
+  {
+    id: 'news-media',
+    name: 'News & Media',
+    icon: BookOpen,
+    priority: 23,
+    platforms: [
+      { 
+        name: 'Times of India', 
+        url: 'https://timesofindia.indiatimes.com', 
+        color: '#C41E3A',
+        features: ['Breaking News', 'Regional News', 'Sports Updates']
+      },
+      { 
+        name: 'NDTV', 
+        url: 'https://www.ndtv.com', 
+        color: '#FF6B35',
+        features: ['Live TV', 'Opinion', 'Fact Check']
+      },
+      { 
+        name: 'The Hindu', 
+        url: 'https://www.thehindu.com', 
+        color: '#1B5E20',
+        features: ['In-depth Analysis', 'Editorial', 'Premium Content']
+      }
+    ]
+  },
+  {
+    id: 'music-streaming',
+    name: 'Music Streaming',
+    icon: Music,
+    priority: 24,
+    platforms: [
+      { 
+        name: 'Spotify', 
+        url: 'https://open.spotify.com', 
+        color: '#1DB954',
+        features: ['Music Library', 'Podcasts', 'Playlists']
+      },
+      { 
+        name: 'JioSaavn', 
+        url: 'https://www.jiosaavn.com', 
+        color: '#FF6B35',
+        features: ['Indian Music', 'Regional Songs', 'Offline Downloads']
+      },
+      { 
+        name: 'YouTube Music', 
+        url: 'https://music.youtube.com', 
+        color: '#FF0000',
+        features: ['Video Music', 'Live Performances', 'Recommendations']
+      }
+    ]
+  },
+  {
+    id: 'photography',
+    name: 'Photography',
+    icon: Camera,
+    priority: 25,
+    platforms: [
+      { 
+        name: 'Shutterstock', 
+        url: 'https://www.shutterstock.com', 
+        color: '#EE3F24',
+        features: ['Stock Photos', 'Vector Graphics', 'Video Clips']
+      },
+      { 
+        name: 'Adobe Stock', 
+        url: 'https://stock.adobe.com', 
+        color: '#FF0000',
+        features: ['High Quality Images', 'Creative Assets', 'Integration']
+      },
+      { 
+        name: 'Unsplash', 
+        url: 'https://unsplash.com', 
+        color: '#000000',
+        features: ['Free Images', 'High Resolution', 'Community']
+      }
+    ]
+  },
+  {
+    id: 'cafe-restaurants',
+    name: 'Cafes & Restaurants',
+    icon: Coffee,
+    priority: 26,
+    platforms: [
+      { 
+        name: 'Dineout', 
+        url: 'https://www.dineout.co.in', 
+        color: '#D32F2F',
+        features: ['Table Booking', 'Restaurant Discovery', 'Offers & Deals']
+      },
+      { 
+        name: 'EazyDiner', 
+        url: 'https://www.eazydiner.com', 
+        color: '#FF5722',
+        features: ['Fine Dining', 'Reviews', 'Exclusive Deals']
+      },
+      { 
+        name: 'OpenTable', 
+        url: 'https://www.opentable.com', 
+        color: '#DA3743',
+        features: ['Global Reservations', 'Points Rewards', 'Special Events']
+      }
+    ]
+  },
+  {
+    id: 'repair-services',
+    name: 'Repair Services',
+    icon: Wrench,
+    priority: 27,
+    platforms: [
+      { 
+        name: 'Mr. Right', 
+        url: 'https://www.mrright.in', 
+        color: '#FF6B35',
+        features: ['Home Repairs', 'Appliance Service', 'Professional Technicians']
+      },
+      { 
+        name: 'UrbanClap Repairs', 
+        url: 'https://www.urbancompany.com/repairs', 
+        color: '#6B46C1',
+        features: ['Electronics Repair', 'Furniture Repair', 'Quick Service']
+      },
+      { 
+        name: 'Sulekha Services', 
+        url: 'https://www.sulekha.com', 
+        color: '#FF9800',
+        features: ['Local Services', 'Verified Professionals', 'Multiple Categories']
       }
     ]
   }
