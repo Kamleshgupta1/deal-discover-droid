@@ -4,14 +4,22 @@ import { Star } from 'lucide-react';
 import { EmptyState } from './common/EmptyState';
 import { RecommendationCards } from './features/RecommendationCards';
 import { PlatformComparison } from './features/PlatformComparison';
+import { RealTimeResults } from './features/RealTimeResults';
 import { ANIMATION_DELAYS } from '@/constants';
 
 interface ComparisonResultsProps {
   results: ComparisonResult[];
   onPlatformClick: (url: string, isApp?: boolean) => void;
+  category?: string;
+  isRealTimeData?: boolean;
 }
 
-export const ComparisonResults = ({ results, onPlatformClick }: ComparisonResultsProps) => {
+export const ComparisonResults = ({ results, onPlatformClick, category, isRealTimeData }: ComparisonResultsProps) => {
+  // Use real-time results component for API-backed categories
+  if (isRealTimeData) {
+    return <RealTimeResults results={results} onPlatformClick={onPlatformClick} category={category} />;
+  }
+
   if (results.length === 0) {
     return (
       <EmptyState

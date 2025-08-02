@@ -228,6 +228,8 @@ const Index = () => {
               <ComparisonResults 
                 results={searchResults}
                 onPlatformClick={handlePlatformLink}
+                category={selectedCategory?.id}
+                isRealTimeData={selectedCategory?.hasRealApi}
               />
             )}
           </div>

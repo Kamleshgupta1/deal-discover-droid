@@ -5,6 +5,7 @@ export interface Category {
   name: string;
   icon: LucideIcon;
   priority?: number;
+  hasRealApi?: boolean;
   platforms: Platform[];
 }
 

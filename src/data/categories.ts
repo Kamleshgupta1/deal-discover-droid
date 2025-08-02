@@ -26,7 +26,9 @@ import {
   BookOpen,
   Music,
   Camera,
-  Coffee
+  Coffee,
+  Book,
+  Bitcoin
 } from 'lucide-react';
 import { Category } from '@/types';
 
@@ -163,16 +165,11 @@ export const categories: Category[] = [
   },
   {
     id: 'entertainment',
-    name: 'Entertainment',
+    name: 'Movies & Entertainment',
     icon: Film,
     priority: 6,
+    hasRealApi: true,
     platforms: [
-      { 
-        name: 'BookMyShow', 
-        url: 'https://in.bookmyshow.com', 
-        color: '#DC2626',
-        features: ['Movie Tickets', 'Event Booking', 'Seat Selection']
-      },
       { 
         name: 'Netflix', 
         url: 'https://www.netflix.com', 
@@ -184,6 +181,12 @@ export const categories: Category[] = [
         url: 'https://www.primevideo.com', 
         color: '#00A8E1',
         features: ['Prime Video', 'Free Delivery', 'Music Streaming']
+      },
+      { 
+        name: 'Disney+ Hotstar', 
+        url: 'https://www.hotstar.com', 
+        color: '#0F1419',
+        features: ['Disney Content', 'Sports', 'Regional Content']
       }
     ]
   },
@@ -672,6 +675,60 @@ export const categories: Category[] = [
     ]
   },
   {
+    id: 'books',
+    name: 'Books & Literature',
+    icon: Book,
+    priority: 7,
+    hasRealApi: true,
+    platforms: [
+      { 
+        name: 'Google Play Books', 
+        url: 'https://play.google.com/store/books', 
+        color: '#4285F4',
+        features: ['Digital Library', 'Cloud Sync', 'Preview Available']
+      },
+      { 
+        name: 'Amazon Kindle', 
+        url: 'https://kindle.amazon.com', 
+        color: '#FF9900',
+        features: ['E-books', 'Audiobooks', 'Kindle Unlimited']
+      },
+      { 
+        name: 'Apple Books', 
+        url: 'https://books.apple.com', 
+        color: '#007AFF',
+        features: ['iOS Integration', 'High Quality', 'Author Interviews']
+      }
+    ]
+  },
+  {
+    id: 'cryptocurrency',
+    name: 'Cryptocurrency',
+    icon: Bitcoin,
+    priority: 8,
+    hasRealApi: true,
+    platforms: [
+      { 
+        name: 'Coinbase', 
+        url: 'https://www.coinbase.com', 
+        color: '#0052FF',
+        features: ['Beginner Friendly', 'Secure Wallet', 'Educational Content']
+      },
+      { 
+        name: 'Binance', 
+        url: 'https://www.binance.com', 
+        color: '#F3BA2F',
+        features: ['Low Fees', 'Advanced Trading', 'Global Exchange']
+      },
+      { 
+        name: 'CoinGecko', 
+        url: 'https://www.coingecko.com', 
+        color: '#8DC647',
+        features: ['Market Data', 'Price Tracking', 'Analytics']
+      }
+    ]
+  },
+  {
     id: 'repair-services',
     name: 'Repair Services',
     icon: Wrench,
@@ -702,13 +759,14 @@ export const categories: Category[] = [
 // Helper function to get high priority categories (top 6)
 export const getHighPriorityCategories = () => {
   return categories
-    .filter(cat => cat.priority && cat.priority <= 6)
-    .sort((a, b) => (a.priority || 0) - (b.priority || 0));
+    .filter(cat => cat.priority && cat.priority <= 8)
+    .sort((a, b) => (a.priority || 0) - (b.priority || 0))
+    .slice(0, 6);
 };
 
 // Helper function to get remaining categories
 export const getRemainingCategories = () => {
   return categories
-    .filter(cat => !cat.priority || cat.priority > 6)
+    .filter(cat => !cat.priority || cat.priority > 8)
     .sort((a, b) => (a.priority || 99) - (b.priority || 99));
 };
