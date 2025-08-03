@@ -7,6 +7,9 @@ import { cryptoApi } from '@/services/cryptoApi';
 import { newsApi } from '@/services/newsApi';
 import { weatherApi } from '@/services/weatherApi';
 import { recipesApi } from '@/services/recipesApi';
+import { ecommerceApi } from '@/services/ecommerceApi';
+import { jobsApi } from '@/services/jobsApi';
+import { travelApi } from '@/services/travelApi';
 
 export const useSearch = () => {
   const [searchResults, setSearchResults] = useState<ComparisonResult[]>([]);
@@ -31,6 +34,12 @@ export const useSearch = () => {
         results = await searchWeather(query, location);
       } else if (category.id === 'food' && query) {
         results = await searchRecipes(query);
+      } else if (category.id === 'shopping' && query) {
+        results = await searchProducts(query);
+      } else if (category.id === 'jobs' && query) {
+        results = await searchJobs(query);
+      } else if (category.id === 'travel' && query) {
+        results = await searchTravel(query, location);
       } else {
         // Use mock data for other categories
         results = generateMockResults(category, query);
@@ -368,6 +377,164 @@ export const useSearch = () => {
         recommendation: {
           bestPrice,
           fastestDelivery,
+          bestRated
+        }
+      });
+    }
+
+    return results;
+  };
+
+  const searchProducts = async (query: string): Promise<ComparisonResult[]> => {
+    const products = await ecommerceApi.searchProducts(query);
+    const platforms = ecommerceApi.getPlatforms();
+    const results: ComparisonResult[] = [];
+
+    for (const product of products.slice(0, 6)) {
+      const productPlatforms = platforms.map(platform => ({
+        platform: {
+          name: platform.name,
+          url: platform.url,
+          color: platform.color,
+          features: platform.features
+        },
+        price: ecommerceApi.generatePlatformPrice(product.price, platform.priceMultiplier),
+        availability: true,
+        estimatedDelivery: platform.deliveryTime,
+        specialOffers: platform.offers,
+        rating: product.rating.rate,
+        reviews: product.rating.count
+      }));
+
+      const bestPrice = productPlatforms.reduce((min, p) => p.price < min.price ? p : min);
+      const bestRated = productPlatforms.reduce((max, p) => p.rating > max.rating ? p : max);
+      const fastestDelivery = productPlatforms.reduce((min, p) => 
+        p.estimatedDelivery.includes('1-2') ? p : min
+      );
+
+      results.push({
+        id: product.id.toString(),
+        name: product.title,
+        image: product.image,
+        platforms: productPlatforms,
+        recommendation: {
+          bestPrice,
+          fastestDelivery,
+          bestRated
+        }
+      });
+    }
+
+    return results;
+  };
+
+  const searchJobs = async (query: string): Promise<ComparisonResult[]> => {
+    const jobs = await jobsApi.searchJobs(query);
+    const platforms = jobsApi.getPlatforms();
+    const results: ComparisonResult[] = [];
+
+    for (const job of jobs.slice(0, 5)) {
+      const jobPlatforms = platforms.map(platform => ({
+        platform: {
+          name: platform.name,
+          url: platform.url,
+          color: platform.color,
+          features: platform.features
+        },
+        price: 0, // Jobs don't have prices
+        availability: true,
+        estimatedDelivery: 'Apply Now',
+        specialOffers: [`${jobsApi.generatePlatformJobCount(platform, query)} similar jobs`],
+        rating: platform.premium ? 4.8 : 4.2,
+        reviews: platform.jobCount
+      }));
+
+      const bestRated = jobPlatforms.reduce((max, p) => p.rating > max.rating ? p : max);
+      const mostJobs = jobPlatforms.reduce((max, p) => p.reviews > max.reviews ? p : max);
+
+      results.push({
+        id: job.id,
+        name: job.title,
+        image: job.logo || '/placeholder.svg',
+        platforms: jobPlatforms,
+        recommendation: {
+          bestPrice: jobPlatforms[0], // Not applicable for jobs
+          fastestDelivery: jobPlatforms[0],
+          bestRated
+        }
+      });
+    }
+
+    return results;
+  };
+
+  const searchTravel = async (query: string, location: string): Promise<ComparisonResult[]> => {
+    const flights = await travelApi.searchFlights(query, undefined, location);
+    const hotels = await travelApi.searchHotels(query, location);
+    const platforms = travelApi.getPlatforms();
+    const results: ComparisonResult[] = [];
+
+    // Add flight results
+    for (const flight of flights.slice(0, 3)) {
+      const flightPlatforms = platforms.map(platform => ({
+        platform: {
+          name: platform.name,
+          url: platform.url,
+          color: platform.color,
+          features: platform.features
+        },
+        price: travelApi.generatePlatformPrice(flight.price, platform),
+        availability: true,
+        estimatedDelivery: 'Instant Booking',
+        specialOffers: [platform.cancellationPolicy],
+        rating: 4.5,
+        reviews: 1000
+      }));
+
+      const bestPrice = flightPlatforms.reduce((min, p) => p.price < min.price ? p : min);
+      const bestRated = flightPlatforms.reduce((max, p) => p.rating > max.rating ? p : max);
+
+      results.push({
+        id: flight.id,
+        name: `${flight.airline}: ${flight.from} → ${flight.to}`,
+        image: '/placeholder.svg',
+        platforms: flightPlatforms,
+        recommendation: {
+          bestPrice,
+          fastestDelivery: flightPlatforms[0],
+          bestRated
+        }
+      });
+    }
+
+    // Add hotel results
+    for (const hotel of hotels.slice(0, 3)) {
+      const hotelPlatforms = platforms.map(platform => ({
+        platform: {
+          name: platform.name,
+          url: platform.url,
+          color: platform.color,
+          features: platform.features
+        },
+        price: travelApi.generatePlatformPrice(hotel.price, platform),
+        availability: true,
+        estimatedDelivery: 'Instant Booking',
+        specialOffers: [platform.cancellationPolicy],
+        rating: hotel.rating,
+        reviews: 500
+      }));
+
+      const bestPrice = hotelPlatforms.reduce((min, p) => p.price < min.price ? p : min);
+      const bestRated = hotelPlatforms.reduce((max, p) => p.rating > max.rating ? p : max);
+
+      results.push({
+        id: hotel.id,
+        name: hotel.name,
+        image: hotel.image,
+        platforms: hotelPlatforms,
+        recommendation: {
+          bestPrice,
+          fastestDelivery: hotelPlatforms[0],
           bestRated
         }
       });

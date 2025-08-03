@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Category } from '@/types';
-import { getHighPriorityCategories, getRemainingCategories } from '@/data/categories';
+import { getHighPriorityCategories, getRemainingCategories, getAllCategories } from '@/data/categories';
 import { ComparisonResults } from '@/components/ComparisonResults';
 import { Sparkles, Search, TrendingUp, Users, Star } from 'lucide-react';
 import appIcon from '@/assets/app-icon.png';

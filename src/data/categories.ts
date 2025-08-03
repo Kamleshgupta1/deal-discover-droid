@@ -117,20 +117,20 @@ export const getAllCategories = (): Category[] => [
     id: 'shopping',
     name: 'Shopping',
     icon: ShoppingCart,
-    hasRealApi: false,
+    hasRealApi: true,
     platforms: [
       { name: 'Amazon', url: 'https://amazon.com', color: '#ff9900', features: ['Prime Delivery', 'Vast Selection'] },
       { name: 'eBay', url: 'https://ebay.com', color: '#e53238', features: ['Auctions', 'Global Marketplace'] },
       { name: 'Walmart', url: 'https://walmart.com', color: '#0071ce', features: ['Everyday Low Prices', 'Store Pickup'] }
     ],
     description: 'Compare shopping deals and prices',
-    keywords: ['shopping', 'deals', 'products', 'amazon', 'ebay']
+    keywords: ['shopping', 'deals', 'products', 'amazon', 'ebay', 'mobile', 'laptop', 'electronics']
   },
   {
     id: 'travel',
     name: 'Travel',
     icon: Plane,
-    hasRealApi: false,
+    hasRealApi: true,
     platforms: [
       { name: 'Expedia', url: 'https://expedia.com', color: '#ffc72c', features: ['Flight Booking', 'Hotel Deals'] },
       { name: 'Booking.com', url: 'https://booking.com', color: '#003580', features: ['Free Cancellation', 'Best Price Guarantee'] },
@@ -273,7 +273,7 @@ export const getAllCategories = (): Category[] => [
     id: 'jobs',
     name: 'Jobs',
     icon: Briefcase,
-    hasRealApi: false,
+    hasRealApi: true,
     platforms: [
       { name: 'LinkedIn', url: 'https://linkedin.com', color: '#0077b5', features: ['Professional Network', 'Job Search'] },
       { name: 'Indeed', url: 'https://indeed.com', color: '#2557a7', features: ['Job Aggregator', 'Company Reviews'] },
