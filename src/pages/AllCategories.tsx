@@ -1,11 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { categories } from '@/data/categories';
+import { getAllCategories } from '@/data/categories';
+import { Category } from '@/types';
 
 const AllCategories = () => {
+  const navigate = useNavigate();
+  const allCategories = getAllCategories();
+  
+  const handleCategoryClick = (category: Category) => {
+    navigate('/', { state: { selectedCategory: category } });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-subtle">
       <div className="container mx-auto px-4 py-6 max-w-6xl">
@@ -24,11 +32,12 @@ const AllCategories = () => {
 
         {/* All Categories Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {categories.map((category, index) => (
+          {allCategories.map((category, index) => (
             <Card 
               key={category.id}
               className="group cursor-pointer hover:shadow-strong transition-all duration-300 hover-scale border-0 overflow-hidden"
               style={{ animationDelay: `${index * 50}ms` }}
+              onClick={() => handleCategoryClick(category)}
             >
               <div className="bg-gradient-primary p-6">
                 <div className="flex items-center gap-4 mb-4">

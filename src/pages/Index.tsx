@@ -13,14 +13,26 @@ import { SearchSection } from '@/components/features/SearchSection';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 import { WelcomeTour } from '@/components/tour/WelcomeTour';
 import { AppDownloadPopup } from '@/components/pwa/AppDownloadPopup';
+import { GlobalSearch } from '@/components/GlobalSearch';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const { searchResults, isLoading, handleSearch, clearResults } = useSearch();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    // Handle category selection from navigation state
+    if (location.state?.selectedCategory) {
+      const category = location.state.selectedCategory;
+      setSelectedCategory(category);
+      handleSearch(category, '', '');
+      // Clear the state to prevent re-triggering
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state, handleSearch]);
 
   const handleCategorySelect = (category: Category) => {
     setSelectedCategory(category);
@@ -31,6 +43,20 @@ const Index = () => {
   const onSearch = async (query: string, location: string) => {
     if (!selectedCategory) return;
     await handleSearch(selectedCategory, query, location);
+  };
+
+  const handleGlobalSearch = async (query: string, location: string, category?: Category) => {
+    if (category) {
+      setSelectedCategory(category);
+      await handleSearch(category, query, location);
+    } else {
+      // If no category detected, search across all API-enabled categories
+      const apiCategories = getAllCategories().filter(cat => cat.hasRealApi);
+      if (apiCategories.length > 0) {
+        setSelectedCategory(apiCategories[0]);
+        await handleSearch(apiCategories[0], query, location);
+      }
+    }
   };
 
   const handleBack = () => {
@@ -69,17 +95,8 @@ const Index = () => {
                 </div>
               </div>
 
-              {/* Search Bar */}
-              <div className="max-w-2xl mx-auto">
-                <div className="relative">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                  <Input
-                    type="text"
-                    placeholder="Search your destination here..."
-                    className="w-full pl-12 pr-4 py-4 text-lg bg-background/80 backdrop-blur-sm border-border/50 rounded-2xl shadow-sm focus:shadow-md transition-all"
-                  />
-                </div>
-              </div>
+              {/* Global Search Bar */}
+              <GlobalSearch onSearch={handleGlobalSearch} placeholder="Search anything - movies, books, news, recipes..." />
             </div>
 
             {/* Categories Grid - Mobile Optimized */}

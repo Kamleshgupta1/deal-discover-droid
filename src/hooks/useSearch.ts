@@ -4,6 +4,9 @@ import { generateMockResults } from '@/utils/categoryUtils';
 import { movieApi } from '@/services/movieApi';
 import { booksApi } from '@/services/booksApi';
 import { cryptoApi } from '@/services/cryptoApi';
+import { newsApi } from '@/services/newsApi';
+import { weatherApi } from '@/services/weatherApi';
+import { recipesApi } from '@/services/recipesApi';
 
 export const useSearch = () => {
   const [searchResults, setSearchResults] = useState<ComparisonResult[]>([]);
@@ -22,6 +25,12 @@ export const useSearch = () => {
         results = await searchBooks(query);
       } else if (category.id === 'cryptocurrency' && query) {
         results = await searchCrypto(query);
+      } else if (category.id === 'news' && query) {
+        results = await searchNews(query);
+      } else if (category.id === 'weather' && query) {
+        results = await searchWeather(query, location);
+      } else if (category.id === 'food' && query) {
+        results = await searchRecipes(query);
       } else {
         // Use mock data for other categories
         results = generateMockResults(category, query);
@@ -240,6 +249,128 @@ export const useSearch = () => {
           }
         });
       }
+    }
+
+    return results;
+  };
+
+  const searchNews = async (query: string): Promise<ComparisonResult[]> => {
+    const articles = await newsApi.searchNews(query);
+    const results: ComparisonResult[] = [];
+
+    for (const article of articles.slice(0, 5)) {
+      const platforms = [
+        {
+          platform: {
+            name: article.source.name,
+            url: article.url,
+            color: '#1da1f2',
+            features: ['Free Read', 'Breaking News']
+          },
+          price: 0,
+          availability: true,
+          estimatedDelivery: 'Instant',
+          specialOffers: ['Free Article'],
+          rating: 4.5,
+          reviews: 100
+        }
+      ];
+
+      const bestPrice = platforms[0];
+      const bestRated = platforms[0];
+      const fastestDelivery = platforms[0];
+
+      results.push({
+        id: article.url,
+        name: article.title,
+        image: article.urlToImage || '/placeholder.svg',
+        platforms,
+        recommendation: {
+          bestPrice,
+          fastestDelivery,
+          bestRated
+        }
+      });
+    }
+
+    return results;
+  };
+
+  const searchWeather = async (query: string, location: string): Promise<ComparisonResult[]> => {
+    const weatherData = await weatherApi.getCurrentWeather(location || query);
+    if (!weatherData) return [];
+
+    const platforms = [
+      {
+        platform: {
+          name: 'WeatherAPI',
+          url: `https://www.weatherapi.com/weather/q/${encodeURIComponent(location || query)}`,
+          color: '#87ceeb',
+          features: ['Current Weather', '3-Day Forecast']
+        },
+        price: 0,
+        availability: true,
+        estimatedDelivery: 'Real-time',
+        specialOffers: ['Free Weather Data'],
+        rating: 4.8,
+        reviews: 1000
+      }
+    ];
+
+    const bestPrice = platforms[0];
+    const bestRated = platforms[0];
+    const fastestDelivery = platforms[0];
+
+    return [{
+      id: weatherData.location.name,
+      name: `Weather in ${weatherData.location.name}`,
+      image: `https:${weatherData.current.condition.icon}`,
+      platforms,
+      recommendation: {
+        bestPrice,
+        fastestDelivery,
+        bestRated
+      }
+    }];
+  };
+
+  const searchRecipes = async (query: string): Promise<ComparisonResult[]> => {
+    const recipes = await recipesApi.searchRecipes(query);
+    const results: ComparisonResult[] = [];
+
+    for (const recipe of recipes.slice(0, 5)) {
+      const platforms = [
+        {
+          platform: {
+            name: 'TheMealDB',
+            url: recipe.strYoutube || `https://www.themealdb.com/meal/${recipe.idMeal}`,
+            color: '#ff6b6b',
+            features: ['Free Recipe', 'Video Tutorial']
+          },
+          price: 0,
+          availability: true,
+          estimatedDelivery: 'Instant',
+          specialOffers: ['Free Recipe & Video'],
+          rating: 4.7,
+          reviews: 200
+        }
+      ];
+
+      const bestPrice = platforms[0];
+      const bestRated = platforms[0];
+      const fastestDelivery = platforms[0];
+
+      results.push({
+        id: recipe.idMeal,
+        name: recipe.strMeal,
+        image: recipe.strMealThumb || '/placeholder.svg',
+        platforms,
+        recommendation: {
+          bestPrice,
+          fastestDelivery,
+          bestRated
+        }
+      });
     }
 
     return results;

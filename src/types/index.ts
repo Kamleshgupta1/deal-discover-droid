@@ -7,6 +7,8 @@ export interface Category {
   priority?: number;
   hasRealApi?: boolean;
   platforms: Platform[];
+  keywords?: string[];
+  description?: string;
 }
 
 export interface Platform {

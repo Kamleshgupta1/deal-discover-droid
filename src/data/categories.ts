@@ -1,772 +1,384 @@
-import { 
-  Car, 
-  Utensils, 
-  ShoppingCart, 
-  Plane, 
-  Building, 
-  Ticket, 
-  Package,
-  MapPin,
-  Stethoscope,
-  Film,
-  Truck,
-  Heart,
-  Gamepad2,
-  GraduationCap,
-  Home,
-  CreditCard,
-  Banknote,
-  TrendingUp,
-  Shield,
-  Phone,
-  Wifi,
-  Zap,
-  Wrench,
-  Users,
-  BookOpen,
-  Music,
-  Camera,
-  Coffee,
-  Book,
-  Bitcoin
-} from 'lucide-react';
+import { Film, BookOpen, TrendingUp, UtensilsCrossed, Car, Pill, Smartphone, 
+         Laptop, Gamepad2, Home, Plane, CreditCard, PiggyBank, Shield, 
+         ShoppingCart, Dumbbell, GraduationCap, Briefcase, MapPin, Stethoscope, 
+         Building, Coffee, Baby, Gift, Music, Newspaper, Cloud } from 'lucide-react';
 import { Category } from '@/types';
 
-export const categories: Category[] = [
+export const getAllCategories = (): Category[] => [
+  // High Priority Categories (shown on home)
   {
-    id: 'food-delivery',
-    name: 'Food Delivery',
-    icon: Utensils,
-    priority: 1,
+    id: 'entertainment',
+    name: 'Entertainment',
+    icon: Film,
+    hasRealApi: true,
     platforms: [
-      { 
-        name: 'Swiggy', 
-        url: 'https://www.swiggy.com', 
-        color: '#FC8A06',
-        features: ['Fast Delivery', 'Wide Selection', 'Live Tracking']
-      },
-      { 
-        name: 'Zomato', 
-        url: 'https://www.zomato.com', 
-        color: '#E23744',
-        features: ['Quality Food', 'Restaurant Reviews', 'Gold Membership']
-      },
-      { 
-        name: 'Uber Eats', 
-        url: 'https://www.ubereats.com', 
-        color: '#000000',
-        features: ['Global Brands', 'Quick Service', 'Uber Integration']
-      }
-    ]
+      { name: 'Netflix', url: 'https://netflix.com', color: '#e50914', features: ['Streaming', 'HD Quality'] },
+      { name: 'Amazon Prime', url: 'https://primevideo.com', color: '#00a8e1', features: ['Prime Video', 'Free Delivery'] },
+      { name: 'Disney+ Hotstar', url: 'https://hotstar.com', color: '#0f1419', features: ['Disney Content', 'Sports'] }
+    ],
+    description: 'Compare movies, TV shows, and streaming services',
+    keywords: ['movie', 'film', 'show', 'netflix', 'streaming']
   },
   {
-    id: 'grocery',
-    name: 'Grocery',
-    icon: ShoppingCart,
-    priority: 2,
+    id: 'books',
+    name: 'Books',
+    icon: BookOpen,
+    hasRealApi: true,
     platforms: [
-      { 
-        name: 'Blinkit', 
-        url: 'https://blinkit.com', 
-        color: '#FFDD00',
-        features: ['10-min Delivery', 'Fresh Produce', '24/7 Service']
-      },
-      { 
-        name: 'BigBasket', 
-        url: 'https://www.bigbasket.com', 
-        color: '#84C225',
-        features: ['Bulk Orders', 'Scheduled Delivery', 'Organic Options']
-      },
-      { 
-        name: 'Amazon Fresh', 
-        url: 'https://www.amazon.in/fresh', 
-        color: '#FF9900',
-        features: ['Prime Benefits', 'Same Day Delivery', 'Wide Range']
-      }
-    ]
+      { name: 'Amazon Kindle', url: 'https://kindle.amazon.com', color: '#ff9900', features: ['Digital', 'Cloud Sync'] },
+      { name: 'Google Books', url: 'https://books.google.com', color: '#4285f4', features: ['Free Preview', 'Sample Pages'] },
+      { name: 'Apple Books', url: 'https://books.apple.com', color: '#007aff', features: ['iOS Integration', 'Audiobooks'] }
+    ],
+    description: 'Find and compare books across platforms',
+    keywords: ['book', 'ebook', 'novel', 'reading', 'kindle']
   },
   {
-    id: 'travel',
-    name: 'Travel',
-    icon: Plane,
-    priority: 3,
+    id: 'cryptocurrency',
+    name: 'Cryptocurrency',
+    icon: TrendingUp,
+    hasRealApi: true,
     platforms: [
-      { 
-        name: 'MakeMyTrip', 
-        url: 'https://www.makemytrip.com', 
-        color: '#E73C7E',
-        features: ['Flight Booking', 'Holiday Packages', 'Travel Insurance']
-      },
-      { 
-        name: 'Goibibo', 
-        url: 'https://www.goibibo.com', 
-        color: '#F79F1F',
-        features: ['Bus Booking', 'Hotel Deals', 'goCash Rewards']
-      },
-      { 
-        name: 'Cleartrip', 
-        url: 'https://www.cleartrip.com', 
-        color: '#FF6B35',
-        features: ['Easy Booking', 'Flexible Dates', 'Clean Interface']
-      }
-    ]
+      { name: 'Binance', url: 'https://binance.com', color: '#f7931a', features: ['Trading', 'Secure'] },
+      { name: 'Coinbase', url: 'https://coinbase.com', color: '#0052ff', features: ['Easy to Use', 'Regulated'] },
+      { name: 'Kraken', url: 'https://kraken.com', color: '#5741d9', features: ['Advanced Trading', 'Security'] }
+    ],
+    description: 'Compare crypto prices and exchanges',
+    keywords: ['crypto', 'bitcoin', 'ethereum', 'trading', 'exchange']
+  },
+  {
+    id: 'food',
+    name: 'Food & Recipes',
+    icon: UtensilsCrossed,
+    hasRealApi: true,
+    platforms: [
+      { name: 'TheMealDB', url: 'https://themealdb.com', color: '#ff6b6b', features: ['Free Recipe', 'Video Tutorial'] },
+      { name: 'Recipe Sites', url: 'https://allrecipes.com', color: '#ff9500', features: ['User Reviews', 'Step by Step'] },
+      { name: 'Cooking Videos', url: 'https://youtube.com/cooking', color: '#ff0000', features: ['Video Tutorials', 'Chef Tips'] }
+    ],
+    description: 'Find recipes and cooking tutorials',
+    keywords: ['recipe', 'cooking', 'food', 'meal', 'ingredients']
   },
   {
     id: 'ride-booking',
     name: 'Ride Booking',
     icon: Car,
-    priority: 4,
+    hasRealApi: false,
     platforms: [
-      { 
-        name: 'Uber', 
-        url: 'https://www.uber.com', 
-        color: '#000000',
-        features: ['Global Service', 'Multiple Options', 'Ride Sharing']
-      },
-      { 
-        name: 'Ola', 
-        url: 'https://www.olacabs.com', 
-        color: '#00D100',
-        features: ['Local Focus', 'Auto Rickshaw', 'Outstation']
-      },
-      { 
-        name: 'Rapido', 
-        url: 'https://rapido.bike', 
-        color: '#FFD700',
-        features: ['Bike Taxi', 'Quick Rides', 'Traffic Beating']
-      }
-    ]
+      { name: 'Uber', url: 'https://uber.com', color: '#000000', features: ['Global Service', 'Multiple Options'] },
+      { name: 'Lyft', url: 'https://lyft.com', color: '#ff00bf', features: ['Ride Sharing', 'Safety Features'] },
+      { name: 'Ola', url: 'https://olacabs.com', color: '#00d100', features: ['Local Focus', 'Auto Rickshaw'] }
+    ],
+    description: 'Compare ride-sharing services and prices',
+    keywords: ['uber', 'taxi', 'ride', 'cab', 'transport']
   },
   {
     id: 'medicine',
     name: 'Medicine',
-    icon: Stethoscope,
-    priority: 5,
+    icon: Pill,
+    hasRealApi: false,
     platforms: [
-      { 
-        name: 'PharmEasy', 
-        url: 'https://pharmeasy.in', 
-        color: '#1B8F47',
-        features: ['Medicine Delivery', 'Lab Tests', 'Health Records']
-      },
-      { 
-        name: 'Apollo Pharmacy', 
-        url: 'https://www.apollopharmacy.in', 
-        color: '#00A859',
-        features: ['Prescription Upload', 'Genuine Medicines', 'Expert Consultation']
-      },
-      { 
-        name: '1mg', 
-        url: 'https://www.1mg.com', 
-        color: '#FF6F61',
-        features: ['Medicine Info', 'Health Articles', 'Quick Delivery']
-      }
-    ]
+      { name: 'CVS', url: 'https://cvs.com', color: '#cc0000', features: ['Pharmacy Services', 'Health Products'] },
+      { name: 'Walgreens', url: 'https://walgreens.com', color: '#e31837', features: ['Prescription Upload', 'Health Records'] },
+      { name: 'Amazon Pharmacy', url: 'https://pharmacy.amazon.com', color: '#ff9900', features: ['Prime Benefits', 'Quick Delivery'] }
+    ],
+    description: 'Compare medicine prices and pharmacy services',
+    keywords: ['medicine', 'pharmacy', 'drug', 'prescription', 'health']
   },
   {
-    id: 'entertainment',
-    name: 'Movies & Entertainment',
-    icon: Film,
-    priority: 6,
+    id: 'news',
+    name: 'News',
+    icon: Newspaper,
     hasRealApi: true,
     platforms: [
-      { 
-        name: 'Netflix', 
-        url: 'https://www.netflix.com', 
-        color: '#E50914',
-        features: ['Streaming', 'Original Content', 'Multiple Devices']
-      },
-      { 
-        name: 'Amazon Prime', 
-        url: 'https://www.primevideo.com', 
-        color: '#00A8E1',
-        features: ['Prime Video', 'Free Delivery', 'Music Streaming']
-      },
-      { 
-        name: 'Disney+ Hotstar', 
-        url: 'https://www.hotstar.com', 
-        color: '#0F1419',
-        features: ['Disney Content', 'Sports', 'Regional Content']
-      }
-    ]
+      { name: 'BBC', url: 'https://bbc.com', color: '#bb1919', features: ['Breaking News', 'Global Coverage'] },
+      { name: 'CNN', url: 'https://cnn.com', color: '#c8102e', features: ['Live Updates', 'Analysis'] },
+      { name: 'Reuters', url: 'https://reuters.com', color: '#ff6d00', features: ['Factual Reporting', 'Business News'] },
+      { name: 'AP News', url: 'https://apnews.com', color: '#c8102e', features: ['Wire Service', 'Verified News'] }
+    ],
+    description: 'Get latest news from multiple sources',
+    keywords: ['news', 'headlines', 'breaking', 'current events']
   },
   {
-    id: 'hotels',
-    name: 'Hotels',
-    icon: Building,
-    priority: 7,
+    id: 'weather',
+    name: 'Weather',
+    icon: Cloud,
+    hasRealApi: true,
     platforms: [
-      { 
-        name: 'OYO', 
-        url: 'https://www.oyorooms.com', 
-        color: '#E60023',
-        features: ['Budget Stays', 'Standardized Rooms', 'Easy Booking']
-      },
-      { 
-        name: 'Booking.com', 
-        url: 'https://www.booking.com', 
-        color: '#003580',
-        features: ['Free Cancellation', 'Verified Reviews', 'Best Price Guarantee']
-      },
-      { 
-        name: 'Agoda', 
-        url: 'https://www.agoda.com', 
-        color: '#B71C1C',
-        features: ['Asia Focus', 'Member Discounts', 'Instant Confirmation']
-      }
-    ]
+      { name: 'WeatherAPI', url: 'https://weatherapi.com', color: '#87ceeb', features: ['Current Weather', '3-Day Forecast'] },
+      { name: 'OpenWeather', url: 'https://openweathermap.org', color: '#eb6e4b', features: ['Global Coverage', 'Historical Data'] },
+      { name: 'AccuWeather', url: 'https://accuweather.com', color: '#ef6c00', features: ['Precise Forecasts', 'Weather Alerts'] }
+    ],
+    description: 'Compare weather forecasts and conditions',
+    keywords: ['weather', 'forecast', 'temperature', 'climate']
   },
+
+  // Other Categories (shown on "See More")
   {
-    id: 'ecommerce',
+    id: 'shopping',
     name: 'Shopping',
-    icon: Package,
-    priority: 8,
+    icon: ShoppingCart,
+    hasRealApi: false,
     platforms: [
-      { 
-        name: 'Amazon', 
-        url: 'https://www.amazon.in', 
-        color: '#FF9900',
-        features: ['Prime Delivery', 'Vast Selection', 'Easy Returns']
-      },
-      { 
-        name: 'Flipkart', 
-        url: 'https://www.flipkart.com', 
-        color: '#2874F0',
-        features: ['Big Billion Days', 'Plus Membership', 'No Cost EMI']
-      },
-      { 
-        name: 'Myntra', 
-        url: 'https://www.myntra.com', 
-        color: '#FF3F6C',
-        features: ['Fashion Focus', 'Brand Variety', 'Easy Returns']
-      }
-    ]
+      { name: 'Amazon', url: 'https://amazon.com', color: '#ff9900', features: ['Prime Delivery', 'Vast Selection'] },
+      { name: 'eBay', url: 'https://ebay.com', color: '#e53238', features: ['Auctions', 'Global Marketplace'] },
+      { name: 'Walmart', url: 'https://walmart.com', color: '#0071ce', features: ['Everyday Low Prices', 'Store Pickup'] }
+    ],
+    description: 'Compare shopping deals and prices',
+    keywords: ['shopping', 'deals', 'products', 'amazon', 'ebay']
   },
   {
-    id: 'fitness',
-    name: 'Fitness',
-    icon: Heart,
-    priority: 9,
+    id: 'travel',
+    name: 'Travel',
+    icon: Plane,
+    hasRealApi: false,
     platforms: [
-      { 
-        name: 'Cult.fit', 
-        url: 'https://www.cult.fit', 
-        color: '#FF4757',
-        features: ['Gym Workouts', 'Home Fitness', 'Mental Wellness']
-      },
-      { 
-        name: 'Fitpass', 
-        url: 'https://www.fitpass.co.in', 
-        color: '#2ECC71',
-        features: ['Multiple Gyms', 'Flexible Plans', 'Fitness Tracking']
-      }
-    ]
-  },
-  {
-    id: 'education',
-    name: 'Education',
-    icon: GraduationCap,
-    priority: 10,
-    platforms: [
-      { 
-        name: 'BYJU\'S', 
-        url: 'https://byjus.com', 
-        color: '#800080',
-        features: ['Personalized Learning', 'Video Lessons', 'Test Prep']
-      },
-      { 
-        name: 'Unacademy', 
-        url: 'https://unacademy.com', 
-        color: '#08BD80',
-        features: ['Live Classes', 'Expert Educators', 'Competitive Exams']
-      }
-    ]
-  },
-  {
-    id: 'gaming',
-    name: 'Gaming',
-    icon: Gamepad2,
-    priority: 11,
-    platforms: [
-      { 
-        name: 'Steam', 
-        url: 'https://store.steampowered.com', 
-        color: '#171A21',
-        features: ['PC Gaming', 'Game Library', 'Community Features']
-      },
-      { 
-        name: 'Epic Games', 
-        url: 'https://www.epicgames.com', 
-        color: '#313131',
-        features: ['Free Weekly Games', 'Exclusive Titles', 'Creator Support']
-      }
-    ]
-  },
-  {
-    id: 'logistics',
-    name: 'Logistics',
-    icon: Truck,
-    priority: 12,
-    platforms: [
-      { 
-        name: 'Porter', 
-        url: 'https://porter.in', 
-        color: '#FF6B35',
-        features: ['Goods Transport', 'City & Intercity', 'Live Tracking']
-      },
-      { 
-        name: 'Pickrr', 
-        url: 'https://www.pickrr.com', 
-        color: '#FF9500',
-        features: ['Shipping Solutions', 'Multiple Carriers', 'API Integration']
-      }
-    ]
-  },
-  {
-    id: 'hyperlocal',
-    name: 'Hyperlocal',
-    icon: MapPin,
-    priority: 13,
-    platforms: [
-      { 
-        name: 'Dunzo', 
-        url: 'https://www.dunzo.com', 
-        color: '#0093FF',
-        features: ['Anything Delivery', 'Pet Supplies', 'Quick Errands']
-      },
-      { 
-        name: 'Urban Company', 
-        url: 'https://www.urbancompany.com', 
-        color: '#6B46C1',
-        features: ['Home Services', 'Professional Care', 'Trusted Partners']
-      }
-    ]
-  },
-  {
-    id: 'home-services',
-    name: 'Home Services',
-    icon: Home,
-    priority: 14,
-    platforms: [
-      { 
-        name: 'Urban Company', 
-        url: 'https://www.urbancompany.com', 
-        color: '#6B46C1',
-        features: ['Professional Services', 'Verified Partners', 'Quality Assurance']
-      },
-      { 
-        name: 'Housejoy', 
-        url: 'https://www.housejoy.in', 
-        color: '#FF6B6B',
-        features: ['Home Repairs', 'Cleaning Services', 'Installation']
-      }
-    ]
+      { name: 'Expedia', url: 'https://expedia.com', color: '#ffc72c', features: ['Flight Booking', 'Hotel Deals'] },
+      { name: 'Booking.com', url: 'https://booking.com', color: '#003580', features: ['Free Cancellation', 'Best Price Guarantee'] },
+      { name: 'Kayak', url: 'https://kayak.com', color: '#ff690f', features: ['Price Comparison', 'Flexible Dates'] }
+    ],
+    description: 'Compare travel deals and bookings',
+    keywords: ['travel', 'flight', 'hotel', 'vacation', 'booking']
   },
   {
     id: 'banking',
     name: 'Banking',
-    icon: Banknote,
-    priority: 15,
+    icon: CreditCard,
+    hasRealApi: false,
     platforms: [
-      { 
-        name: 'HDFC Bank', 
-        url: 'https://www.hdfcbank.com', 
-        color: '#004C8F',
-        features: ['Digital Banking', 'Loan Services', 'Credit Cards']
-      },
-      { 
-        name: 'ICICI Bank', 
-        url: 'https://www.icicibank.com', 
-        color: '#F37020',
-        features: ['Net Banking', 'Investment Options', 'Quick Loans']
-      },
-      { 
-        name: 'SBI', 
-        url: 'https://www.onlinesbi.com', 
-        color: '#1F4E79',
-        features: ['Government Services', 'Rural Banking', 'Pension Schemes']
-      }
-    ]
+      { name: 'Chase', url: 'https://chase.com', color: '#0066b2', features: ['Credit Cards', 'Checking Accounts'] },
+      { name: 'Bank of America', url: 'https://bankofamerica.com', color: '#e31837', features: ['Mobile Banking', 'Investment Services'] },
+      { name: 'Wells Fargo', url: 'https://wellsfargo.com', color: '#d71921', features: ['Personal Banking', 'Mortgages'] }
+    ],
+    description: 'Compare banking services and rates',
+    keywords: ['banking', 'credit card', 'loan', 'mortgage', 'savings']
   },
   {
-    id: 'financial-services',
+    id: 'financial',
     name: 'Financial Services',
-    icon: CreditCard,
-    priority: 16,
+    icon: PiggyBank,
+    hasRealApi: false,
     platforms: [
-      { 
-        name: 'Paytm', 
-        url: 'https://paytm.com', 
-        color: '#00BAF2',
-        features: ['Digital Payments', 'Bill Payments', 'Wallet Services']
-      },
-      { 
-        name: 'PhonePe', 
-        url: 'https://www.phonepe.com', 
-        color: '#5F259F',
-        features: ['UPI Payments', 'Money Transfer', 'Merchant Services']
-      },
-      { 
-        name: 'Google Pay', 
-        url: 'https://pay.google.com', 
-        color: '#4285F4',
-        features: ['Quick Payments', 'Rewards', 'Security']
-      }
-    ]
+      { name: 'Robinhood', url: 'https://robinhood.com', color: '#00c805', features: ['Commission-Free Trading', 'Crypto Trading'] },
+      { name: 'E*TRADE', url: 'https://etrade.com', color: '#7b68ee', features: ['Research Tools', 'Investment Options'] },
+      { name: 'TD Ameritrade', url: 'https://tdameritrade.com', color: '#00a651', features: ['Professional Tools', 'Education'] }
+    ],
+    description: 'Compare investment and financial services',
+    keywords: ['investing', 'stocks', 'financial', 'trading', 'retirement']
   },
   {
     id: 'mutual-funds',
     name: 'Mutual Funds',
     icon: TrendingUp,
-    priority: 17,
+    hasRealApi: false,
     platforms: [
-      { 
-        name: 'Groww', 
-        url: 'https://groww.in', 
-        color: '#00D09C',
-        features: ['Zero Commission', 'SIP Investment', 'Portfolio Tracking']
-      },
-      { 
-        name: 'Zerodha Coin', 
-        url: 'https://coin.zerodha.com', 
-        color: '#387ED1',
-        features: ['Direct Funds', 'No Transaction Fees', 'Goal Planning']
-      },
-      { 
-        name: 'Kuvera', 
-        url: 'https://kuvera.in', 
-        color: '#2E7D32',
-        features: ['Free Investment', 'Tax Planning', 'Family Portfolio']
-      }
-    ]
+      { name: 'Vanguard', url: 'https://vanguard.com', color: '#8b1538', features: ['Low-Cost Funds', 'Index Investing'] },
+      { name: 'Fidelity', url: 'https://fidelity.com', color: '#00a651', features: ['Zero-Fee Funds', 'Research Tools'] },
+      { name: 'Schwab', url: 'https://schwab.com', color: '#00a0df', features: ['No Minimum Investment', 'Advisory Services'] }
+    ],
+    description: 'Compare mutual fund options and fees',
+    keywords: ['mutual funds', 'investing', 'portfolio', 'returns', 'fees']
   },
   {
     id: 'insurance',
     name: 'Insurance',
     icon: Shield,
-    priority: 18,
+    hasRealApi: false,
     platforms: [
-      { 
-        name: 'PolicyBazaar', 
-        url: 'https://www.policybazaar.com', 
-        color: '#ED1C24',
-        features: ['Compare Policies', 'Instant Quotes', 'Expert Advice']
-      },
-      { 
-        name: 'Acko', 
-        url: 'https://www.acko.com', 
-        color: '#FF6B35',
-        features: ['Digital Insurance', 'Zero Paperwork', 'Quick Claims']
-      },
-      { 
-        name: 'Digit Insurance', 
-        url: 'https://www.godigit.com', 
-        color: '#FF6B6B',
-        features: ['General Insurance', 'Mobile App', 'Easy Claims']
-      }
-    ]
+      { name: 'GEICO', url: 'https://geico.com', color: '#004890', features: ['Auto Insurance', 'Competitive Rates'] },
+      { name: 'State Farm', url: 'https://statefarm.com', color: '#da020e', features: ['Personal Insurance', 'Local Agents'] },
+      { name: 'Progressive', url: 'https://progressive.com', color: '#0066cc', features: ['Compare Rates', 'Bundling Discounts'] }
+    ],
+    description: 'Compare insurance policies and rates',
+    keywords: ['insurance', 'auto', 'home', 'life', 'health', 'coverage']
   },
   {
-    id: 'telecom',
-    name: 'Telecom',
-    icon: Phone,
-    priority: 19,
+    id: 'electronics',
+    name: 'Electronics',
+    icon: Smartphone,
+    hasRealApi: false,
     platforms: [
-      { 
-        name: 'Jio', 
-        url: 'https://www.jio.com', 
-        color: '#0066CC',
-        features: ['5G Network', 'Digital Services', 'Affordable Plans']
-      },
-      { 
-        name: 'Airtel', 
-        url: 'https://www.airtel.in', 
-        color: '#E60000',
-        features: ['Premium Network', 'Xstream Services', 'International Roaming']
-      },
-      { 
-        name: 'Vi', 
-        url: 'https://www.myvi.in', 
-        color: '#662D91',
-        features: ['Data Plans', 'Voice Services', 'Entertainment']
-      }
-    ]
+      { name: 'Best Buy', url: 'https://bestbuy.com', color: '#0046be', features: ['Latest Tech', 'Expert Support'] },
+      { name: 'Newegg', url: 'https://newegg.com', color: '#ff6900', features: ['PC Components', 'Tech Deals'] },
+      { name: 'B&H', url: 'https://bhphotovideo.com', color: '#ff6900', features: ['Professional Equipment', 'Photography Gear'] }
+    ],
+    description: 'Compare electronics and tech products',
+    keywords: ['electronics', 'tech', 'gadgets', 'computers', 'phones']
   },
   {
-    id: 'internet',
-    name: 'Internet & Broadband',
-    icon: Wifi,
-    priority: 20,
+    id: 'computers',
+    name: 'Computers',
+    icon: Laptop,
+    hasRealApi: false,
     platforms: [
-      { 
-        name: 'Jio Fiber', 
-        url: 'https://www.jio.com/fiber', 
-        color: '#0066CC',
-        features: ['High Speed Internet', 'TV Streaming', 'Security Services']
-      },
-      { 
-        name: 'Airtel Xstream Fiber', 
-        url: 'https://www.airtel.in/broadband', 
-        color: '#E60000',
-        features: ['Unlimited Data', 'Premium Support', 'Smart Home']
-      },
-      { 
-        name: 'BSNL Broadband', 
-        url: 'https://www.bsnl.co.in', 
-        color: '#FFD700',
-        features: ['Government Service', 'Rural Coverage', 'Affordable Plans']
-      }
-    ]
+      { name: 'Dell', url: 'https://dell.com', color: '#007db8', features: ['Custom Builds', 'Business Solutions'] },
+      { name: 'HP', url: 'https://hp.com', color: '#0073e6', features: ['Reliable Hardware', 'Support Services'] },
+      { name: 'Lenovo', url: 'https://lenovo.com', color: '#e2231a', features: ['ThinkPad Series', 'Gaming Laptops'] }
+    ],
+    description: 'Compare computer brands and specs',
+    keywords: ['computers', 'laptops', 'desktops', 'pc', 'specs']
   },
   {
-    id: 'utilities',
-    name: 'Utilities',
-    icon: Zap,
-    priority: 21,
+    id: 'gaming',
+    name: 'Gaming',
+    icon: Gamepad2,
+    hasRealApi: false,
     platforms: [
-      { 
-        name: 'BESCOM', 
-        url: 'https://bescom.karnataka.gov.in', 
-        color: '#2E7D32',
-        features: ['Electricity Bills', 'Online Services', 'Power Management']
-      },
-      { 
-        name: 'Paytm Bills', 
-        url: 'https://paytm.com/bill-payment', 
-        color: '#00BAF2',
-        features: ['All Bill Payments', 'Instant Payments', 'Cashback Offers']
-      },
-      { 
-        name: 'Amazon Pay Bills', 
-        url: 'https://www.amazon.in/bill-payments', 
-        color: '#FF9900',
-        features: ['Multiple Utilities', 'Rewards', 'Auto Pay']
-      }
-    ]
+      { name: 'Steam', url: 'https://steampowered.com', color: '#1b2838', features: ['PC Gaming', 'Digital Library'] },
+      { name: 'PlayStation', url: 'https://playstation.com', color: '#003087', features: ['Exclusive Games', 'Online Gaming'] },
+      { name: 'Xbox', url: 'https://xbox.com', color: '#107c10', features: ['Game Pass', 'Cloud Gaming'] }
+    ],
+    description: 'Compare gaming platforms and deals',
+    keywords: ['gaming', 'games', 'console', 'pc gaming', 'steam']
   },
   {
-    id: 'social-media',
-    name: 'Social Media',
-    icon: Users,
-    priority: 22,
+    id: 'home',
+    name: 'Home & Garden',
+    icon: Home,
+    hasRealApi: false,
     platforms: [
-      { 
-        name: 'Facebook', 
-        url: 'https://www.facebook.com', 
-        color: '#1877F2',
-        features: ['Social Networking', 'Marketplace', 'Business Pages']
-      },
-      { 
-        name: 'Instagram', 
-        url: 'https://www.instagram.com', 
-        color: '#E4405F',
-        features: ['Photo Sharing', 'Stories', 'Reels']
-      },
-      { 
-        name: 'Twitter', 
-        url: 'https://twitter.com', 
-        color: '#1DA1F2',
-        features: ['Microblogging', 'News Updates', 'Trending Topics']
-      }
-    ]
+      { name: 'Home Depot', url: 'https://homedepot.com', color: '#f96302', features: ['Home Improvement', 'Tool Rental'] },
+      { name: 'Lowes', url: 'https://lowes.com', color: '#0067b1', features: ['Installation Services', 'Project Ideas'] },
+      { name: 'IKEA', url: 'https://ikea.com', color: '#0058a3', features: ['Furniture Design', 'Assembly Service'] }
+    ],
+    description: 'Compare home improvement and furniture',
+    keywords: ['home', 'furniture', 'garden', 'tools', 'improvement']
   },
   {
-    id: 'news-media',
-    name: 'News & Media',
-    icon: BookOpen,
-    priority: 23,
+    id: 'fitness',
+    name: 'Fitness',
+    icon: Dumbbell,
+    hasRealApi: false,
     platforms: [
-      { 
-        name: 'Times of India', 
-        url: 'https://timesofindia.indiatimes.com', 
-        color: '#C41E3A',
-        features: ['Breaking News', 'Regional News', 'Sports Updates']
-      },
-      { 
-        name: 'NDTV', 
-        url: 'https://www.ndtv.com', 
-        color: '#FF6B35',
-        features: ['Live TV', 'Opinion', 'Fact Check']
-      },
-      { 
-        name: 'The Hindu', 
-        url: 'https://www.thehindu.com', 
-        color: '#1B5E20',
-        features: ['In-depth Analysis', 'Editorial', 'Premium Content']
-      }
-    ]
+      { name: 'Planet Fitness', url: 'https://planetfitness.com', color: '#7b2d8e', features: ['Affordable Membership', 'Judgment Free Zone'] },
+      { name: 'LA Fitness', url: 'https://lafitness.com', color: '#c8102e', features: ['Full-Service Gym', 'Group Classes'] },
+      { name: 'Anytime Fitness', url: 'https://anytimefitness.com', color: '#7b2d8e', features: ['24/7 Access', 'Personal Training'] }
+    ],
+    description: 'Compare fitness centers and memberships',
+    keywords: ['fitness', 'gym', 'workout', 'health', 'exercise']
   },
   {
-    id: 'music-streaming',
-    name: 'Music Streaming',
-    icon: Music,
-    priority: 24,
+    id: 'education',
+    name: 'Education',
+    icon: GraduationCap,
+    hasRealApi: false,
     platforms: [
-      { 
-        name: 'Spotify', 
-        url: 'https://open.spotify.com', 
-        color: '#1DB954',
-        features: ['Music Library', 'Podcasts', 'Playlists']
-      },
-      { 
-        name: 'JioSaavn', 
-        url: 'https://www.jiosaavn.com', 
-        color: '#FF6B35',
-        features: ['Indian Music', 'Regional Songs', 'Offline Downloads']
-      },
-      { 
-        name: 'YouTube Music', 
-        url: 'https://music.youtube.com', 
-        color: '#FF0000',
-        features: ['Video Music', 'Live Performances', 'Recommendations']
-      }
-    ]
+      { name: 'Coursera', url: 'https://coursera.org', color: '#0056d3', features: ['University Courses', 'Certificates'] },
+      { name: 'Udemy', url: 'https://udemy.com', color: '#a435f0', features: ['Practical Skills', 'Lifetime Access'] },
+      { name: 'Khan Academy', url: 'https://khanacademy.org', color: '#14bf96', features: ['Free Education', 'Personalized Learning'] }
+    ],
+    description: 'Compare online learning platforms',
+    keywords: ['education', 'learning', 'courses', 'skills', 'certification']
   },
   {
-    id: 'photography',
-    name: 'Photography',
-    icon: Camera,
-    priority: 25,
+    id: 'jobs',
+    name: 'Jobs',
+    icon: Briefcase,
+    hasRealApi: false,
     platforms: [
-      { 
-        name: 'Shutterstock', 
-        url: 'https://www.shutterstock.com', 
-        color: '#EE3F24',
-        features: ['Stock Photos', 'Vector Graphics', 'Video Clips']
-      },
-      { 
-        name: 'Adobe Stock', 
-        url: 'https://stock.adobe.com', 
-        color: '#FF0000',
-        features: ['High Quality Images', 'Creative Assets', 'Integration']
-      },
-      { 
-        name: 'Unsplash', 
-        url: 'https://unsplash.com', 
-        color: '#000000',
-        features: ['Free Images', 'High Resolution', 'Community']
-      }
-    ]
+      { name: 'LinkedIn', url: 'https://linkedin.com', color: '#0077b5', features: ['Professional Network', 'Job Search'] },
+      { name: 'Indeed', url: 'https://indeed.com', color: '#2557a7', features: ['Job Aggregator', 'Company Reviews'] },
+      { name: 'Glassdoor', url: 'https://glassdoor.com', color: '#0caa41', features: ['Salary Insights', 'Company Culture'] }
+    ],
+    description: 'Compare job search platforms',
+    keywords: ['jobs', 'career', 'employment', 'resume', 'hiring']
   },
   {
-    id: 'cafe-restaurants',
-    name: 'Cafes & Restaurants',
+    id: 'local',
+    name: 'Local Services',
+    icon: MapPin,
+    hasRealApi: false,
+    platforms: [
+      { name: 'Yelp', url: 'https://yelp.com', color: '#d32323', features: ['Local Reviews', 'Business Discovery'] },
+      { name: 'Google Maps', url: 'https://maps.google.com', color: '#4285f4', features: ['Navigation', 'Business Hours'] },
+      { name: 'Foursquare', url: 'https://foursquare.com', color: '#f94877', features: ['Location Intelligence', 'Check-ins'] }
+    ],
+    description: 'Find and compare local services',
+    keywords: ['local', 'services', 'reviews', 'nearby', 'businesses']
+  },
+  {
+    id: 'healthcare',
+    name: 'Healthcare',
+    icon: Stethoscope,
+    hasRealApi: false,
+    platforms: [
+      { name: 'Teladoc', url: 'https://teladoc.com', color: '#6c5ce7', features: ['Virtual Consultations', 'Medical Expertise'] },
+      { name: 'MDLive', url: 'https://mdlive.com', color: '#00b894', features: ['24/7 Access', 'Prescription Services'] },
+      { name: 'Doctor on Demand', url: 'https://doctorondemand.com', color: '#0984e3', features: ['Video Visits', 'Mental Health'] }
+    ],
+    description: 'Compare healthcare and telemedicine services',
+    keywords: ['healthcare', 'doctor', 'medical', 'telemedicine', 'health']
+  },
+  {
+    id: 'real-estate',
+    name: 'Real Estate',
+    icon: Building,
+    hasRealApi: false,
+    platforms: [
+      { name: 'Zillow', url: 'https://zillow.com', color: '#006aff', features: ['Home Values', 'Market Trends'] },
+      { name: 'Realtor.com', url: 'https://realtor.com', color: '#d92228', features: ['MLS Listings', 'Agent Directory'] },
+      { name: 'Redfin', url: 'https://redfin.com', color: '#a02021', features: ['Low Commission', 'Market Insights'] }
+    ],
+    description: 'Compare real estate platforms and listings',
+    keywords: ['real estate', 'homes', 'property', 'buying', 'selling']
+  },
+  {
+    id: 'coffee',
+    name: 'Coffee',
     icon: Coffee,
-    priority: 26,
+    hasRealApi: false,
     platforms: [
-      { 
-        name: 'Dineout', 
-        url: 'https://www.dineout.co.in', 
-        color: '#D32F2F',
-        features: ['Table Booking', 'Restaurant Discovery', 'Offers & Deals']
-      },
-      { 
-        name: 'EazyDiner', 
-        url: 'https://www.eazydiner.com', 
-        color: '#FF5722',
-        features: ['Fine Dining', 'Reviews', 'Exclusive Deals']
-      },
-      { 
-        name: 'OpenTable', 
-        url: 'https://www.opentable.com', 
-        color: '#DA3743',
-        features: ['Global Reservations', 'Points Rewards', 'Special Events']
-      }
-    ]
+      { name: 'Starbucks', url: 'https://starbucks.com', color: '#00704a', features: ['Global Presence', 'Rewards Program'] },
+      { name: 'Blue Bottle', url: 'https://bluebottlecoffee.com', color: '#1e3a8a', features: ['Artisan Coffee', 'Subscription Service'] },
+      { name: 'Dunkin', url: 'https://dunkindonuts.com', color: '#ff6600', features: ['Fast Service', 'Mobile Ordering'] }
+    ],
+    description: 'Compare coffee shops and subscriptions',
+    keywords: ['coffee', 'cafe', 'espresso', 'beans', 'subscription']
   },
   {
-    id: 'books',
-    name: 'Books & Literature',
-    icon: Book,
-    priority: 7,
-    hasRealApi: true,
+    id: 'baby',
+    name: 'Baby & Kids',
+    icon: Baby,
+    hasRealApi: false,
     platforms: [
-      { 
-        name: 'Google Play Books', 
-        url: 'https://play.google.com/store/books', 
-        color: '#4285F4',
-        features: ['Digital Library', 'Cloud Sync', 'Preview Available']
-      },
-      { 
-        name: 'Amazon Kindle', 
-        url: 'https://kindle.amazon.com', 
-        color: '#FF9900',
-        features: ['E-books', 'Audiobooks', 'Kindle Unlimited']
-      },
-      { 
-        name: 'Apple Books', 
-        url: 'https://books.apple.com', 
-        color: '#007AFF',
-        features: ['iOS Integration', 'High Quality', 'Author Interviews']
-      }
-    ]
+      { name: 'Buy Buy Baby', url: 'https://buybuybaby.com', color: '#0066cc', features: ['Baby Gear', 'Registry Services'] },
+      { name: 'Target Baby', url: 'https://target.com/c/baby', color: '#cc0000', features: ['Affordable Options', 'Subscription Boxes'] },
+      { name: 'Amazon Baby', url: 'https://amazon.com/baby', color: '#ff9900', features: ['Wide Selection', 'Subscribe & Save'] }
+    ],
+    description: 'Compare baby and kids products',
+    keywords: ['baby', 'kids', 'children', 'toys', 'gear']
   },
   {
-    id: 'cryptocurrency',
-    name: 'Cryptocurrency',
-    icon: Bitcoin,
-    priority: 8,
-    hasRealApi: true,
+    id: 'gifts',
+    name: 'Gifts',
+    icon: Gift,
+    hasRealApi: false,
     platforms: [
-      { 
-        name: 'Coinbase', 
-        url: 'https://www.coinbase.com', 
-        color: '#0052FF',
-        features: ['Beginner Friendly', 'Secure Wallet', 'Educational Content']
-      },
-      { 
-        name: 'Binance', 
-        url: 'https://www.binance.com', 
-        color: '#F3BA2F',
-        features: ['Low Fees', 'Advanced Trading', 'Global Exchange']
-      },
-      { 
-        name: 'CoinGecko', 
-        url: 'https://www.coingecko.com', 
-        color: '#8DC647',
-        features: ['Market Data', 'Price Tracking', 'Analytics']
-      }
-    ]
+      { name: 'Amazon Gifts', url: 'https://amazon.com/gifts', color: '#ff9900', features: ['Gift Cards', 'Wish Lists'] },
+      { name: 'Etsy', url: 'https://etsy.com', color: '#f16521', features: ['Handmade Items', 'Personalized Gifts'] },
+      { name: 'Uncommon Goods', url: 'https://uncommongoods.com', color: '#8b5a3c', features: ['Unique Gifts', 'Artisan Made'] }
+    ],
+    description: 'Find and compare gift ideas',
+    keywords: ['gifts', 'presents', 'occasions', 'personalized', 'unique']
   },
   {
-    id: 'repair-services',
-    name: 'Repair Services',
-    icon: Wrench,
-    priority: 27,
+    id: 'music',
+    name: 'Music',
+    icon: Music,
+    hasRealApi: false,
     platforms: [
-      { 
-        name: 'Mr. Right', 
-        url: 'https://www.mrright.in', 
-        color: '#FF6B35',
-        features: ['Home Repairs', 'Appliance Service', 'Professional Technicians']
-      },
-      { 
-        name: 'UrbanClap Repairs', 
-        url: 'https://www.urbancompany.com/repairs', 
-        color: '#6B46C1',
-        features: ['Electronics Repair', 'Furniture Repair', 'Quick Service']
-      },
-      { 
-        name: 'Sulekha Services', 
-        url: 'https://www.sulekha.com', 
-        color: '#FF9800',
-        features: ['Local Services', 'Verified Professionals', 'Multiple Categories']
-      }
-    ]
+      { name: 'Spotify', url: 'https://spotify.com', color: '#1db954', features: ['Music Streaming', 'Playlists'] },
+      { name: 'Apple Music', url: 'https://music.apple.com', color: '#fc3c44', features: ['High Quality Audio', 'Exclusive Content'] },
+      { name: 'YouTube Music', url: 'https://music.youtube.com', color: '#ff0000', features: ['Music Videos', 'Free Tier'] }
+    ],
+    description: 'Compare music streaming services',
+    keywords: ['music', 'streaming', 'songs', 'playlist', 'audio']
   }
 ];
 
-// Helper function to get high priority categories (top 6)
-export const getHighPriorityCategories = () => {
-  return categories
-    .filter(cat => cat.priority && cat.priority <= 8)
-    .sort((a, b) => (a.priority || 0) - (b.priority || 0))
-    .slice(0, 6);
+export const getHighPriorityCategories = (): Category[] => {
+  return getAllCategories().slice(0, 6);
 };
 
-// Helper function to get remaining categories
-export const getRemainingCategories = () => {
-  return categories
-    .filter(cat => !cat.priority || cat.priority > 8)
-    .sort((a, b) => (a.priority || 99) - (b.priority || 99));
+export const getRemainingCategories = (): Category[] => {
+  return getAllCategories().slice(6);
 };
