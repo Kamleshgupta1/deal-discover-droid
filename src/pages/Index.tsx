@@ -53,11 +53,22 @@ const Index = () => {
       setSelectedCategory(category);
       await handleSearch(category, query, location);
     } else {
-      // If no category detected, search across all API-enabled categories
-      const apiCategories = getAllCategories().filter(cat => cat.hasRealApi);
-      if (apiCategories.length > 0) {
-        setSelectedCategory(apiCategories[0]);
-        await handleSearch(apiCategories[0], query, location);
+      // Search across all matching APIs based on query
+      const allCategories = getAllCategories().filter(cat => cat.hasRealApi);
+      const matchingCategories = allCategories.filter(cat => 
+        cat.keywords.some(keyword => 
+          query.toLowerCase().includes(keyword.toLowerCase())
+        )
+      );
+      
+      if (matchingCategories.length > 0) {
+        // Use the most relevant category
+        setSelectedCategory(matchingCategories[0]);
+        await handleSearch(matchingCategories[0], query, location);
+      } else if (allCategories.length > 0) {
+        // Fallback to first API category
+        setSelectedCategory(allCategories[0]);
+        await handleSearch(allCategories[0], query, location);
       }
     }
   };

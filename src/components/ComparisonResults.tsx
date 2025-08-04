@@ -5,6 +5,7 @@ import { EmptyState } from './common/EmptyState';
 import { RecommendationCards } from './features/RecommendationCards';
 import { PlatformComparison } from './features/PlatformComparison';
 import { RealTimeResults } from './features/RealTimeResults';
+import { EnhancedComparison } from './features/EnhancedComparison';
 import { ANIMATION_DELAYS } from '@/constants';
 
 interface ComparisonResultsProps {
@@ -15,9 +16,9 @@ interface ComparisonResultsProps {
 }
 
 export const ComparisonResults = ({ results, onPlatformClick, category, isRealTimeData }: ComparisonResultsProps) => {
-  // Use real-time results component for API-backed categories
-  if (isRealTimeData) {
-    return <RealTimeResults results={results} onPlatformClick={onPlatformClick} category={category} />;
+  // Use enhanced comparison for all results
+  if (results.length > 0) {
+    return <EnhancedComparison results={results} onPlatformClick={onPlatformClick} category={category} />;
   }
 
   if (results.length === 0) {

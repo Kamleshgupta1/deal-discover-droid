@@ -10,6 +10,10 @@ import { recipesApi } from '@/services/recipesApi';
 import { ecommerceApi } from '@/services/ecommerceApi';
 import { jobsApi } from '@/services/jobsApi';
 import { travelApi } from '@/services/travelApi';
+import { theaterApi } from '@/services/theaterApi';
+import { trainApi } from '@/services/trainApi';
+import { groceryApi } from '@/services/groceryApi';
+import { clothingApi } from '@/services/clothingApi';
 
 export const useSearch = () => {
   const [searchResults, setSearchResults] = useState<ComparisonResult[]>([]);
@@ -40,6 +44,12 @@ export const useSearch = () => {
         results = await searchJobs(query);
       } else if (category.id === 'travel' && query) {
         results = await searchTravel(query, location);
+      } else if (category.id === 'electronics' && query) {
+        results = await searchProducts(query);
+      } else if (category.id === 'grocery' && query) {
+        results = await searchGrocery(query);
+      } else if (category.id === 'clothing' && query) {
+        results = await searchClothing(query);
       } else {
         // Use mock data for other categories
         results = generateMockResults(category, query);
@@ -535,6 +545,92 @@ export const useSearch = () => {
         recommendation: {
           bestPrice,
           fastestDelivery: hotelPlatforms[0],
+          bestRated
+        }
+      });
+    }
+
+    return results;
+  };
+
+  const searchGrocery = async (query: string): Promise<ComparisonResult[]> => {
+    const products = await groceryApi.searchGroceries(query);
+    const platforms = groceryApi.getPlatforms();
+    const results: ComparisonResult[] = [];
+
+    for (const product of products.slice(0, 6)) {
+      const productPlatforms = platforms.map(platform => ({
+        platform: {
+          name: platform.name,
+          url: platform.url,
+          color: platform.color,
+          features: platform.features
+        },
+        price: groceryApi.generatePlatformPrice(product.price, platform),
+        availability: product.inStock,
+        estimatedDelivery: platform.deliveryTime,
+        specialOffers: [`Min Order: ₹${platform.minimumOrder}`, `Delivery: ₹${platform.deliveryFee}`],
+        rating: product.rating,
+        reviews: Math.floor(Math.random() * 500) + 100
+      }));
+
+      const bestPrice = productPlatforms.reduce((min, p) => p.price < min.price ? p : min);
+      const bestRated = productPlatforms.reduce((max, p) => p.rating > max.rating ? p : max);
+      const fastestDelivery = productPlatforms.reduce((min, p) => 
+        p.estimatedDelivery.includes('min') ? p : min
+      );
+
+      results.push({
+        id: product.id,
+        name: `${product.name} (${product.unit})`,
+        image: product.image,
+        platforms: productPlatforms,
+        recommendation: {
+          bestPrice,
+          fastestDelivery,
+          bestRated
+        }
+      });
+    }
+
+    return results;
+  };
+
+  const searchClothing = async (query: string): Promise<ComparisonResult[]> => {
+    const products = await clothingApi.searchClothing(query);
+    const platforms = clothingApi.getPlatforms();
+    const results: ComparisonResult[] = [];
+
+    for (const product of products.slice(0, 6)) {
+      const productPlatforms = platforms.map(platform => ({
+        platform: {
+          name: platform.name,
+          url: platform.url,
+          color: platform.color,
+          features: platform.features
+        },
+        price: clothingApi.generatePlatformPrice(product.price, platform),
+        availability: true,
+        estimatedDelivery: platform.deliveryTime,
+        specialOffers: platform.offers.slice(0, 1),
+        rating: product.rating,
+        reviews: Math.floor(Math.random() * 1000) + 200
+      }));
+
+      const bestPrice = productPlatforms.reduce((min, p) => p.price < min.price ? p : min);
+      const bestRated = productPlatforms.reduce((max, p) => p.rating > max.rating ? p : max);
+      const fastestDelivery = productPlatforms.reduce((min, p) => 
+        parseInt(p.estimatedDelivery) < parseInt(min.estimatedDelivery) ? p : min
+      );
+
+      results.push({
+        id: product.id,
+        name: `${product.name} - ${product.brand}`,
+        image: product.image,
+        platforms: productPlatforms,
+        recommendation: {
+          bestPrice,
+          fastestDelivery,
           bestRated
         }
       });

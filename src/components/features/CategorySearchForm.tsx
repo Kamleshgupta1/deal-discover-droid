@@ -28,11 +28,27 @@ export const CategorySearchForm = ({ category, onSearch }: CategorySearchFormPro
       case 'shopping':
       case 'electronics':
         return [
-          { key: 'query', label: 'Product Name', placeholder: 'e.g., iPhone 15, laptop', icon: Search, required: true },
+          { key: 'query', label: 'Product Name', placeholder: 'e.g., iPhone 15, laptop, mobile', icon: Search, required: true },
           { key: 'location', label: 'Location', placeholder: 'e.g., New York, London', icon: MapPin },
           { key: 'minPrice', label: 'Min Price', placeholder: 'e.g., 100', icon: DollarSign },
           { key: 'maxPrice', label: 'Max Price', placeholder: 'e.g., 1000', icon: DollarSign },
           { key: 'brand', label: 'Brand', placeholder: 'e.g., Apple, Samsung', icon: Filter }
+        ];
+      
+      case 'grocery':
+        return [
+          { key: 'query', label: 'Product/Item', placeholder: 'e.g., Rice, Milk, Vegetables', icon: Search, required: true },
+          { key: 'location', label: 'Location', placeholder: 'e.g., Mumbai, Delhi', icon: MapPin },
+          { key: 'brand', label: 'Brand', placeholder: 'e.g., Amul, Fortune', icon: Filter },
+          { key: 'quantity', label: 'Quantity', placeholder: 'e.g., 1kg, 2 liters', icon: Filter }
+        ];
+      
+      case 'clothing':
+        return [
+          { key: 'query', label: 'Clothing Item', placeholder: 'e.g., Shirt, Jeans, Dress', icon: Search, required: true },
+          { key: 'brand', label: 'Brand', placeholder: 'e.g., Nike, Zara, H&M', icon: Filter },
+          { key: 'size', label: 'Size', placeholder: 'e.g., M, L, 32', icon: Filter },
+          { key: 'color', label: 'Color', placeholder: 'e.g., Black, Blue', icon: Filter }
         ];
       
       case 'travel':

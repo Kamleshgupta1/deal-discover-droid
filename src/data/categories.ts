@@ -115,6 +115,34 @@ export const getAllCategories = (): Category[] => [
 
   // Other Categories (shown on "See More")
   {
+    id: 'grocery',
+    name: 'Grocery',
+    icon: ShoppingCart,
+    hasRealApi: true,
+    platforms: [
+      { name: 'BigBasket', url: 'https://bigbasket.com', color: '#84c440', features: ['Fresh Produce', 'Same Day Delivery'] },
+      { name: 'Grofers', url: 'https://blinkit.com', color: '#fcbf04', features: ['10 Min Delivery', 'Fresh Fruits'] },
+      { name: 'Amazon Fresh', url: 'https://amazon.in/fresh', color: '#ff9900', features: ['Prime Benefits', 'Fresh Guarantee'] },
+      { name: 'Swiggy Instamart', url: 'https://swiggy.com/instamart', color: '#fc8019', features: ['Ultra Fast Delivery', 'Express Lane'] }
+    ],
+    description: 'Compare grocery prices and delivery times across all major platforms',
+    keywords: ['grocery', 'vegetables', 'fruits', 'milk', 'bread', 'food items', 'fresh produce']
+  },
+  {
+    id: 'clothing',
+    name: 'Clothing & Fashion',
+    icon: ShoppingCart,
+    hasRealApi: true,
+    platforms: [
+      { name: 'Myntra', url: 'https://myntra.com', color: '#ff3f6c', features: ['Fashion Forward', 'Easy Returns'] },
+      { name: 'Amazon Fashion', url: 'https://amazon.in/fashion', color: '#ff9900', features: ['Prime Delivery', 'Try Before Buy'] },
+      { name: 'Flipkart Fashion', url: 'https://flipkart.com/clothing', color: '#2874f0', features: ['Big Billion Days', 'Plus Exclusive'] },
+      { name: 'Ajio', url: 'https://ajio.com', color: '#c8a86d', features: ['Curated Fashion', 'Exclusive Brands'] }
+    ],
+    description: 'Find the best deals on clothing, shoes, and fashion accessories',
+    keywords: ['clothing', 'fashion', 'shirt', 'dress', 'jeans', 'shoes', 'accessories', 'apparel']
+  },
+  {
     id: 'shopping',
     name: 'Shopping',
     icon: ShoppingCart,
@@ -208,7 +236,7 @@ export const getAllCategories = (): Category[] => [
       { name: 'Micro Center', url: 'https://microcenter.com', color: '#ff6900', features: ['In-Store Pickup', 'Tech Support'] }
     ],
     description: 'Find the best deals on smartphones, laptops, and all tech gadgets',
-    keywords: ['electronics', 'tech', 'gadgets', 'computers', 'phones', 'smartphone', 'laptop', 'tablet', 'camera']
+    keywords: ['electronics', 'tech', 'gadgets', 'computers', 'phones', 'smartphone', 'laptop', 'tablet', 'camera', 'mobile']
   },
   {
     id: 'computers',
