@@ -52,11 +52,12 @@ export const getAllCategories = (): Category[] => [
     hasRealApi: true,
     platforms: [
       { name: 'TheMealDB', url: 'https://themealdb.com', color: '#ff6b6b', features: ['Free Recipe', 'Video Tutorial'] },
-      { name: 'Recipe Sites', url: 'https://allrecipes.com', color: '#ff9500', features: ['User Reviews', 'Step by Step'] },
-      { name: 'Cooking Videos', url: 'https://youtube.com/cooking', color: '#ff0000', features: ['Video Tutorials', 'Chef Tips'] }
+      { name: 'Allrecipes', url: 'https://allrecipes.com', color: '#ff9500', features: ['User Reviews', 'Step by Step'] },
+      { name: 'Food Network', url: 'https://foodnetwork.com', color: '#ff0000', features: ['Chef Recipes', 'Cooking Shows'] },
+      { name: 'Tasty', url: 'https://tasty.co', color: '#ee4622', features: ['Quick Recipes', 'Video Guides'] }
     ],
-    description: 'Find recipes and cooking tutorials',
-    keywords: ['recipe', 'cooking', 'food', 'meal', 'ingredients']
+    description: 'Discover delicious recipes and cooking tutorials from top chefs',
+    keywords: ['recipe', 'cooking', 'food', 'meal', 'ingredients', 'chef', 'cuisine']
   },
   {
     id: 'ride-booking',
@@ -121,10 +122,13 @@ export const getAllCategories = (): Category[] => [
     platforms: [
       { name: 'Amazon', url: 'https://amazon.com', color: '#ff9900', features: ['Prime Delivery', 'Vast Selection'] },
       { name: 'eBay', url: 'https://ebay.com', color: '#e53238', features: ['Auctions', 'Global Marketplace'] },
-      { name: 'Walmart', url: 'https://walmart.com', color: '#0071ce', features: ['Everyday Low Prices', 'Store Pickup'] }
+      { name: 'Walmart', url: 'https://walmart.com', color: '#0071ce', features: ['Everyday Low Prices', 'Store Pickup'] },
+      { name: 'Target', url: 'https://target.com', color: '#cc0000', features: ['Trendy Products', 'Same Day Delivery'] },
+      { name: 'Best Buy', url: 'https://bestbuy.com', color: '#0046be', features: ['Electronics', 'Expert Support'] },
+      { name: 'Costco', url: 'https://costco.com', color: '#ee2e32', features: ['Bulk Shopping', 'Member Prices'] }
     ],
-    description: 'Compare shopping deals and prices',
-    keywords: ['shopping', 'deals', 'products', 'amazon', 'ebay', 'mobile', 'laptop', 'electronics']
+    description: 'Find the best deals across all major shopping platforms',
+    keywords: ['shopping', 'deals', 'products', 'amazon', 'ebay', 'mobile', 'laptop', 'electronics', 'clothing', 'home']
   },
   {
     id: 'travel',
@@ -195,14 +199,16 @@ export const getAllCategories = (): Category[] => [
     id: 'electronics',
     name: 'Electronics',
     icon: Smartphone,
-    hasRealApi: false,
+    hasRealApi: true,
     platforms: [
       { name: 'Best Buy', url: 'https://bestbuy.com', color: '#0046be', features: ['Latest Tech', 'Expert Support'] },
+      { name: 'Amazon Electronics', url: 'https://amazon.com/electronics', color: '#ff9900', features: ['Fast Delivery', 'Reviews'] },
       { name: 'Newegg', url: 'https://newegg.com', color: '#ff6900', features: ['PC Components', 'Tech Deals'] },
-      { name: 'B&H', url: 'https://bhphotovideo.com', color: '#ff6900', features: ['Professional Equipment', 'Photography Gear'] }
+      { name: 'B&H Photo', url: 'https://bhphotovideo.com', color: '#ff6900', features: ['Professional Equipment', 'Photography Gear'] },
+      { name: 'Micro Center', url: 'https://microcenter.com', color: '#ff6900', features: ['In-Store Pickup', 'Tech Support'] }
     ],
-    description: 'Compare electronics and tech products',
-    keywords: ['electronics', 'tech', 'gadgets', 'computers', 'phones']
+    description: 'Find the best deals on smartphones, laptops, and all tech gadgets',
+    keywords: ['electronics', 'tech', 'gadgets', 'computers', 'phones', 'smartphone', 'laptop', 'tablet', 'camera']
   },
   {
     id: 'computers',
