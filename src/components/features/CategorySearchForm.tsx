@@ -53,11 +53,48 @@ export const CategorySearchForm = ({ category, onSearch }: CategorySearchFormPro
       
       case 'travel':
         return [
-          { key: 'destination', label: 'Destination', placeholder: 'e.g., Paris, Tokyo', icon: MapPin, required: true },
-          { key: 'departure', label: 'Departure From', placeholder: 'e.g., New York', icon: MapPin },
-          { key: 'checkIn', label: 'Check-in Date', placeholder: 'YYYY-MM-DD', icon: Calendar },
-          { key: 'checkOut', label: 'Check-out Date', placeholder: 'YYYY-MM-DD', icon: Calendar },
-          { key: 'guests', label: 'Number of Guests', placeholder: 'e.g., 2', icon: Users }
+          { key: 'from', label: 'From', placeholder: 'e.g., Mumbai, Delhi', icon: MapPin, required: true },
+          { key: 'to', label: 'To', placeholder: 'e.g., Goa, Bangalore', icon: MapPin, required: true },
+          { key: 'departureDate', label: 'Departure Date', placeholder: 'YYYY-MM-DD', icon: Calendar },
+          { key: 'returnDate', label: 'Return Date', placeholder: 'YYYY-MM-DD', icon: Calendar },
+          { key: 'passengers', label: 'Passengers', placeholder: 'e.g., 2', icon: Users },
+          { key: 'class', label: 'Travel Class', placeholder: 'Economy, Business', icon: Filter }
+        ];
+      
+      case 'train':
+        return [
+          { key: 'from', label: 'From Station', placeholder: 'e.g., New Delhi, Mumbai Central', icon: MapPin, required: true },
+          { key: 'to', label: 'To Station', placeholder: 'e.g., Bangalore, Chennai', icon: MapPin, required: true },
+          { key: 'date', label: 'Journey Date', placeholder: 'YYYY-MM-DD', icon: Calendar, required: true },
+          { key: 'class', label: 'Class', placeholder: 'Sleeper, AC 3-Tier, AC 2-Tier', icon: Filter },
+          { key: 'passengers', label: 'Passengers', placeholder: 'e.g., 2', icon: Users }
+        ];
+      
+      case 'bus':
+        return [
+          { key: 'from', label: 'From', placeholder: 'e.g., Mumbai, Delhi', icon: MapPin, required: true },
+          { key: 'to', label: 'To', placeholder: 'e.g., Pune, Agra', icon: MapPin, required: true },
+          { key: 'date', label: 'Journey Date', placeholder: 'YYYY-MM-DD', icon: Calendar, required: true },
+          { key: 'busType', label: 'Bus Type', placeholder: 'AC, Non-AC, Sleeper', icon: Filter },
+          { key: 'passengers', label: 'Passengers', placeholder: 'e.g., 2', icon: Users }
+        ];
+        
+      case 'flight':
+        return [
+          { key: 'from', label: 'From', placeholder: 'e.g., Mumbai (BOM), Delhi (DEL)', icon: MapPin, required: true },
+          { key: 'to', label: 'To', placeholder: 'e.g., Bangalore (BLR), Chennai (MAA)', icon: MapPin, required: true },
+          { key: 'departureDate', label: 'Departure Date', placeholder: 'YYYY-MM-DD', icon: Calendar, required: true },
+          { key: 'returnDate', label: 'Return Date', placeholder: 'YYYY-MM-DD (optional)', icon: Calendar },
+          { key: 'passengers', label: 'Passengers', placeholder: 'e.g., 2', icon: Users },
+          { key: 'class', label: 'Class', placeholder: 'Economy, Business, First', icon: Filter }
+        ];
+        
+      case 'ride-booking':
+        return [
+          { key: 'from', label: 'Pickup Location', placeholder: 'e.g., Airport, Hotel, Address', icon: MapPin, required: true },
+          { key: 'to', label: 'Drop Location', placeholder: 'e.g., Office, Mall, Address', icon: MapPin, required: true },
+          { key: 'rideType', label: 'Ride Type', placeholder: 'Economy, Premium, Bike, Auto', icon: Filter },
+          { key: 'time', label: 'Pickup Time', placeholder: 'Now, Schedule for later', icon: Calendar }
         ];
       
       case 'jobs':
@@ -89,9 +126,10 @@ export const CategorySearchForm = ({ category, onSearch }: CategorySearchFormPro
       case 'entertainment':
         return [
           { key: 'query', label: 'Movie/Show Title', placeholder: 'e.g., Avengers, Game of Thrones', icon: Search, required: true },
+          { key: 'location', label: 'Location', placeholder: 'e.g., Mumbai, Delhi (for theaters)', icon: MapPin },
           { key: 'genre', label: 'Genre', placeholder: 'e.g., Action, Comedy', icon: Filter },
-          { key: 'year', label: 'Release Year', placeholder: 'e.g., 2023', icon: Calendar },
-          { key: 'rating', label: 'Min Rating', placeholder: 'e.g., 7.0', icon: Filter }
+          { key: 'showType', label: 'Show Type', placeholder: 'Movie, Web Series, Documentary', icon: Filter },
+          { key: 'date', label: 'Show Date', placeholder: 'YYYY-MM-DD (for theaters)', icon: Calendar }
         ];
       
       case 'books':

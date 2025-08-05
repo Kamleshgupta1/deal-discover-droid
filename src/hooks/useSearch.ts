@@ -20,6 +20,10 @@ import { searchRechargeOptions } from '@/services/rechargeApi';
 import { searchMutualFunds } from '@/services/mutualFundApi';
 import { searchInsurancePolicies } from '@/services/insuranceApi';
 import { searchBankingProducts } from '@/services/bankingApi';
+import { foodDeliveryApi } from '@/services/foodDeliveryApi';
+import { rideBookingApi } from '@/services/rideBookingApi';
+import { medicineApi } from '@/services/medicineApi';
+import { enhancedTravelApi } from '@/services/enhancedTravelApi';
 
 export const useSearch = () => {
   const [searchResults, setSearchResults] = useState<ComparisonResult[]>([]);
@@ -68,6 +72,12 @@ export const useSearch = () => {
         results = await searchInsurance(query);
       } else if (category.id === 'banking' && query) {
         results = await searchBanking(query);
+      } else if (category.id === 'food-delivery' && query) {
+        results = await searchFoodDelivery(query, location);
+      } else if (category.id === 'ride-booking' && query) {
+        results = await searchRideBooking(query, location);
+      } else if (category.id === 'medicine' && query) {
+        results = await searchMedicine(query, location);
       } else {
         // Use mock data for other categories
         results = generateMockResults(category, query);
@@ -905,6 +915,126 @@ export const useSearch = () => {
           bestPrice: platforms[0],
           fastestDelivery: platforms[0],
           bestRated: platforms[0]
+        }
+      });
+    }
+
+    return results;
+  };
+
+  const searchFoodDelivery = async (query: string, location: string): Promise<ComparisonResult[]> => {
+    const foods = await foodDeliveryApi.searchFood(query, location);
+    const platforms = foodDeliveryApi.getPlatforms();
+    const results: ComparisonResult[] = [];
+
+    for (const food of foods.slice(0, 8)) {
+      const foodPlatforms = platforms.map(platform => ({
+        platform: {
+          name: platform.name,
+          url: platform.url,
+          color: platform.color,
+          features: platform.features
+        },
+        price: foodDeliveryApi.generatePlatformPrice(food.price, platform),
+        availability: true,
+        estimatedDelivery: food.restaurant.deliveryTime,
+        specialOffers: [`${food.restaurant.rating}⭐`, food.restaurant.priceRange],
+        rating: food.rating,
+        reviews: 150
+      }));
+
+      const bestPrice = foodPlatforms.reduce((min, p) => p.price < min.price ? p : min);
+      const fastestDelivery = foodPlatforms.reduce((min, p) => 
+        parseInt(p.estimatedDelivery) < parseInt(min.estimatedDelivery) ? p : min
+      );
+
+      results.push({
+        id: food.id,
+        name: `${food.name} from ${food.restaurant.name}`,
+        image: food.image,
+        platforms: foodPlatforms,
+        recommendation: {
+          bestPrice,
+          fastestDelivery,
+          bestRated: foodPlatforms[0]
+        }
+      });
+    }
+
+    return results;
+  };
+
+  const searchRideBooking = async (from: string, to: string): Promise<ComparisonResult[]> => {
+    const rides = await rideBookingApi.searchRides(from, to);
+    const platforms = rideBookingApi.getPlatforms();
+    const results: ComparisonResult[] = [];
+
+    for (const ride of rides) {
+      const ridePlatforms = platforms.map(platform => ({
+        platform: {
+          name: platform.name,
+          url: platform.url,
+          color: platform.color,
+          features: platform.features
+        },
+        price: rideBookingApi.generatePlatformPrice(ride.estimatedPrice, platform),
+        availability: true,
+        estimatedDelivery: `${ride.estimatedTime} mins`,
+        specialOffers: [`${ride.capacity} seats`, `Surge: ${ride.surge}x`],
+        rating: 4.3,
+        reviews: 1000
+      }));
+
+      const bestPrice = ridePlatforms.reduce((min, p) => p.price < min.price ? p : min);
+
+      results.push({
+        id: ride.id,
+        name: `${ride.name} - ${from} to ${to}`,
+        image: '/placeholder.svg',
+        platforms: ridePlatforms,
+        recommendation: {
+          bestPrice,
+          fastestDelivery: ridePlatforms[0],
+          bestRated: ridePlatforms[0]
+        }
+      });
+    }
+
+    return results;
+  };
+
+  const searchMedicine = async (query: string, location: string): Promise<ComparisonResult[]> => {
+    const medicines = await medicineApi.searchMedicines(query, location);
+    const platforms = medicineApi.getPlatforms();
+    const results: ComparisonResult[] = [];
+
+    for (const medicine of medicines.slice(0, 6)) {
+      const medicinePlatforms = platforms.map(platform => ({
+        platform: {
+          name: platform.name,
+          url: platform.url,
+          color: platform.color,
+          features: platform.features
+        },
+        price: medicineApi.generatePlatformPrice(medicine.mrp, platform),
+        availability: true,
+        estimatedDelivery: platform.deliveryTime,
+        specialOffers: [medicine.prescriptionRequired ? 'Prescription Required' : 'No Prescription', medicine.packSize],
+        rating: 4.4,
+        reviews: 200
+      }));
+
+      const bestPrice = medicinePlatforms.reduce((min, p) => p.price < min.price ? p : min);
+
+      results.push({
+        id: medicine.id,
+        name: `${medicine.name} ${medicine.strength}`,
+        image: medicine.image,
+        platforms: medicinePlatforms,
+        recommendation: {
+          bestPrice,
+          fastestDelivery: medicinePlatforms[0],
+          bestRated: medicinePlatforms[0]
         }
       });
     }
