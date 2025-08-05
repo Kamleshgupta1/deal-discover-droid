@@ -1,7 +1,8 @@
 import { Film, BookOpen, TrendingUp, UtensilsCrossed, Car, Pill, Smartphone, 
          Laptop, Gamepad2, Home, Plane, CreditCard, PiggyBank, Shield, 
          ShoppingCart, Dumbbell, GraduationCap, Briefcase, MapPin, Stethoscope, 
-         Building, Coffee, Baby, Gift, Music, Newspaper, Cloud } from 'lucide-react';
+         Building, Coffee, Baby, Gift, Music, Newspaper, Cloud, Fuel, 
+         Zap, Battery, Heart, DollarSign, Banknote } from 'lucide-react';
 import { Category } from '@/types';
 
 export const getAllCategories = (): Category[] => [
@@ -406,6 +407,90 @@ export const getAllCategories = (): Category[] => [
     ],
     description: 'Compare music streaming services',
     keywords: ['music', 'streaming', 'songs', 'playlist', 'audio']
+  },
+  {
+    id: 'fuel',
+    name: 'Fuel Prices',
+    icon: Fuel,
+    hasRealApi: true,
+    platforms: [
+      { name: 'Indian Oil', url: 'https://iocl.com', color: '#ff6b35', features: ['Daily Updates', 'All Fuel Types'] },
+      { name: 'Bharat Petroleum', url: 'https://bharatpetroleum.in', color: '#0066cc', features: ['Competitive Prices', 'Quality Fuel'] },
+      { name: 'Hindustan Petroleum', url: 'https://hindustanpetroleum.com', color: '#ff3366', features: ['Premium Quality', 'Wide Network'] },
+      { name: 'Reliance', url: 'https://ril.com', color: '#005580', features: ['Modern Stations', 'Digital Payments'] }
+    ],
+    description: 'Compare fuel prices across different providers and locations',
+    keywords: ['fuel', 'petrol', 'diesel', 'cng', 'lpg', 'gas', 'price']
+  },
+  {
+    id: 'gas',
+    name: 'Gas Connections',
+    icon: Zap,
+    hasRealApi: true,
+    platforms: [
+      { name: 'Indane Gas', url: 'https://indane.co.in', color: '#ff6b35', features: ['Subsidized Rates', 'Home Delivery'] },
+      { name: 'Bharat Gas', url: 'https://bharatgas.com', color: '#0066cc', features: ['Quick Service', 'Safety Features'] },
+      { name: 'HP Gas', url: 'https://hpgas.in', color: '#ff3366', features: ['Online Booking', 'Reliable Supply'] },
+      { name: 'Reliance Gas', url: 'https://reliancegas.com', color: '#005580', features: ['Premium Service', 'Digital Platform'] }
+    ],
+    description: 'Compare commercial and domestic gas connections and prices',
+    keywords: ['gas', 'lpg', 'commercial', 'domestic', 'connection', 'cylinder']
+  },
+  {
+    id: 'recharge',
+    name: 'Mobile & DTH Recharge',
+    icon: Battery,
+    hasRealApi: true,
+    platforms: [
+      { name: 'Paytm', url: 'https://paytm.com', color: '#002970', features: ['5% Cashback', 'Instant Recharge'] },
+      { name: 'PhonePe', url: 'https://phonepe.com', color: '#5f259f', features: ['UPI Payments', 'Rewards'] },
+      { name: 'Google Pay', url: 'https://pay.google.com', color: '#4285f4', features: ['Secure Payments', 'Offers'] },
+      { name: 'Amazon Pay', url: 'https://amazon.in/pay', color: '#ff9900', features: ['Prime Benefits', 'Cashback'] }
+    ],
+    description: 'Compare recharge options for mobile, DTH, electricity and broadband',
+    keywords: ['recharge', 'mobile', 'dth', 'electricity', 'broadband', 'prepaid', 'postpaid']
+  },
+  {
+    id: 'mutual-funds',
+    name: 'Mutual Funds',
+    icon: TrendingUp,
+    hasRealApi: true,
+    platforms: [
+      { name: 'SBI Mutual Fund', url: 'https://sbimf.com', color: '#0066cc', features: ['Low Expense Ratio', 'Diversified Portfolio'] },
+      { name: 'HDFC Mutual Fund', url: 'https://hdfcfund.com', color: '#004c8c', features: ['Top Performance', 'Professional Management'] },
+      { name: 'ICICI Prudential', url: 'https://icicipruamc.com', color: '#b30000', features: ['Systematic Plans', 'Risk Management'] },
+      { name: 'Axis Mutual Fund', url: 'https://axismf.com', color: '#800080', features: ['Growth Funds', 'Regular Income'] }
+    ],
+    description: 'Compare mutual fund options, returns, and investment plans',
+    keywords: ['mutual funds', 'sip', 'investment', 'returns', 'portfolio', 'equity', 'debt']
+  },
+  {
+    id: 'insurance',
+    name: 'Insurance Policies',
+    icon: Shield,
+    hasRealApi: true,
+    platforms: [
+      { name: 'LIC', url: 'https://licindia.in', color: '#ff6b35', features: ['Trusted Brand', 'High Claim Ratio'] },
+      { name: 'HDFC ERGO', url: 'https://hdfcergo.com', color: '#004c8c', features: ['Comprehensive Coverage', 'Quick Claims'] },
+      { name: 'ICICI Lombard', url: 'https://icicilombard.com', color: '#b30000', features: ['Digital Services', 'Wide Network'] },
+      { name: 'Star Health', url: 'https://starhealth.in', color: '#ff3366', features: ['Health Specialist', 'Cashless Treatment'] }
+    ],
+    description: 'Compare health, life, motor and travel insurance policies',
+    keywords: ['insurance', 'health', 'life', 'motor', 'travel', 'policy', 'premium', 'coverage']
+  },
+  {
+    id: 'banking',
+    name: 'Banking & Cards',
+    icon: CreditCard,
+    hasRealApi: true,
+    platforms: [
+      { name: 'SBI', url: 'https://sbi.co.in', color: '#0066cc', features: ['Largest Network', 'Government Bank'] },
+      { name: 'HDFC Bank', url: 'https://hdfcbank.com', color: '#004c8c', features: ['Premium Cards', 'Digital Banking'] },
+      { name: 'ICICI Bank', url: 'https://icicibank.com', color: '#b30000', features: ['Tech Banking', 'Quick Loans'] },
+      { name: 'Axis Bank', url: 'https://axisbank.com', color: '#800080', features: ['Lifestyle Banking', 'Rewards Program'] }
+    ],
+    description: 'Compare savings accounts, credit cards, loans and banking services',
+    keywords: ['banking', 'credit card', 'savings account', 'loan', 'fd', 'interest rate']
   }
 ];
 

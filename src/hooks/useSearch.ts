@@ -14,6 +14,12 @@ import { theaterApi } from '@/services/theaterApi';
 import { trainApi } from '@/services/trainApi';
 import { groceryApi } from '@/services/groceryApi';
 import { clothingApi } from '@/services/clothingApi';
+import { searchFuelPrices } from '@/services/fuelApi';
+import { searchGasPrices } from '@/services/gasApi';
+import { searchRechargeOptions } from '@/services/rechargeApi';
+import { searchMutualFunds } from '@/services/mutualFundApi';
+import { searchInsurancePolicies } from '@/services/insuranceApi';
+import { searchBankingProducts } from '@/services/bankingApi';
 
 export const useSearch = () => {
   const [searchResults, setSearchResults] = useState<ComparisonResult[]>([]);
@@ -50,6 +56,18 @@ export const useSearch = () => {
         results = await searchGrocery(query);
       } else if (category.id === 'clothing' && query) {
         results = await searchClothing(query);
+      } else if (category.id === 'fuel' && query) {
+        results = await searchFuel(query, location);
+      } else if (category.id === 'gas' && query) {
+        results = await searchGas(query, location);
+      } else if (category.id === 'recharge' && query) {
+        results = await searchRecharge(query);
+      } else if (category.id === 'mutual-funds' && query) {
+        results = await searchMutualFundsWrapper(query);
+      } else if (category.id === 'insurance' && query) {
+        results = await searchInsurance(query);
+      } else if (category.id === 'banking' && query) {
+        results = await searchBanking(query);
       } else {
         // Use mock data for other categories
         results = generateMockResults(category, query);
@@ -632,6 +650,261 @@ export const useSearch = () => {
           bestPrice,
           fastestDelivery,
           bestRated
+        }
+      });
+    }
+
+    return results;
+  };
+
+  const searchFuel = async (query: string, location: string): Promise<ComparisonResult[]> => {
+    const fuelPrices = await searchFuelPrices(query, location);
+    const results: ComparisonResult[] = [];
+
+    const groupedPrices = fuelPrices.reduce((acc, fuel) => {
+      if (!acc[fuel.fuelType]) acc[fuel.fuelType] = [];
+      acc[fuel.fuelType].push(fuel);
+      return acc;
+    }, {} as Record<string, typeof fuelPrices>);
+
+    Object.entries(groupedPrices).forEach(([fuelType, prices]) => {
+      const platforms = prices.map(fuel => ({
+        platform: {
+          name: fuel.provider,
+          url: fuel.url,
+          color: '#ff6b35',
+          features: fuel.features
+        },
+        price: fuel.price,
+        availability: true,
+        estimatedDelivery: 'Available Now',
+        specialOffers: [`Updated: ${new Date(fuel.lastUpdated).toLocaleDateString()}`],
+        rating: 4.5,
+        reviews: 100
+      }));
+
+      const bestPrice = platforms.reduce((min, p) => p.price < min.price ? p : min);
+      const bestRated = platforms.reduce((max, p) => p.rating > max.rating ? p : max);
+
+      results.push({
+        id: fuelType,
+        name: `${fuelType.toUpperCase()} - ${location}`,
+        image: '/placeholder.svg',
+        platforms,
+        recommendation: {
+          bestPrice,
+          fastestDelivery: platforms[0],
+          bestRated
+        }
+      });
+    });
+
+    return results;
+  };
+
+  const searchGas = async (query: string, location: string): Promise<ComparisonResult[]> => {
+    const gasPrices = await searchGasPrices(query, location);
+    const results: ComparisonResult[] = [];
+
+    const platforms = gasPrices.map(gas => ({
+      platform: {
+        name: gas.provider,
+        url: gas.url,
+        color: '#0066cc',
+        features: gas.features
+      },
+      price: gas.price,
+      availability: true,
+      estimatedDelivery: 'Available Now',
+      specialOffers: [`Security Deposit: ₹${gas.securityDeposit}`, `Monthly Rental: ₹${gas.monthlyRental}`],
+      rating: 4.5,
+      reviews: 200
+    }));
+
+    const bestPrice = platforms.reduce((min, p) => p.price < min.price ? p : min);
+    const bestRated = platforms.reduce((max, p) => p.rating > max.rating ? p : max);
+
+    results.push({
+      id: query,
+      name: `${query.toUpperCase()} Gas Connection - ${location}`,
+      image: '/placeholder.svg',
+      platforms,
+      recommendation: {
+        bestPrice,
+        fastestDelivery: platforms[0],
+        bestRated
+      }
+    });
+
+    return results;
+  };
+
+  const searchRecharge = async (query: string): Promise<ComparisonResult[]> => {
+    const rechargeOptions = await searchRechargeOptions(query);
+    const results: ComparisonResult[] = [];
+
+    const groupedOptions = rechargeOptions.reduce((acc, option) => {
+      if (!acc[option.plan]) acc[option.plan] = [];
+      acc[option.plan].push(option);
+      return acc;
+    }, {} as Record<string, typeof rechargeOptions>);
+
+    Object.entries(groupedOptions).forEach(([planName, options]) => {
+      const platforms = options.map(option => ({
+        platform: {
+          name: option.provider,
+          url: option.url,
+          color: '#5f259f',
+          features: option.features
+        },
+        price: option.amount,
+        availability: true,
+        estimatedDelivery: 'Instant',
+        specialOffers: [`Cashback: ₹${option.cashback}`, `Validity: ${option.validity}`],
+        rating: 4.3,
+        reviews: 500
+      }));
+
+      const bestPrice = platforms.reduce((min, p) => p.price < min.price ? p : min);
+      const bestCashback = platforms.reduce((max, p) => 
+        parseInt(p.specialOffers[0].split('₹')[1]) > parseInt(max.specialOffers[0].split('₹')[1]) ? p : max
+      );
+
+      results.push({
+        id: planName,
+        name: `${planName} - ${query.toUpperCase()}`,
+        image: '/placeholder.svg',
+        platforms,
+        recommendation: {
+          bestPrice,
+          fastestDelivery: platforms[0],
+          bestRated: bestCashback
+        }
+      });
+    });
+
+    return results;
+  };
+
+  const searchMutualFundsWrapper = async (query: string): Promise<ComparisonResult[]> => {
+    const funds = await searchMutualFunds(query);
+    const results: ComparisonResult[] = [];
+
+    for (const fund of funds) {
+      const platforms = [{
+        platform: {
+          name: fund.provider,
+          url: fund.url,
+          color: '#0066cc',
+          features: fund.features
+        },
+        price: fund.nav,
+        availability: true,
+        estimatedDelivery: 'SIP Available',
+        specialOffers: [
+          `1Y Return: ${fund.returns1Y}%`,
+          `3Y Return: ${fund.returns3Y}%`,
+          `Expense Ratio: ${fund.expenseRatio}%`,
+          `Min Investment: ₹${fund.minInvestment}`
+        ],
+        rating: fund.rating,
+        reviews: 300
+      }];
+
+      results.push({
+        id: fund.id,
+        name: fund.fundName,
+        image: '/placeholder.svg',
+        platforms,
+        recommendation: {
+          bestPrice: platforms[0],
+          fastestDelivery: platforms[0],
+          bestRated: platforms[0]
+        }
+      });
+    }
+
+    return results.sort((a, b) => 
+      parseFloat(b.platforms[0].specialOffers[0].split('%')[0].split(': ')[1]) - 
+      parseFloat(a.platforms[0].specialOffers[0].split('%')[0].split(': ')[1])
+    );
+  };
+
+  const searchInsurance = async (query: string): Promise<ComparisonResult[]> => {
+    const policies = await searchInsurancePolicies(query);
+    const results: ComparisonResult[] = [];
+
+    for (const policy of policies) {
+      const platforms = [{
+        platform: {
+          name: policy.provider,
+          url: policy.url,
+          color: '#ff3366',
+          features: policy.features
+        },
+        price: policy.premium,
+        availability: true,
+        estimatedDelivery: 'Instant Quote',
+        specialOffers: [
+          `Coverage: ₹${policy.coverage.toLocaleString()}`,
+          `Claim Ratio: ${policy.claimRatio}%`,
+          `Tenure: ${policy.tenure}`,
+          policy.ageLimit || 'All Ages'
+        ],
+        rating: policy.rating,
+        reviews: 400
+      }];
+
+      results.push({
+        id: policy.id,
+        name: `${policy.policyName} - ${policy.policyType.toUpperCase()}`,
+        image: '/placeholder.svg',
+        platforms,
+        recommendation: {
+          bestPrice: platforms[0],
+          fastestDelivery: platforms[0],
+          bestRated: platforms[0]
+        }
+      });
+    }
+
+    return results;
+  };
+
+  const searchBanking = async (query: string): Promise<ComparisonResult[]> => {
+    const products = await searchBankingProducts(query);
+    const results: ComparisonResult[] = [];
+
+    for (const product of products) {
+      const platforms = [{
+        platform: {
+          name: product.bank,
+          url: product.url,
+          color: '#004c8c',
+          features: product.features
+        },
+        price: product.productType === 'creditcard' ? (product.annualFee || 0) : (product.fees || 0),
+        availability: true,
+        estimatedDelivery: product.processingTime || 'Apply Now',
+        specialOffers: [
+          product.interestRate ? `Interest Rate: ${product.interestRate}%` : '',
+          product.creditLimit ? `Credit Limit: ₹${product.creditLimit.toLocaleString()}` : '',
+          product.minBalance ? `Min Balance: ₹${product.minBalance.toLocaleString()}` : '',
+          `Rating: ${product.rating}/5`
+        ].filter(Boolean),
+        rating: product.rating,
+        reviews: 600
+      }];
+
+      results.push({
+        id: product.id,
+        name: `${product.productName} - ${product.productType.toUpperCase()}`,
+        image: '/placeholder.svg',
+        platforms,
+        recommendation: {
+          bestPrice: platforms[0],
+          fastestDelivery: platforms[0],
+          bestRated: platforms[0]
         }
       });
     }
