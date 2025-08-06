@@ -8,7 +8,6 @@ import {
   User, 
   Bell, 
   Settings,
-  Palette,
   LogOut,
   Shield
 } from 'lucide-react';
@@ -23,13 +22,12 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { APP_CONFIG } from '@/constants';
-import { useTheme } from '@/hooks/useTheme';
+import { Settings as SettingsComponent } from '@/components/layout/Settings';
 import appIcon from '@/assets/app-icon.png';
 
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const { currentTheme, setTheme, themes } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -100,33 +98,20 @@ export const Header = () => {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-3">
-            {/* Theme Selector */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="h-9 w-9 p-0">
-                  <Palette className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuLabel>Choose Theme</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                {themes.map((theme) => (
-                  <DropdownMenuItem
-                    key={theme.key}
-                    onClick={() => setTheme(theme.key)}
-                    className={currentTheme === theme.key ? 'bg-primary/10' : ''}
-                  >
-                    {theme.name}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-
             {/* Notifications */}
             <Button variant="ghost" size="sm" className="h-9 w-9 p-0 relative">
               <Bell className="h-4 w-4" />
-              <Badge className="absolute -top-1 -right-1 h-5 w-5 p-0 text-xs">3</Badge>
+              <Badge className="absolute -top-1 -right-1 h-5 w-5 p-0 text-xs bg-primary text-primary-foreground">
+                3
+              </Badge>
             </Button>
+
+            {/* Settings */}
+            <SettingsComponent>
+              <Button variant="ghost" size="sm" className="h-9 w-9 p-0">
+                <Settings className="h-4 w-4" />
+              </Button>
+            </SettingsComponent>
 
             {/* User Menu */}
             <DropdownMenu>
@@ -147,10 +132,6 @@ export const Header = () => {
                   Sign Up
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <Settings className="h-4 w-4 mr-2" />
-                  Settings
-                </DropdownMenuItem>
                 <DropdownMenuItem>
                   <LogOut className="h-4 w-4 mr-2" />
                   Logout
@@ -207,13 +188,34 @@ export const Header = () => {
               </nav>
 
               {/* Mobile Actions */}
-              <div className="flex items-center justify-between px-2 pt-4 border-t border-border">
-                <Button variant="outline" size="sm" onClick={() => handleNavigation('/login')}>
-                  Sign In
-                </Button>
-                <Button size="sm" onClick={() => handleNavigation('/register')}>
-                  Sign Up
-                </Button>
+              <div className="px-2 pt-4 border-t border-border space-y-4">
+                <div className="flex items-center justify-between">
+                  <Button variant="outline" size="sm" onClick={() => handleNavigation('/login')}>
+                    Sign In
+                  </Button>
+                  <Button size="sm" onClick={() => handleNavigation('/register')}>
+                    Sign Up
+                  </Button>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  {/* Mobile Notifications */}
+                  <Button variant="ghost" size="sm" className="relative">
+                    <Bell className="h-4 w-4 mr-2" />
+                    <Badge className="absolute -top-1 left-2 h-4 w-4 p-0 text-xs bg-primary text-primary-foreground">
+                      3
+                    </Badge>
+                    Notifications
+                  </Button>
+                  
+                  {/* Mobile Settings */}
+                  <SettingsComponent>
+                    <Button variant="ghost" size="sm">
+                      <Settings className="h-4 w-4 mr-2" />
+                      Settings
+                    </Button>
+                  </SettingsComponent>
+                </div>
               </div>
             </div>
           </div>

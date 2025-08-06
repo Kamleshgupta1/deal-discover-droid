@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
-import { Search, MapPin, Calendar, DollarSign, Filter, Users } from 'lucide-react';
+import { Search, MapPin, Calendar, DollarSign, Filter, Users, Shield } from 'lucide-react';
 
 interface CategorySearchFormProps {
   category: Category;
@@ -97,7 +97,7 @@ export const CategorySearchForm = ({ category, onSearch }: CategorySearchFormPro
           { key: 'time', label: 'Pickup Time', placeholder: 'Now, Schedule for later', icon: Calendar }
         ];
       
-      case 'jobs':
+      case 'jobs-old':
         return [
           { key: 'position', label: 'Job Title', placeholder: 'e.g., Software Engineer', icon: Search, required: true },
           { key: 'location', label: 'Location', placeholder: 'e.g., San Francisco', icon: MapPin },
@@ -152,6 +152,54 @@ export const CategorySearchForm = ({ category, onSearch }: CategorySearchFormPro
         return [
           { key: 'location', label: 'Location', placeholder: 'e.g., London, New York', icon: MapPin, required: true },
           { key: 'days', label: 'Forecast Days', placeholder: 'e.g., 5', icon: Calendar }
+        ];
+
+      case 'crypto':
+        return [
+          { key: 'query', label: 'Cryptocurrency', placeholder: 'e.g., Bitcoin, Ethereum', icon: Search, required: true },
+          { key: 'currency', label: 'Currency', placeholder: 'e.g., USD, INR', icon: DollarSign },
+          { key: 'timeframe', label: 'Timeframe', placeholder: 'e.g., 24h, 7d, 30d', icon: Calendar }
+        ];
+
+      case 'jobs':
+        return [
+          { key: 'position', label: 'Job Title', placeholder: 'e.g., Software Engineer', icon: Search, required: true },
+          { key: 'location', label: 'Location', placeholder: 'e.g., San Francisco, Remote', icon: MapPin },
+          { key: 'experience', label: 'Experience Level', placeholder: 'e.g., 3-5 years', icon: Filter },
+          { key: 'salary', label: 'Expected Salary', placeholder: 'e.g., 80000', icon: DollarSign },
+          { key: 'remote', label: 'Remote Work', placeholder: 'yes/no/hybrid', icon: Filter }
+        ];
+
+      case 'health':
+        return [
+          { key: 'query', label: 'Service/Doctor', placeholder: 'e.g., cardiologist, dental', icon: Search, required: true },
+          { key: 'location', label: 'Location', placeholder: 'e.g., Mumbai, Delhi', icon: MapPin },
+          { key: 'specialty', label: 'Specialty', placeholder: 'e.g., cardiology, dermatology', icon: Filter },
+          { key: 'insurance', label: 'Insurance', placeholder: 'e.g., cashless, accepted', icon: Shield }
+        ];
+
+      case 'education':
+        return [
+          { key: 'query', label: 'Course/Topic', placeholder: 'e.g., Python, Data Science', icon: Search, required: true },
+          { key: 'level', label: 'Level', placeholder: 'e.g., beginner, intermediate', icon: Filter },
+          { key: 'duration', label: 'Duration', placeholder: 'e.g., 4 weeks, 6 months', icon: Calendar },
+          { key: 'budget', label: 'Budget', placeholder: 'e.g., free, <5000', icon: DollarSign }
+        ];
+
+      case 'real-estate':
+        return [
+          { key: 'query', label: 'Property Type', placeholder: 'e.g., 2BHK, villa, commercial', icon: Search, required: true },
+          { key: 'location', label: 'Location', placeholder: 'e.g., Bandra, Gurgaon', icon: MapPin, required: true },
+          { key: 'budget', label: 'Budget Range', placeholder: 'e.g., 50000-100000', icon: DollarSign },
+          { key: 'type', label: 'Rent/Buy', placeholder: 'rent/buy', icon: Filter }
+        ];
+
+      case 'automotive':
+        return [
+          { key: 'query', label: 'Vehicle', placeholder: 'e.g., Maruti Swift, Honda City', icon: Search, required: true },
+          { key: 'location', label: 'Location', placeholder: 'e.g., Mumbai, Delhi', icon: MapPin },
+          { key: 'budget', label: 'Budget', placeholder: 'e.g., 500000-1000000', icon: DollarSign },
+          { key: 'type', label: 'Type', placeholder: 'e.g., new, used', icon: Filter }
         ];
       
       default:
