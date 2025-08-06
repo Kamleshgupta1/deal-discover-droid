@@ -2,7 +2,9 @@ import { Film, BookOpen, TrendingUp, UtensilsCrossed, Car, Pill, Smartphone,
          Laptop, Gamepad2, Home, Plane, CreditCard, PiggyBank, Shield, 
          ShoppingCart, Dumbbell, GraduationCap, Briefcase, MapPin, Stethoscope, 
          Building, Coffee, Baby, Gift, Music, Newspaper, Cloud, Fuel, 
-         Zap, Battery, Heart, DollarSign, Banknote } from 'lucide-react';
+         Zap, Battery, Heart, DollarSign, Banknote, Truck, Monitor, 
+         Refrigerator, Package, ShirtIcon as Shirt, Camera, Tv, Headphones,
+         Calculator, Wrench, Paintbrush } from 'lucide-react';
 import { Category } from '@/types';
 
 export const getAllCategories = (): Category[] => [
@@ -45,6 +47,78 @@ export const getAllCategories = (): Category[] => [
     ],
     description: 'Compare crypto prices and exchanges',
     keywords: ['crypto', 'bitcoin', 'ethereum', 'trading', 'exchange']
+  },
+  
+  // New Categories - Vehicles
+  {
+    id: 'vehicles',
+    name: 'Vehicles',
+    icon: Truck,
+    hasRealApi: false,
+    platforms: [
+      { name: 'Royal Enfield', url: 'https://royalenfield.com', color: '#000000', features: ['Classic Bikes', 'Premium Quality'] },
+      { name: 'Honda', url: 'https://honda.com', color: '#cc0000', features: ['Reliable Vehicles', 'Global Brand'] },
+      { name: 'Tata Motors', url: 'https://tata.com', color: '#1f4788', features: ['Commercial Vehicles', 'Electric Cars'] },
+      { name: 'Ather Energy', url: 'https://atherenergy.com', color: '#00d4aa', features: ['Electric Scooters', 'Smart Features'] }
+    ],
+    description: 'Compare bikes, scooters, cars, trucks and electric vehicles',
+    keywords: ['vehicle', 'bike', 'scooter', 'car', 'truck', 'electric', 'two wheeler', 'four wheeler']
+  },
+  {
+    id: 'mobile-devices',
+    name: 'Mobile Devices',
+    icon: Smartphone,
+    hasRealApi: false,
+    platforms: [
+      { name: 'Apple', url: 'https://apple.com', color: '#007aff', features: ['iPhone', 'Premium Build'] },
+      { name: 'Samsung', url: 'https://samsung.com', color: '#1f4788', features: ['Galaxy Series', 'Android'] },
+      { name: 'OnePlus', url: 'https://oneplus.com', color: '#eb0029', features: ['Flagship Killer', 'OxygenOS'] },
+      { name: 'Xiaomi', url: 'https://xiaomi.com', color: '#ff6900', features: ['Value for Money', 'MIUI'] }
+    ],
+    description: 'Compare smartphones, tablets and mobile accessories',
+    keywords: ['mobile', 'smartphone', 'phone', 'tablet', 'iphone', 'android']
+  },
+  {
+    id: 'computers-laptops',
+    name: 'Computers & Laptops',
+    icon: Laptop,
+    hasRealApi: false,
+    platforms: [
+      { name: 'Apple', url: 'https://apple.com', color: '#007aff', features: ['MacBook', 'macOS'] },
+      { name: 'Dell', url: 'https://dell.com', color: '#007db8', features: ['XPS Series', 'Business Laptops'] },
+      { name: 'HP', url: 'https://hp.com', color: '#0073e6', features: ['Pavilion Series', 'Enterprise Solutions'] },
+      { name: 'Lenovo', url: 'https://lenovo.com', color: '#e2231a', features: ['ThinkPad', 'Gaming Laptops'] }
+    ],
+    description: 'Compare laptops, desktops, and computer components',
+    keywords: ['laptop', 'computer', 'desktop', 'pc', 'macbook', 'gaming pc']
+  },
+  {
+    id: 'home-appliances',
+    name: 'Home Appliances',
+    icon: Refrigerator,
+    hasRealApi: false,
+    platforms: [
+      { name: 'LG', url: 'https://lg.com', color: '#a50034', features: ['Smart Appliances', 'Energy Efficient'] },
+      { name: 'Samsung', url: 'https://samsung.com', color: '#1f4788', features: ['Digital Inverter', 'Connected Home'] },
+      { name: 'Whirlpool', url: 'https://whirlpool.com', color: '#004c97', features: ['Reliable Quality', 'Innovation'] },
+      { name: 'Godrej', url: 'https://godrej.com', color: '#00a651', features: ['Indian Brand', 'Affordable'] }
+    ],
+    description: 'Compare refrigerators, washing machines, ACs, and other appliances',
+    keywords: ['appliance', 'refrigerator', 'fridge', 'washing machine', 'ac', 'air conditioner', 'microwave']
+  },
+  {
+    id: 'home-products',
+    name: 'Home & Kitchen Products',
+    icon: Package,
+    hasRealApi: false,
+    platforms: [
+      { name: 'Amazon', url: 'https://amazon.com', color: '#ff9900', features: ['Wide Selection', 'Fast Delivery'] },
+      { name: 'Flipkart', url: 'https://flipkart.com', color: '#2874f0', features: ['Big Billion Days', 'Local Brand'] },
+      { name: 'Pepperfry', url: 'https://pepperfry.com', color: '#f57224', features: ['Furniture Specialist', 'Home Decor'] },
+      { name: 'Urban Ladder', url: 'https://urbanladder.com', color: '#f26522', features: ['Premium Furniture', 'Design Focus'] }
+    ],
+    description: 'Compare home decor, kitchen items, furniture and household products',
+    keywords: ['home', 'kitchen', 'furniture', 'decor', 'household', 'cookware', 'storage']
   },
   {
     id: 'food',
