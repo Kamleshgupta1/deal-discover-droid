@@ -583,6 +583,102 @@ export const getAllCategories = (): Category[] => [
     keywords: ['statistics', 'data', 'gdp', 'economy', 'government', 'employment', 'education', 'world bank']
   },
   {
+    id: 'stats-countries',
+    name: 'Countries Data',
+    icon: Globe,
+    hasRealApi: true,
+    platforms: [
+      { name: 'REST Countries', url: 'https://restcountries.com', color: '#0066cc', features: ['Country Info', 'Real-time Data'] },
+      { name: 'World Bank', url: 'https://data.worldbank.org', color: '#009fda', features: ['Country Statistics', 'Demographics'] }
+    ],
+    description: 'Compare countries by population, area, languages, currencies, and geography',
+    keywords: ['countries', 'nations', 'geography', 'population', 'demographics', 'capital']
+  },
+  {
+    id: 'stats-network',
+    name: 'Internet & Network',
+    icon: Globe,
+    hasRealApi: true,
+    platforms: [
+      { name: 'Speedtest', url: 'https://speedtest.net', color: '#ff6600', features: ['Speed Tests', 'ISP Rankings'] },
+      { name: 'World Bank', url: 'https://data.worldbank.org', color: '#009fda', features: ['Internet Statistics', 'Connectivity Data'] }
+    ],
+    description: 'Compare internet speeds, connectivity, and digital infrastructure across countries',
+    keywords: ['internet', 'network', 'speed', 'broadband', 'connectivity', 'digital']
+  },
+  {
+    id: 'stats-un-sdg',
+    name: 'UN Development Goals',
+    icon: Globe,
+    hasRealApi: true,
+    platforms: [
+      { name: 'UN SDG', url: 'https://sdgs.un.org', color: '#0077bb', features: ['SDG Progress', 'Country Reports'] },
+      { name: 'World Bank', url: 'https://data.worldbank.org', color: '#009fda', features: ['Development Indicators', 'Goal Tracking'] }
+    ],
+    description: 'Compare UN Sustainable Development Goals progress and targets',
+    keywords: ['un', 'sustainable', 'development', 'sdg', 'goals', 'united nations']
+  },
+  {
+    id: 'stats-education',
+    name: 'Education Statistics',
+    icon: GraduationCap,
+    hasRealApi: true,
+    platforms: [
+      { name: 'UNESCO', url: 'https://uis.unesco.org', color: '#0066cc', features: ['Education Data', 'Global Statistics'] },
+      { name: 'World Bank', url: 'https://data.worldbank.org', color: '#009fda', features: ['School Enrollment', 'Literacy Rates'] }
+    ],
+    description: 'Compare education spending, enrollment rates, and literacy statistics',
+    keywords: ['education', 'school', 'literacy', 'enrollment', 'learning', 'unesco']
+  },
+  {
+    id: 'stats-health',
+    name: 'Health Statistics',
+    icon: Heart,
+    hasRealApi: true,
+    platforms: [
+      { name: 'WHO', url: 'https://who.int', color: '#0099cc', features: ['Health Data', 'Disease Statistics'] },
+      { name: 'World Bank', url: 'https://data.worldbank.org', color: '#009fda', features: ['Life Expectancy', 'Healthcare Spending'] }
+    ],
+    description: 'Compare healthcare systems, life expectancy, and medical infrastructure',
+    keywords: ['health', 'healthcare', 'medical', 'life expectancy', 'who', 'hospital']
+  },
+  {
+    id: 'stats-environment',
+    name: 'Environmental Data',
+    icon: Globe,
+    hasRealApi: true,
+    platforms: [
+      { name: 'World Bank', url: 'https://data.worldbank.org', color: '#009fda', features: ['Climate Data', 'Environmental Indicators'] },
+      { name: 'UN Environment', url: 'https://unep.org', color: '#00a651', features: ['Sustainability Metrics', 'Emissions Data'] }
+    ],
+    description: 'Compare environmental metrics, emissions, renewable energy, and sustainability',
+    keywords: ['environment', 'climate', 'emissions', 'sustainability', 'pollution', 'renewable']
+  },
+  {
+    id: 'stats-crime',
+    name: 'Crime & Safety',
+    icon: Shield,
+    hasRealApi: true,
+    platforms: [
+      { name: 'Numbeo', url: 'https://numbeo.com/crime', color: '#ff6600', features: ['Crime Index', 'Safety Ratings'] },
+      { name: 'UNODC', url: 'https://dataunodc.un.org', color: '#0077bb', features: ['Crime Statistics', 'Global Data'] }
+    ],
+    description: 'Compare crime rates, safety indices, and security statistics',
+    keywords: ['crime', 'safety', 'security', 'violence', 'law', 'enforcement']
+  },
+  {
+    id: 'stats-labor',
+    name: 'Labor & Employment',
+    icon: Briefcase,
+    hasRealApi: true,
+    platforms: [
+      { name: 'ILO', url: 'https://ilo.org', color: '#cc0000', features: ['Labor Statistics', 'Employment Data'] },
+      { name: 'World Bank', url: 'https://data.worldbank.org', color: '#009fda', features: ['Workforce Data', 'Unemployment Rates'] }
+    ],
+    description: 'Compare employment rates, labor force participation, and job market statistics',
+    keywords: ['labor', 'employment', 'jobs', 'workforce', 'unemployment', 'work']
+  },
+  {
     id: 'stats-religion',
     name: 'Religion Statistics',
     icon: Globe,

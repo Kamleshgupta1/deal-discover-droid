@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
-import { Search, MapPin, Calendar, DollarSign, Filter, Users, Shield } from 'lucide-react';
+import { Search, MapPin, Calendar, DollarSign, Filter, Users, Shield, Briefcase } from 'lucide-react';
 
 interface CategorySearchFormProps {
   category: Category;
@@ -289,6 +289,62 @@ export const CategorySearchForm = ({ category, onSearch }: CategorySearchFormPro
           { key: 'person2', label: 'Second Person', placeholder: 'e.g., Bill Gates, Warren Buffett', icon: Search },
           { key: 'aspect', label: 'Compare By', placeholder: 'Wealth, Influence, Career, Achievements', icon: Filter },
           { key: 'field', label: 'Field', placeholder: 'Business, Politics, Sports, Entertainment', icon: Filter }
+        ];
+
+      case 'stats-countries':
+        return [
+          { key: 'country1', label: 'First Country', placeholder: 'e.g., India, USA, Japan', icon: MapPin, required: true },
+          { key: 'country2', label: 'Second Country', placeholder: 'e.g., China, UK, Germany', icon: MapPin },
+          { key: 'aspect', label: 'Compare By', placeholder: 'Demographics, Geography, Economy', icon: Filter }
+        ];
+
+      case 'stats-network':
+        return [
+          { key: 'country1', label: 'First Country', placeholder: 'e.g., South Korea, USA', icon: MapPin, required: true },
+          { key: 'country2', label: 'Second Country', placeholder: 'e.g., India, Brazil', icon: MapPin },
+          { key: 'metric', label: 'Network Metric', placeholder: 'Internet Speed, Coverage, Users', icon: Filter }
+        ];
+
+      case 'stats-un-sdg':
+        return [
+          { key: 'country1', label: 'First Country', placeholder: 'e.g., Norway, Sweden', icon: MapPin, required: true },
+          { key: 'country2', label: 'Second Country', placeholder: 'e.g., India, Kenya', icon: MapPin },
+          { key: 'goal', label: 'SDG Goal', placeholder: 'Poverty, Education, Climate, Health', icon: Filter, required: true }
+        ];
+
+      case 'stats-education':
+        return [
+          { key: 'country1', label: 'First Country', placeholder: 'e.g., Finland, Singapore', icon: MapPin, required: true },
+          { key: 'country2', label: 'Second Country', placeholder: 'e.g., USA, India', icon: MapPin },
+          { key: 'level', label: 'Education Level', placeholder: 'Primary, Secondary, Tertiary', icon: Filter }
+        ];
+
+      case 'stats-health':
+        return [
+          { key: 'country1', label: 'First Country', placeholder: 'e.g., Japan, Switzerland', icon: MapPin, required: true },
+          { key: 'country2', label: 'Second Country', placeholder: 'e.g., USA, India', icon: MapPin },
+          { key: 'metric', label: 'Health Metric', placeholder: 'Life Expectancy, Healthcare, Mortality', icon: Filter }
+        ];
+
+      case 'stats-environment':
+        return [
+          { key: 'country1', label: 'First Country', placeholder: 'e.g., Iceland, Costa Rica', icon: MapPin, required: true },
+          { key: 'country2', label: 'Second Country', placeholder: 'e.g., China, USA', icon: MapPin },
+          { key: 'metric', label: 'Environmental Metric', placeholder: 'Emissions, Renewable Energy, Forest', icon: Filter }
+        ];
+
+      case 'stats-crime':
+        return [
+          { key: 'country1', label: 'First Country/City', placeholder: 'e.g., Singapore, Tokyo', icon: MapPin, required: true },
+          { key: 'country2', label: 'Second Country/City', placeholder: 'e.g., London, New York', icon: MapPin },
+          { key: 'crimeType', label: 'Crime Type', placeholder: 'Overall, Violent, Property, Safety', icon: Shield }
+        ];
+
+      case 'stats-labor':
+        return [
+          { key: 'country1', label: 'First Country', placeholder: 'e.g., Germany, Japan', icon: MapPin, required: true },
+          { key: 'country2', label: 'Second Country', placeholder: 'e.g., USA, India', icon: MapPin },
+          { key: 'metric', label: 'Labor Metric', placeholder: 'Unemployment, Workforce, Participation', icon: Briefcase }
         ];
       
       default:

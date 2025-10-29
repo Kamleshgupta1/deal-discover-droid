@@ -33,7 +33,15 @@ import {
   generateReligionComparison, 
   generateFinancialComparison, 
   generatePoliticalComparison, 
-  generatePersonComparison 
+  generatePersonComparison,
+  searchCountriesData,
+  searchNetworkData,
+  searchUNSDGData,
+  searchEducationData,
+  searchHealthData,
+  searchEnvironmentData,
+  searchCrimeData,
+  searchLaborData
 } from '@/services/statisticsApi';
 
 export const useSearch = () => {
@@ -105,6 +113,22 @@ export const useSearch = () => {
         results = await searchProducts(query);
       } else if (category.id === 'statistics' && query) {
         results = await handleStatisticsSearch(query, location);
+      } else if (category.id === 'stats-countries' && query) {
+        results = await handleCountriesStats(query, location);
+      } else if (category.id === 'stats-network' && query) {
+        results = await handleNetworkStats(query, location);
+      } else if (category.id === 'stats-un-sdg' && query) {
+        results = await handleUNSDGStats(query, location);
+      } else if (category.id === 'stats-education' && query) {
+        results = await handleEducationStats(query, location);
+      } else if (category.id === 'stats-health' && query) {
+        results = await handleHealthStats(query, location);
+      } else if (category.id === 'stats-environment' && query) {
+        results = await handleEnvironmentStats(query, location);
+      } else if (category.id === 'stats-crime' && query) {
+        results = await handleCrimeStats(query, location);
+      } else if (category.id === 'stats-labor' && query) {
+        results = await handleLaborStats(query, location);
       } else if (category.id === 'stats-religion' && query) {
         results = await handleReligionStats(query, location);
       } else if (category.id === 'stats-financial' && query) {
@@ -1364,6 +1388,310 @@ export const useSearch = () => {
         bestRated: platforms[0]
       }
     }];
+  };
+
+  const handleCountriesStats = async (country1: string, country2: string): Promise<ComparisonResult[]> => {
+    const [c1, c2] = [country1, country2].filter(Boolean);
+    
+    try {
+      const data = await searchCountriesData(c1, c2);
+      
+      const platforms = [{
+        platform: {
+          name: 'REST Countries API',
+          url: 'https://restcountries.com',
+          color: '#0066cc',
+          features: ['Real-time Data', 'Comprehensive Info']
+        },
+        price: 0,
+        availability: true,
+        estimatedDelivery: 'Instant',
+        specialOffers: ['Free Country Data'],
+        rating: 4.9,
+        reviews: 15000
+      }];
+
+      return [{
+        id: `countries-${c1}`,
+        name: `Countries: ${c1}${c2 ? ` vs ${c2}` : ''}`,
+        image: data.countries[0]?.flag || '/placeholder.svg',
+        platforms,
+        recommendation: {
+          bestPrice: platforms[0],
+          fastestDelivery: platforms[0],
+          bestRated: platforms[0]
+        }
+      }];
+    } catch (error) {
+      console.error('Countries comparison error:', error);
+      return [];
+    }
+  };
+
+  const handleNetworkStats = async (country1: string, country2: string): Promise<ComparisonResult[]> => {
+    const [c1, c2] = [country1, country2].filter(Boolean);
+    
+    try {
+      const data = await searchNetworkData(c1, c2);
+      
+      const platforms = [{
+        platform: {
+          name: 'World Bank Internet Data',
+          url: 'https://data.worldbank.org',
+          color: '#009fda',
+          features: ['Network Statistics', 'Connectivity Data']
+        },
+        price: 0,
+        availability: true,
+        estimatedDelivery: 'Real-time',
+        specialOffers: ['Official Data'],
+        rating: 4.8,
+        reviews: 8000
+      }];
+
+      return [{
+        id: `network-${c1}`,
+        name: `Internet & Network: ${c1}${c2 ? ` vs ${c2}` : ''}`,
+        image: '/placeholder.svg',
+        platforms,
+        recommendation: {
+          bestPrice: platforms[0],
+          fastestDelivery: platforms[0],
+          bestRated: platforms[0]
+        }
+      }];
+    } catch (error) {
+      console.error('Network stats error:', error);
+      return [];
+    }
+  };
+
+  const handleUNSDGStats = async (country1: string, goal: string): Promise<ComparisonResult[]> => {
+    const [c1, c2] = country1.split(',').map(c => c.trim()).filter(Boolean);
+    
+    try {
+      const data = await searchUNSDGData(c1, goal, c2);
+      
+      const platforms = [{
+        platform: {
+          name: 'UN SDG Data',
+          url: 'https://sdgs.un.org',
+          color: '#0077bb',
+          features: ['SDG Progress', 'Official UN Data']
+        },
+        price: 0,
+        availability: true,
+        estimatedDelivery: 'Real-time',
+        specialOffers: ['Global Development Goals'],
+        rating: 4.9,
+        reviews: 10000
+      }];
+
+      return [{
+        id: `unsdg-${c1}-${goal}`,
+        name: `UN SDG - ${data.goal}: ${c1}${c2 ? ` vs ${c2}` : ''}`,
+        image: '/placeholder.svg',
+        platforms,
+        recommendation: {
+          bestPrice: platforms[0],
+          fastestDelivery: platforms[0],
+          bestRated: platforms[0]
+        }
+      }];
+    } catch (error) {
+      console.error('UN SDG stats error:', error);
+      return [];
+    }
+  };
+
+  const handleEducationStats = async (country1: string, country2: string): Promise<ComparisonResult[]> => {
+    const [c1, c2] = [country1, country2].filter(Boolean);
+    
+    try {
+      const data = await searchEducationData(c1, c2);
+      
+      const platforms = [{
+        platform: {
+          name: 'UNESCO & World Bank Education Data',
+          url: 'https://uis.unesco.org',
+          color: '#0066cc',
+          features: ['Education Statistics', 'Enrollment Data']
+        },
+        price: 0,
+        availability: true,
+        estimatedDelivery: 'Real-time',
+        specialOffers: ['Global Education Data'],
+        rating: 4.8,
+        reviews: 7000
+      }];
+
+      return [{
+        id: `education-${c1}`,
+        name: `Education Statistics: ${c1}${c2 ? ` vs ${c2}` : ''}`,
+        image: '/placeholder.svg',
+        platforms,
+        recommendation: {
+          bestPrice: platforms[0],
+          fastestDelivery: platforms[0],
+          bestRated: platforms[0]
+        }
+      }];
+    } catch (error) {
+      console.error('Education stats error:', error);
+      return [];
+    }
+  };
+
+  const handleHealthStats = async (country1: string, country2: string): Promise<ComparisonResult[]> => {
+    const [c1, c2] = [country1, country2].filter(Boolean);
+    
+    try {
+      const data = await searchHealthData(c1, c2);
+      
+      const platforms = [{
+        platform: {
+          name: 'WHO & World Bank Health Data',
+          url: 'https://who.int',
+          color: '#0099cc',
+          features: ['Health Statistics', 'Medical Infrastructure']
+        },
+        price: 0,
+        availability: true,
+        estimatedDelivery: 'Real-time',
+        specialOffers: ['Global Health Data'],
+        rating: 4.9,
+        reviews: 12000
+      }];
+
+      return [{
+        id: `health-${c1}`,
+        name: `Health Statistics: ${c1}${c2 ? ` vs ${c2}` : ''}`,
+        image: '/placeholder.svg',
+        platforms,
+        recommendation: {
+          bestPrice: platforms[0],
+          fastestDelivery: platforms[0],
+          bestRated: platforms[0]
+        }
+      }];
+    } catch (error) {
+      console.error('Health stats error:', error);
+      return [];
+    }
+  };
+
+  const handleEnvironmentStats = async (country1: string, country2: string): Promise<ComparisonResult[]> => {
+    const [c1, c2] = [country1, country2].filter(Boolean);
+    
+    try {
+      const data = await searchEnvironmentData(c1, c2);
+      
+      const platforms = [{
+        platform: {
+          name: 'Environmental Data',
+          url: 'https://data.worldbank.org',
+          color: '#00a651',
+          features: ['Climate Data', 'Sustainability Metrics']
+        },
+        price: 0,
+        availability: true,
+        estimatedDelivery: 'Real-time',
+        specialOffers: ['Environmental Indicators'],
+        rating: 4.7,
+        reviews: 6000
+      }];
+
+      return [{
+        id: `environment-${c1}`,
+        name: `Environmental Data: ${c1}${c2 ? ` vs ${c2}` : ''}`,
+        image: '/placeholder.svg',
+        platforms,
+        recommendation: {
+          bestPrice: platforms[0],
+          fastestDelivery: platforms[0],
+          bestRated: platforms[0]
+        }
+      }];
+    } catch (error) {
+      console.error('Environment stats error:', error);
+      return [];
+    }
+  };
+
+  const handleCrimeStats = async (country1: string, country2: string): Promise<ComparisonResult[]> => {
+    const [c1, c2] = [country1, country2].filter(Boolean);
+    
+    try {
+      const data = await searchCrimeData(c1, c2);
+      
+      const platforms = [{
+        platform: {
+          name: 'Crime & Safety Data',
+          url: 'https://numbeo.com/crime',
+          color: '#ff6600',
+          features: ['Crime Statistics', 'Safety Indices']
+        },
+        price: 0,
+        availability: true,
+        estimatedDelivery: 'Real-time',
+        specialOffers: ['Global Crime Data'],
+        rating: 4.6,
+        reviews: 4000
+      }];
+
+      return [{
+        id: `crime-${c1}`,
+        name: `Crime & Safety: ${c1}${c2 ? ` vs ${c2}` : ''}`,
+        image: '/placeholder.svg',
+        platforms,
+        recommendation: {
+          bestPrice: platforms[0],
+          fastestDelivery: platforms[0],
+          bestRated: platforms[0]
+        }
+      }];
+    } catch (error) {
+      console.error('Crime stats error:', error);
+      return [];
+    }
+  };
+
+  const handleLaborStats = async (country1: string, country2: string): Promise<ComparisonResult[]> => {
+    const [c1, c2] = [country1, country2].filter(Boolean);
+    
+    try {
+      const data = await searchLaborData(c1, c2);
+      
+      const platforms = [{
+        platform: {
+          name: 'Labor & Employment Data',
+          url: 'https://ilo.org',
+          color: '#cc0000',
+          features: ['Employment Statistics', 'Labor Force Data']
+        },
+        price: 0,
+        availability: true,
+        estimatedDelivery: 'Real-time',
+        specialOffers: ['ILO & World Bank Data'],
+        rating: 4.8,
+        reviews: 7000
+      }];
+
+      return [{
+        id: `labor-${c1}`,
+        name: `Labor & Employment: ${c1}${c2 ? ` vs ${c2}` : ''}`,
+        image: '/placeholder.svg',
+        platforms,
+        recommendation: {
+          bestPrice: platforms[0],
+          fastestDelivery: platforms[0],
+          bestRated: platforms[0]
+        }
+      }];
+    } catch (error) {
+      console.error('Labor stats error:', error);
+      return [];
+    }
   };
 
   const clearResults = () => {
