@@ -28,6 +28,13 @@ import { foodDeliveryApi } from '@/services/foodDeliveryApi';
 import { rideBookingApi } from '@/services/rideBookingApi';
 import { medicineApi } from '@/services/medicineApi';
 import { enhancedTravelApi } from '@/services/enhancedTravelApi';
+import { 
+  searchStatistics, 
+  generateReligionComparison, 
+  generateFinancialComparison, 
+  generatePoliticalComparison, 
+  generatePersonComparison 
+} from '@/services/statisticsApi';
 
 export const useSearch = () => {
   const [searchResults, setSearchResults] = useState<ComparisonResult[]>([]);
@@ -82,6 +89,30 @@ export const useSearch = () => {
         results = await searchRideBooking(query, location);
       } else if (category.id === 'medicine' && query) {
         results = await searchMedicine(query, location);
+      } else if (category.id === 'vehicles' && query) {
+        const vehicles = await searchVehicles(query);
+        results = convertVehiclesToResults(vehicles);
+      } else if (category.id === 'mobile-devices' && query) {
+        const electronics = await searchElectronics(query);
+        results = convertElectronicsToResults(electronics);
+      } else if (category.id === 'computers-laptops' && query) {
+        const electronics = await searchElectronics(query);
+        results = convertElectronicsToResults(electronics);
+      } else if (category.id === 'home-appliances' && query) {
+        const appliances = await searchAppliances(query);
+        results = convertAppliancesToResults(appliances);
+      } else if (category.id === 'home-products' && query) {
+        results = await searchProducts(query);
+      } else if (category.id === 'statistics' && query) {
+        results = await handleStatisticsSearch(query, location);
+      } else if (category.id === 'stats-religion' && query) {
+        results = await handleReligionStats(query, location);
+      } else if (category.id === 'stats-financial' && query) {
+        results = await handleFinancialStats(query, location);
+      } else if (category.id === 'stats-political' && query) {
+        results = await handlePoliticalStats(query, location);
+      } else if (category.id === 'stats-person' && query) {
+        results = await handlePersonStats(query, location);
       } else {
         // Use mock data for other categories
         results = generateMockResults(category, query);
@@ -1044,6 +1075,295 @@ export const useSearch = () => {
     }
 
     return results;
+  };
+
+  const convertVehiclesToResults = (vehicles: any[]): ComparisonResult[] => {
+    return vehicles.slice(0, 6).map(vehicle => {
+      const platforms = [
+        {
+          platform: { name: 'CarDekho', url: 'https://cardekho.com', color: '#ff6b35', features: ['Expert Reviews', 'Price Comparison'] },
+          price: vehicle.price,
+          availability: true,
+          estimatedDelivery: 'Visit Showroom',
+          specialOffers: vehicle.offers || [],
+          rating: vehicle.rating || 4.5,
+          reviews: 500
+        },
+        {
+          platform: { name: 'CarWale', url: 'https://carwale.com', color: '#0066cc', features: ['Latest Offers', 'EMI Calculator'] },
+          price: vehicle.price * 1.02,
+          availability: true,
+          estimatedDelivery: 'Visit Showroom',
+          specialOffers: ['Test Drive Available'],
+          rating: 4.4,
+          reviews: 400
+        }
+      ];
+      
+      const bestPrice = platforms.reduce((min, p) => p.price < min.price ? p : min);
+      
+      return {
+        id: vehicle.id,
+        name: vehicle.name,
+        image: vehicle.image || '/placeholder.svg',
+        platforms,
+        recommendation: {
+          bestPrice,
+          fastestDelivery: platforms[0],
+          bestRated: platforms[0]
+        }
+      };
+    });
+  };
+
+  const convertElectronicsToResults = (electronics: any[]): ComparisonResult[] => {
+    return electronics.slice(0, 6).map(item => {
+      const platforms = [
+        {
+          platform: { name: 'Amazon', url: 'https://amazon.in', color: '#ff9900', features: ['Fast Delivery', 'Returns'] },
+          price: item.price,
+          availability: true,
+          estimatedDelivery: '1-2 days',
+          specialOffers: ['Prime Delivery'],
+          rating: item.rating || 4.3,
+          reviews: 1000
+        },
+        {
+          platform: { name: 'Flipkart', url: 'https://flipkart.com', color: '#2874f0', features: ['Exchange Offers', 'EMI'] },
+          price: item.price * 0.98,
+          availability: true,
+          estimatedDelivery: '2-3 days',
+          specialOffers: ['Bank Offers'],
+          rating: 4.2,
+          reviews: 800
+        }
+      ];
+      
+      const bestPrice = platforms.reduce((min, p) => p.price < min.price ? p : min);
+      
+      return {
+        id: item.id,
+        name: item.name,
+        image: item.image || '/placeholder.svg',
+        platforms,
+        recommendation: {
+          bestPrice,
+          fastestDelivery: platforms[0],
+          bestRated: platforms[0]
+        }
+      };
+    });
+  };
+
+  const convertAppliancesToResults = (appliances: any[]): ComparisonResult[] => {
+    return appliances.slice(0, 6).map(appliance => {
+      const platforms = [
+        {
+          platform: { name: 'Amazon', url: 'https://amazon.in', color: '#ff9900', features: ['Installation', 'Warranty'] },
+          price: appliance.price,
+          availability: true,
+          estimatedDelivery: '3-5 days',
+          specialOffers: ['Free Installation'],
+          rating: appliance.rating || 4.4,
+          reviews: 600
+        },
+        {
+          platform: { name: 'Reliance Digital', url: 'https://reliancedigital.in', color: '#0066cc', features: ['Demo Available', 'Extended Warranty'] },
+          price: appliance.price * 1.03,
+          availability: true,
+          estimatedDelivery: '4-6 days',
+          specialOffers: ['Exchange Offer'],
+          rating: 4.3,
+          reviews: 400
+        }
+      ];
+      
+      const bestPrice = platforms.reduce((min, p) => p.price < min.price ? p : min);
+      
+      return {
+        id: appliance.id,
+        name: appliance.name,
+        image: appliance.image || '/placeholder.svg',
+        platforms,
+        recommendation: {
+          bestPrice,
+          fastestDelivery: platforms[0],
+          bestRated: platforms[0]
+        }
+      };
+    });
+  };
+
+  const handleStatisticsSearch = async (topic: string, countries: string): Promise<ComparisonResult[]> => {
+    // Parse countries from the combined search data
+    const [country1, country2] = countries.split(',').map(c => c.trim()).filter(Boolean);
+    
+    try {
+      const statsData = await searchStatistics(topic, country1, country2);
+      
+      // Convert statistics data to ComparisonResult format
+      if (statsData.data.length === 0) return [];
+
+      const platforms = [
+        {
+          platform: {
+            name: 'World Bank Data',
+            url: 'https://data.worldbank.org',
+            color: '#009fda',
+            features: ['Official Data', 'Historical Trends']
+          },
+          price: 0,
+          availability: true,
+          estimatedDelivery: 'Real-time',
+          specialOffers: ['Free Access'],
+          rating: 4.9,
+          reviews: 10000
+        }
+      ];
+
+      return [{
+        id: `stats-${topic}-${country1}`,
+        name: `${topic} Statistics: ${country1}${country2 ? ` vs ${country2}` : ''}`,
+        image: '/placeholder.svg',
+        platforms,
+        recommendation: {
+          bestPrice: platforms[0],
+          fastestDelivery: platforms[0],
+          bestRated: platforms[0]
+        }
+      }];
+    } catch (error) {
+      console.error('Statistics search error:', error);
+      return [];
+    }
+  };
+
+  const handleReligionStats = async (religion1: string, country: string): Promise<ComparisonResult[]> => {
+    const [rel1, rel2] = religion1.split(',').map(r => r.trim()).filter(Boolean);
+    const data = generateReligionComparison(rel1, rel2, country);
+    
+    const platforms = [{
+      platform: {
+        name: 'Religious Demographics Data',
+        url: 'https://pewresearch.org',
+        color: '#ff6b35',
+        features: ['Global Data', 'Trend Analysis']
+      },
+      price: 0,
+      availability: true,
+      estimatedDelivery: 'Instant',
+      specialOffers: ['Free Research Data'],
+      rating: 4.7,
+      reviews: 5000
+    }];
+
+    return [{
+      id: `religion-${rel1}`,
+      name: `Religion Comparison: ${rel1}${rel2 ? ` vs ${rel2}` : ''}`,
+      image: '/placeholder.svg',
+      platforms,
+      recommendation: {
+        bestPrice: platforms[0],
+        fastestDelivery: platforms[0],
+        bestRated: platforms[0]
+      }
+    }];
+  };
+
+  const handleFinancialStats = async (entity1: string, metric: string): Promise<ComparisonResult[]> => {
+    const [ent1, ent2] = entity1.split(',').map(e => e.trim()).filter(Boolean);
+    const data = generateFinancialComparison(ent1, ent2, metric);
+    
+    const platforms = [{
+      platform: {
+        name: 'Financial Power Analysis',
+        url: 'https://forbes.com',
+        color: '#0066cc',
+        features: ['Wealth Data', 'Market Analysis']
+      },
+      price: 0,
+      availability: true,
+      estimatedDelivery: 'Real-time',
+      specialOffers: ['Updated Daily'],
+      rating: 4.8,
+      reviews: 8000
+    }];
+
+    return [{
+      id: `financial-${ent1}`,
+      name: `Financial Comparison: ${ent1}${ent2 ? ` vs ${ent2}` : ''}`,
+      image: '/placeholder.svg',
+      platforms,
+      recommendation: {
+        bestPrice: platforms[0],
+        fastestDelivery: platforms[0],
+        bestRated: platforms[0]
+      }
+    }];
+  };
+
+  const handlePoliticalStats = async (party1: string, country: string): Promise<ComparisonResult[]> => {
+    const [p1, p2] = party1.split(',').map(p => p.trim()).filter(Boolean);
+    const data = generatePoliticalComparison(p1, country, p2);
+    
+    const platforms = [{
+      platform: {
+        name: 'Political Analysis Data',
+        url: 'https://politicaldata.org',
+        color: '#cc0000',
+        features: ['Party History', 'Policy Comparison']
+      },
+      price: 0,
+      availability: true,
+      estimatedDelivery: 'Instant',
+      specialOffers: ['Comprehensive Analysis'],
+      rating: 4.6,
+      reviews: 3000
+    }];
+
+    return [{
+      id: `political-${p1}`,
+      name: `Political Party: ${p1}${p2 ? ` vs ${p2}` : ''} (${country})`,
+      image: '/placeholder.svg',
+      platforms,
+      recommendation: {
+        bestPrice: platforms[0],
+        fastestDelivery: platforms[0],
+        bestRated: platforms[0]
+      }
+    }];
+  };
+
+  const handlePersonStats = async (person1: string, aspect: string): Promise<ComparisonResult[]> => {
+    const [p1, p2] = person1.split(',').map(p => p.trim()).filter(Boolean);
+    const data = generatePersonComparison(p1, aspect, p2);
+    
+    const platforms = [{
+      platform: {
+        name: 'Person Comparison Data',
+        url: 'https://forbes.com',
+        color: '#0066cc',
+        features: ['Wealth Rankings', 'Achievement Data']
+      },
+      price: 0,
+      availability: true,
+      estimatedDelivery: 'Instant',
+      specialOffers: ['Detailed Profiles'],
+      rating: 4.7,
+      reviews: 6000
+    }];
+
+    return [{
+      id: `person-${p1}`,
+      name: `Person Comparison: ${p1}${p2 ? ` vs ${p2}` : ''}`,
+      image: '/placeholder.svg',
+      platforms,
+      recommendation: {
+        bestPrice: platforms[0],
+        fastestDelivery: platforms[0],
+        bestRated: platforms[0]
+      }
+    }];
   };
 
   const clearResults = () => {

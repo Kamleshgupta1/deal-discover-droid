@@ -201,6 +201,95 @@ export const CategorySearchForm = ({ category, onSearch }: CategorySearchFormPro
           { key: 'budget', label: 'Budget', placeholder: 'e.g., 500000-1000000', icon: DollarSign },
           { key: 'type', label: 'Type', placeholder: 'e.g., new, used', icon: Filter }
         ];
+
+      case 'vehicles':
+        return [
+          { key: 'vehicleType', label: 'Vehicle Type', placeholder: 'Bike, Scooter, Car, Truck, Bus, Electric', icon: Filter, required: true },
+          { key: 'query', label: 'Model/Brand', placeholder: 'e.g., Royal Enfield, Honda Activa', icon: Search, required: true },
+          { key: 'budget', label: 'Budget Range', placeholder: 'e.g., 100000-500000', icon: DollarSign },
+          { key: 'fuelType', label: 'Fuel Type', placeholder: 'Petrol, Diesel, Electric, CNG', icon: Filter }
+        ];
+
+      case 'mobile-devices':
+        return [
+          { key: 'query', label: 'Device Model', placeholder: 'e.g., iPhone 15, Samsung Galaxy', icon: Search, required: true },
+          { key: 'brand', label: 'Brand', placeholder: 'Apple, Samsung, OnePlus', icon: Filter },
+          { key: 'budget', label: 'Budget', placeholder: 'e.g., 20000-50000', icon: DollarSign },
+          { key: 'storage', label: 'Storage', placeholder: 'e.g., 128GB, 256GB', icon: Filter }
+        ];
+
+      case 'computers-laptops':
+        return [
+          { key: 'query', label: 'Product Name', placeholder: 'e.g., MacBook Pro, Dell XPS', icon: Search, required: true },
+          { key: 'type', label: 'Type', placeholder: 'Laptop, Desktop, Components', icon: Filter },
+          { key: 'processor', label: 'Processor', placeholder: 'e.g., Intel i7, AMD Ryzen', icon: Filter },
+          { key: 'budget', label: 'Budget', placeholder: 'e.g., 50000-150000', icon: DollarSign }
+        ];
+
+      case 'home-appliances':
+        return [
+          { key: 'applianceType', label: 'Appliance Type', placeholder: 'Fridge, AC, Washing Machine, Microwave', icon: Filter, required: true },
+          { key: 'brand', label: 'Brand', placeholder: 'LG, Samsung, Whirlpool', icon: Filter },
+          { key: 'capacity', label: 'Capacity', placeholder: 'e.g., 200L, 1.5 Ton', icon: Filter },
+          { key: 'budget', label: 'Budget', placeholder: 'e.g., 15000-50000', icon: DollarSign }
+        ];
+
+      case 'home-products':
+        return [
+          { key: 'query', label: 'Product Name', placeholder: 'e.g., sofa, dining table, cookware', icon: Search, required: true },
+          { key: 'category', label: 'Category', placeholder: 'Furniture, Kitchen, Decor', icon: Filter },
+          { key: 'brand', label: 'Brand', placeholder: 'e.g., IKEA, Urban Ladder', icon: Filter },
+          { key: 'budget', label: 'Budget', placeholder: 'e.g., 5000-30000', icon: DollarSign }
+        ];
+
+      case 'food-delivery':
+        return [
+          { key: 'query', label: 'Restaurant/Dish', placeholder: 'e.g., Pizza, Chinese, McDonald\'s', icon: Search, required: true },
+          { key: 'location', label: 'Delivery Location', placeholder: 'e.g., Bandra, Koramangala', icon: MapPin, required: true },
+          { key: 'cuisine', label: 'Cuisine Type', placeholder: 'e.g., Italian, Indian, Chinese', icon: Filter },
+          { key: 'budget', label: 'Budget per Person', placeholder: 'e.g., 200-500', icon: DollarSign }
+        ];
+
+      case 'statistics':
+        return [
+          { key: 'topic', label: 'Data Topic', placeholder: 'e.g., GDP, Employment, Education', icon: Search, required: true },
+          { key: 'country1', label: 'First Country/State', placeholder: 'e.g., India, USA, California', icon: MapPin, required: true },
+          { key: 'country2', label: 'Second Country/State', placeholder: 'e.g., China, UK, Texas', icon: MapPin },
+          { key: 'year', label: 'Year', placeholder: 'e.g., 2023, 2022', icon: Calendar },
+          { key: 'indicator', label: 'Specific Indicator', placeholder: 'Optional - specific metric', icon: Filter }
+        ];
+
+      case 'stats-religion':
+        return [
+          { key: 'religion1', label: 'First Religion', placeholder: 'e.g., Christianity, Islam, Hinduism', icon: Search, required: true },
+          { key: 'religion2', label: 'Second Religion', placeholder: 'e.g., Buddhism, Judaism', icon: Search },
+          { key: 'country', label: 'Country/Region', placeholder: 'e.g., India, USA, World', icon: MapPin },
+          { key: 'aspect', label: 'Comparison Aspect', placeholder: 'Population, Growth, Distribution', icon: Filter }
+        ];
+
+      case 'stats-financial':
+        return [
+          { key: 'entity1', label: 'First Entity', placeholder: 'e.g., USA, India, Google', icon: Search, required: true },
+          { key: 'entity2', label: 'Second Entity', placeholder: 'e.g., China, Brazil, Apple', icon: Search },
+          { key: 'metric', label: 'Financial Metric', placeholder: 'GDP, Revenue, Market Cap, Wealth', icon: DollarSign },
+          { key: 'year', label: 'Year', placeholder: 'e.g., 2023', icon: Calendar }
+        ];
+
+      case 'stats-political':
+        return [
+          { key: 'party1', label: 'First Party', placeholder: 'e.g., Democratic, BJP, Labour', icon: Search, required: true },
+          { key: 'party2', label: 'Second Party', placeholder: 'e.g., Republican, Congress, Conservative', icon: Search },
+          { key: 'country', label: 'Country', placeholder: 'e.g., USA, India, UK', icon: MapPin, required: true },
+          { key: 'aspect', label: 'Compare By', placeholder: 'Policies, History, Performance, Ideology', icon: Filter }
+        ];
+
+      case 'stats-person':
+        return [
+          { key: 'person1', label: 'First Person', placeholder: 'e.g., Elon Musk, Jeff Bezos', icon: Search, required: true },
+          { key: 'person2', label: 'Second Person', placeholder: 'e.g., Bill Gates, Warren Buffett', icon: Search },
+          { key: 'aspect', label: 'Compare By', placeholder: 'Wealth, Influence, Career, Achievements', icon: Filter },
+          { key: 'field', label: 'Field', placeholder: 'Business, Politics, Sports, Entertainment', icon: Filter }
+        ];
       
       default:
         return [

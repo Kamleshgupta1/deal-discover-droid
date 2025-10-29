@@ -23,11 +23,31 @@ export const GlobalSearch = ({ onSearch, placeholder = "Search anything..." }: G
     let categoryToUse = selectedCategory;
     if (!categoryToUse) {
       const categories = getAllCategories();
-      // Simple keyword matching for category detection
+      // Enhanced keyword matching for category detection
       const queryLower = query.toLowerCase();
+      
+      // First try exact keyword match
       categoryToUse = categories.find(cat => 
-        cat.keywords?.some(keyword => queryLower.includes(keyword.toLowerCase()))
-      ) || categories.find(cat => cat.name.toLowerCase().includes(queryLower));
+        cat.keywords?.some(keyword => {
+          const keywordLower = keyword.toLowerCase();
+          return queryLower.includes(keywordLower) || keywordLower.includes(queryLower);
+        })
+      );
+      
+      // Then try category name match
+      if (!categoryToUse) {
+        categoryToUse = categories.find(cat => 
+          queryLower.includes(cat.name.toLowerCase()) || 
+          cat.name.toLowerCase().includes(queryLower)
+        );
+      }
+      
+      // If still not found, check for partial matches in description
+      if (!categoryToUse) {
+        categoryToUse = categories.find(cat => 
+          cat.description?.toLowerCase().includes(queryLower)
+        );
+      }
     }
     
     onSearch(query, location, categoryToUse || undefined);
@@ -68,9 +88,12 @@ export const GlobalSearch = ({ onSearch, placeholder = "Search anything..." }: G
           </Button>
         </div>
         
-        {/* Category chips for quick selection */}
+        {/* Category chips for quick selection - showing popular categories */}
         <div className="flex flex-wrap gap-2">
-          {getAllCategories().slice(0, 6).map((category) => (
+          <div className="text-xs text-muted-foreground w-full mb-1">Quick categories:</div>
+          {getAllCategories().filter(cat => 
+            ['shopping', 'travel', 'entertainment', 'food-delivery', 'statistics', 'vehicles'].includes(cat.id)
+          ).map((category) => (
             <Button
               key={category.id}
               variant={selectedCategory?.id === category.id ? "default" : "outline"}

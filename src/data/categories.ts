@@ -4,7 +4,7 @@ import { Film, BookOpen, TrendingUp, UtensilsCrossed, Car, Pill, Smartphone,
          Building, Coffee, Baby, Gift, Music, Newspaper, Cloud, Fuel, 
          Zap, Battery, Heart, DollarSign, Banknote, Truck, Monitor, 
          Refrigerator, Package, ShirtIcon as Shirt, Camera, Tv, Headphones,
-         Calculator, Wrench, Paintbrush } from 'lucide-react';
+         Calculator, Wrench, Paintbrush, BarChart3, Globe, Users2, Landmark } from 'lucide-react';
 import { Category } from '@/types';
 
 export const getAllCategories = (): Category[] => [
@@ -565,6 +565,71 @@ export const getAllCategories = (): Category[] => [
     ],
     description: 'Compare savings accounts, credit cards, loans and banking services',
     keywords: ['banking', 'credit card', 'savings account', 'loan', 'fd', 'interest rate']
+  },
+
+  // Statistics & Data Categories
+  {
+    id: 'statistics',
+    name: 'Statistics & Data',
+    icon: BarChart3,
+    hasRealApi: true,
+    platforms: [
+      { name: 'World Bank', url: 'https://data.worldbank.org', color: '#009fda', features: ['Global Data', 'Economic Indicators'] },
+      { name: 'UN Data', url: 'https://data.un.org', color: '#0077bb', features: ['Development Stats', 'Social Indicators'] },
+      { name: 'OECD', url: 'https://data.oecd.org', color: '#cc0000', features: ['Economic Data', 'Policy Analysis'] },
+      { name: 'IMF', url: 'https://imf.org/data', color: '#0066cc', features: ['Financial Data', 'Country Reports'] }
+    ],
+    description: 'Compare government data, GDP, employment, education, and economic indicators',
+    keywords: ['statistics', 'data', 'gdp', 'economy', 'government', 'employment', 'education', 'world bank']
+  },
+  {
+    id: 'stats-religion',
+    name: 'Religion Statistics',
+    icon: Globe,
+    hasRealApi: false,
+    platforms: [
+      { name: 'Pew Research', url: 'https://pewresearch.org', color: '#ff6b35', features: ['Religious Demographics', 'Global Surveys'] },
+      { name: 'World Religion Database', url: 'https://worldreligiondatabase.org', color: '#0066cc', features: ['Comprehensive Data', 'Historical Trends'] }
+    ],
+    description: 'Compare religious demographics, population, growth rates, and distribution',
+    keywords: ['religion', 'demographics', 'population', 'faith', 'religious statistics']
+  },
+  {
+    id: 'stats-financial',
+    name: 'Financial Power',
+    icon: DollarSign,
+    hasRealApi: false,
+    platforms: [
+      { name: 'Forbes', url: 'https://forbes.com', color: '#0066cc', features: ['Wealth Rankings', 'Company Data'] },
+      { name: 'Bloomberg', url: 'https://bloomberg.com', color: '#ff6600', features: ['Market Data', 'Financial News'] },
+      { name: 'World Bank', url: 'https://worldbank.org', color: '#009fda', features: ['Country Economics', 'Development Data'] }
+    ],
+    description: 'Compare financial power of countries, companies, and individuals',
+    keywords: ['financial', 'wealth', 'gdp', 'revenue', 'market cap', 'rich list']
+  },
+  {
+    id: 'stats-political',
+    name: 'Political Comparison',
+    icon: Landmark,
+    hasRealApi: false,
+    platforms: [
+      { name: 'Political Database', url: 'https://politicaldata.org', color: '#cc0000', features: ['Party Data', 'Election Results'] },
+      { name: 'Parliament Data', url: 'https://parliamentdata.org', color: '#0066cc', features: ['Legislative Data', 'Voting Records'] }
+    ],
+    description: 'Compare political parties, policies, history, and performance',
+    keywords: ['political', 'party', 'politics', 'election', 'government', 'policy']
+  },
+  {
+    id: 'stats-person',
+    name: 'Person Comparison',
+    icon: Users2,
+    hasRealApi: false,
+    platforms: [
+      { name: 'Forbes', url: 'https://forbes.com', color: '#0066cc', features: ['Billionaire List', 'Celebrity Rankings'] },
+      { name: 'Wikipedia', url: 'https://wikipedia.org', color: '#000000', features: ['Biographical Data', 'Achievements'] }
+    ],
+    description: 'Compare individuals by wealth, influence, career, and achievements',
+    keywords: ['person', 'celebrity', 'billionaire', 'influence', 'achievements', 'comparison']
   }
 ];
 
