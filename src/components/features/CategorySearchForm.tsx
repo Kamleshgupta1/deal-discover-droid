@@ -5,6 +5,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
 import { Search, MapPin, Calendar, DollarSign, Filter, Users, Shield, Briefcase } from 'lucide-react';
+import { MultiProductComparison } from './MultiProductComparison';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 interface CategorySearchFormProps {
   category: Category;
@@ -13,6 +15,7 @@ interface CategorySearchFormProps {
 
 export const CategorySearchForm = ({ category, onSearch }: CategorySearchFormProps) => {
   const [searchData, setSearchData] = useState<Record<string, string>>({});
+  const [searchMode, setSearchMode] = useState<'single' | 'multi'>('single');
 
   const handleInputChange = (field: string, value: string) => {
     setSearchData(prev => ({ ...prev, [field]: value }));
@@ -22,6 +25,20 @@ export const CategorySearchForm = ({ category, onSearch }: CategorySearchFormPro
     e.preventDefault();
     onSearch(searchData);
   };
+
+  const handleMultiCompare = (products: string[]) => {
+    onSearch({ 
+      query: products.join(' vs '),
+      compareMode: 'multi',
+      products: products.join(',') 
+    });
+  };
+
+  // Categories that support multi-product comparison
+  const supportsMultiComparison = [
+    'vehicles', 'mobile-devices', 'computers-laptops', 'home-appliances',
+    'home-products', 'electronics', 'shopping'
+  ].includes(category.id);
 
   const getFieldsForCategory = () => {
     switch (category.id) {
@@ -356,6 +373,66 @@ export const CategorySearchForm = ({ category, onSearch }: CategorySearchFormPro
   };
 
   const fields = getFieldsForCategory();
+
+  if (supportsMultiComparison) {
+    return (
+      <div className="w-full max-w-2xl mx-auto space-y-4">
+        <Tabs value={searchMode} onValueChange={(v) => setSearchMode(v as 'single' | 'multi')}>
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="single">Single Search</TabsTrigger>
+            <TabsTrigger value="multi">Compare Multiple</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="single">
+            <Card className="w-full">
+              <CardContent className="p-6">
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {fields.map((field) => {
+                      const Icon = field.icon;
+                      return (
+                        <div key={field.key} className="space-y-2">
+                          <Label htmlFor={field.key} className="text-sm font-medium flex items-center gap-2">
+                            <Icon className="h-4 w-4" />
+                            {field.label}
+                            {field.required && <span className="text-destructive">*</span>}
+                          </Label>
+                          <Input
+                            id={field.key}
+                            placeholder={field.placeholder}
+                            value={searchData[field.key] || ''}
+                            onChange={(e) => handleInputChange(field.key, e.target.value)}
+                            required={field.required}
+                            className="w-full"
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                  
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-gradient-primary hover:shadow-strong"
+                    size="lg"
+                  >
+                    <Search className="h-4 w-4 mr-2" />
+                    Search {category.name}
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </TabsContent>
+          
+          <TabsContent value="multi">
+            <MultiProductComparison 
+              onCompare={handleMultiCompare}
+              categoryName={category.name}
+            />
+          </TabsContent>
+        </Tabs>
+      </div>
+    );
+  }
 
   return (
     <Card className="w-full max-w-2xl mx-auto">

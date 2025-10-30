@@ -729,6 +729,273 @@ export const getAllCategories = (): Category[] => [
   }
 ];
 
+// Parent Categories with Sub-Categories
+export const getParentCategories = (): Category[] => [
+  {
+    id: 'digital-products',
+    name: 'Digital Products',
+    icon: Monitor,
+    hasRealApi: false,
+    platforms: [],
+    description: 'Compare digital products - electronics, computers, mobile devices',
+    keywords: ['digital', 'electronics', 'technology', 'gadgets'],
+    subCategories: [
+      getAllCategories().find(c => c.id === 'mobile-devices')!,
+      getAllCategories().find(c => c.id === 'computers-laptops')!,
+      getAllCategories().find(c => c.id === 'electronics')!,
+      {
+        id: 'tablets',
+        name: 'Tablets & iPads',
+        icon: Monitor,
+        hasRealApi: false,
+        platforms: [
+          { name: 'Apple iPad', url: 'https://apple.com/ipad', color: '#007aff', features: ['iPadOS', 'Apple Pencil Support'] },
+          { name: 'Samsung Galaxy Tab', url: 'https://samsung.com/tablets', color: '#1f4788', features: ['Android', 'S-Pen'] }
+        ],
+        description: 'Compare tablets and iPad models',
+        keywords: ['tablet', 'ipad', 'android tablet'],
+        parentId: 'digital-products'
+      },
+      {
+        id: 'smartwatches',
+        name: 'Smartwatches',
+        icon: Monitor,
+        hasRealApi: false,
+        platforms: [
+          { name: 'Apple Watch', url: 'https://apple.com/watch', color: '#007aff', features: ['Health Tracking', 'watchOS'] },
+          { name: 'Samsung Galaxy Watch', url: 'https://samsung.com/watches', color: '#1f4788', features: ['Fitness Tracking', 'Wear OS'] }
+        ],
+        description: 'Compare smartwatches and fitness trackers',
+        keywords: ['smartwatch', 'fitness tracker', 'wearable'],
+        parentId: 'digital-products'
+      },
+      {
+        id: 'cameras',
+        name: 'Cameras & Photography',
+        icon: Camera,
+        hasRealApi: false,
+        platforms: [
+          { name: 'Canon', url: 'https://canon.com', color: '#cc0000', features: ['DSLR', 'Mirrorless'] },
+          { name: 'Nikon', url: 'https://nikon.com', color: '#ffcc00', features: ['Professional Cameras', 'Lenses'] }
+        ],
+        description: 'Compare cameras, lenses, and photography equipment',
+        keywords: ['camera', 'dslr', 'mirrorless', 'photography'],
+        parentId: 'digital-products'
+      },
+      {
+        id: 'audio',
+        name: 'Audio & Headphones',
+        icon: Headphones,
+        hasRealApi: false,
+        platforms: [
+          { name: 'Sony', url: 'https://sony.com', color: '#000000', features: ['Noise Cancelling', 'Premium Audio'] },
+          { name: 'Bose', url: 'https://bose.com', color: '#000000', features: ['Studio Quality', 'Comfort'] }
+        ],
+        description: 'Compare headphones, earbuds, and audio equipment',
+        keywords: ['headphones', 'earbuds', 'audio', 'speakers'],
+        parentId: 'digital-products'
+      },
+      {
+        id: 'tvs',
+        name: 'TVs & Displays',
+        icon: Tv,
+        hasRealApi: false,
+        platforms: [
+          { name: 'LG', url: 'https://lg.com/tvs', color: '#a50034', features: ['OLED', 'Smart TV'] },
+          { name: 'Samsung', url: 'https://samsung.com/tvs', color: '#1f4788', features: ['QLED', '4K/8K'] }
+        ],
+        description: 'Compare TVs, monitors, and display devices',
+        keywords: ['tv', 'television', 'monitor', 'display', 'oled', 'qled'],
+        parentId: 'digital-products'
+      }
+    ]
+  },
+  {
+    id: 'home-products-parent',
+    name: 'Home Products',
+    icon: Home,
+    hasRealApi: false,
+    platforms: [],
+    description: 'Compare home appliances, furniture, and household products',
+    keywords: ['home', 'appliances', 'furniture', 'household'],
+    subCategories: [
+      getAllCategories().find(c => c.id === 'home-appliances')!,
+      getAllCategories().find(c => c.id === 'home-products')!,
+      {
+        id: 'kitchen-appliances',
+        name: 'Kitchen Appliances',
+        icon: Refrigerator,
+        hasRealApi: false,
+        platforms: [
+          { name: 'Philips', url: 'https://philips.com', color: '#0073cf', features: ['Smart Cooking', 'Energy Efficient'] },
+          { name: 'Prestige', url: 'https://prestigeappliances.com', color: '#c8102e', features: ['Indian Brand', 'Durable'] }
+        ],
+        description: 'Compare mixers, grinders, toasters, and kitchen gadgets',
+        keywords: ['kitchen', 'mixer', 'grinder', 'toaster', 'appliances'],
+        parentId: 'home-products-parent'
+      },
+      {
+        id: 'air-conditioners',
+        name: 'Air Conditioners',
+        icon: Refrigerator,
+        hasRealApi: false,
+        platforms: [
+          { name: 'Daikin', url: 'https://daikin.com', color: '#0066cc', features: ['Inverter AC', 'Energy Saving'] },
+          { name: 'Voltas', url: 'https://voltas.com', color: '#ff6600', features: ['Indian Leader', 'Affordable'] }
+        ],
+        description: 'Compare split, window, and inverter air conditioners',
+        keywords: ['ac', 'air conditioner', 'cooling', 'split ac', 'window ac'],
+        parentId: 'home-products-parent'
+      },
+      {
+        id: 'washing-machines',
+        name: 'Washing Machines',
+        icon: Refrigerator,
+        hasRealApi: false,
+        platforms: [
+          { name: 'IFB', url: 'https://ifbappliances.com', color: '#0066cc', features: ['Front Load', 'Premium Quality'] },
+          { name: 'Bosch', url: 'https://bosch.com', color: '#cc0000', features: ['German Engineering', 'Durable'] }
+        ],
+        description: 'Compare front load, top load, and automatic washing machines',
+        keywords: ['washing machine', 'washer', 'laundry', 'front load', 'top load'],
+        parentId: 'home-products-parent'
+      },
+      {
+        id: 'water-purifiers',
+        name: 'Water Purifiers',
+        icon: Refrigerator,
+        hasRealApi: false,
+        platforms: [
+          { name: 'Kent', url: 'https://kent.co.in', color: '#0066cc', features: ['RO+UV', 'Pure Water'] },
+          { name: 'Aquaguard', url: 'https://aquaguard.com', color: '#00a651', features: ['Trusted Brand', 'Service Network'] }
+        ],
+        description: 'Compare RO, UV, and UF water purifiers',
+        keywords: ['water purifier', 'ro', 'uv', 'water filter'],
+        parentId: 'home-products-parent'
+      },
+      {
+        id: 'furniture',
+        name: 'Furniture',
+        icon: Home,
+        hasRealApi: false,
+        platforms: [
+          { name: 'IKEA', url: 'https://ikea.com', color: '#0058a3', features: ['Modern Design', 'Affordable'] },
+          { name: 'Pepperfry', url: 'https://pepperfry.com', color: '#f57224', features: ['Indian Designs', 'Custom Options'] }
+        ],
+        description: 'Compare sofas, beds, tables, and home furniture',
+        keywords: ['furniture', 'sofa', 'bed', 'table', 'chair', 'wardrobe'],
+        parentId: 'home-products-parent'
+      }
+    ]
+  },
+  {
+    id: 'vehicles-parent',
+    name: 'Vehicles',
+    icon: Truck,
+    hasRealApi: false,
+    platforms: [],
+    description: 'Compare all types of vehicles - bikes, cars, trucks, electric vehicles',
+    keywords: ['vehicle', 'automobile', 'transport'],
+    subCategories: [
+      {
+        id: 'two-wheelers',
+        name: 'Two Wheelers',
+        icon: Car,
+        hasRealApi: false,
+        platforms: [
+          { name: 'Royal Enfield', url: 'https://royalenfield.com', color: '#000000', features: ['Classic Bikes', 'Premium'] },
+          { name: 'Honda', url: 'https://honda.com', color: '#cc0000', features: ['Reliable', 'Fuel Efficient'] }
+        ],
+        description: 'Compare bikes, scooters, and motorcycles',
+        keywords: ['bike', 'motorcycle', 'scooter', 'two wheeler'],
+        parentId: 'vehicles-parent'
+      },
+      {
+        id: 'passenger-cars',
+        name: 'Passenger Cars',
+        icon: Car,
+        hasRealApi: false,
+        platforms: [
+          { name: 'Maruti Suzuki', url: 'https://marutisuzuki.com', color: '#003399', features: ['Market Leader', 'Affordable'] },
+          { name: 'Hyundai', url: 'https://hyundai.com', color: '#002c5f', features: ['Modern Features', 'Safety'] }
+        ],
+        description: 'Compare hatchbacks, sedans, SUVs, and passenger vehicles',
+        keywords: ['car', 'sedan', 'suv', 'hatchback', 'passenger vehicle'],
+        parentId: 'vehicles-parent'
+      },
+      {
+        id: 'electric-vehicles',
+        name: 'Electric Vehicles',
+        icon: Battery,
+        hasRealApi: false,
+        platforms: [
+          { name: 'Tesla', url: 'https://tesla.com', color: '#cc0000', features: ['Autopilot', 'Long Range'] },
+          { name: 'Tata Nexon EV', url: 'https://tata.com', color: '#1f4788', features: ['Affordable EV', 'Indian Made'] }
+        ],
+        description: 'Compare electric cars, bikes, and scooters',
+        keywords: ['electric vehicle', 'ev', 'electric car', 'electric bike', 'electric scooter'],
+        parentId: 'vehicles-parent'
+      },
+      {
+        id: 'commercial-vehicles',
+        name: 'Commercial Vehicles',
+        icon: Truck,
+        hasRealApi: false,
+        platforms: [
+          { name: 'Tata Motors', url: 'https://tata.com', color: '#1f4788', features: ['Trucks', 'Buses'] },
+          { name: 'Ashok Leyland', url: 'https://ashokleyland.com', color: '#003399', features: ['Heavy Vehicles', 'Reliable'] }
+        ],
+        description: 'Compare trucks, buses, and commercial vehicles',
+        keywords: ['truck', 'bus', 'commercial vehicle', 'cargo', 'transport'],
+        parentId: 'vehicles-parent'
+      },
+      {
+        id: 'loading-vehicles',
+        name: 'Loading Vehicles',
+        icon: Truck,
+        hasRealApi: false,
+        platforms: [
+          { name: 'Mahindra', url: 'https://mahindra.com', color: '#cc0000', features: ['Pickup Trucks', 'Strong Build'] },
+          { name: 'Isuzu', url: 'https://isuzu.com', color: '#cc0000', features: ['Heavy Duty', 'Reliable'] }
+        ],
+        description: 'Compare pickup trucks, mini trucks, and loading vehicles',
+        keywords: ['pickup', 'mini truck', 'loading vehicle', 'cargo vehicle'],
+        parentId: 'vehicles-parent'
+      }
+    ]
+  },
+  {
+    id: 'statistics-parent',
+    name: 'Statistics & Data',
+    icon: BarChart3,
+    hasRealApi: true,
+    platforms: [],
+    description: 'Compare statistical data, government data, and analytics',
+    keywords: ['statistics', 'data', 'analytics', 'comparison'],
+    subCategories: [
+      getAllCategories().find(c => c.id === 'statistics')!,
+      getAllCategories().find(c => c.id === 'stats-countries')!,
+      getAllCategories().find(c => c.id === 'stats-network')!,
+      getAllCategories().find(c => c.id === 'stats-un-sdg')!,
+      getAllCategories().find(c => c.id === 'stats-education')!,
+      getAllCategories().find(c => c.id === 'stats-health')!,
+      getAllCategories().find(c => c.id === 'stats-environment')!,
+      getAllCategories().find(c => c.id === 'stats-crime')!,
+      getAllCategories().find(c => c.id === 'stats-labor')!,
+      getAllCategories().find(c => c.id === 'stats-religion')!,
+      getAllCategories().find(c => c.id === 'stats-financial')!,
+      getAllCategories().find(c => c.id === 'stats-political')!,
+      getAllCategories().find(c => c.id === 'stats-person')!
+    ]
+  }
+];
+
+export const getAllCategoriesWithHierarchy = (): Category[] => {
+  const allCategories = getAllCategories();
+  const parentCategories = getParentCategories();
+  return [...allCategories, ...parentCategories];
+};
+
 export const getHighPriorityCategories = (): Category[] => {
   return getAllCategories().slice(0, 6);
 };

@@ -7,9 +7,32 @@ interface CategoryCardProps {
   category: Category;
   onSelect: (category: Category) => void;
   delay?: number;
+  variant?: 'default' | 'compact';
 }
 
-export const CategoryCard = ({ category, onSelect, delay = 0 }: CategoryCardProps) => {
+export const CategoryCard = ({ category, onSelect, delay = 0, variant = 'default' }: CategoryCardProps) => {
+  if (variant === 'compact') {
+    return (
+      <Card 
+        className="card-feature hover:scale-102 cursor-pointer transition-all"
+        onClick={() => onSelect(category)}
+      >
+        <CardContent className="p-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-primary/10 rounded-lg">
+              <category.icon className="h-5 w-5 text-primary" />
+            </div>
+            <div className="flex-1">
+              <h4 className="font-semibold text-sm">{category.name}</h4>
+              <p className="text-xs text-muted-foreground">{category.platforms.length} platforms</p>
+            </div>
+            <ChevronRight className="h-4 w-4 text-muted-foreground" />
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <Card 
       className={`card-feature hover:scale-105 cursor-pointer animate-slide-up`}

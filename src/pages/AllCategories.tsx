@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, FolderTree } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { getAllCategories } from '@/data/categories';
+import { getAllCategories, getParentCategories } from '@/data/categories';
 import { Category } from '@/types';
+import { ParentCategoryCard } from '@/components/features/ParentCategoryCard';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const AllCategories = () => {
   const navigate = useNavigate();
   const allCategories = getAllCategories();
+  const parentCategories = getParentCategories();
+  const [viewMode, setViewMode] = useState<'flat' | 'hierarchical'>('flat');
   
   const handleCategoryClick = (category: Category) => {
     navigate('/', { state: { selectedCategory: category } });
@@ -18,21 +22,33 @@ const AllCategories = () => {
     <div className="min-h-screen bg-gradient-subtle">
       <div className="container mx-auto px-4 py-6 max-w-6xl">
         {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <Link to="/">
-            <Button variant="ghost" size="sm" className="h-9 w-9 p-0">
-              <ArrowLeft className="h-4 w-4" />
-            </Button>
-          </Link>
-          <div>
-            <h1 className="text-2xl md:text-3xl font-bold">All Categories</h1>
-            <p className="text-muted-foreground">Choose from all available categories</p>
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-4">
+            <Link to="/">
+              <Button variant="ghost" size="sm" className="h-9 w-9 p-0">
+                <ArrowLeft className="h-4 w-4" />
+              </Button>
+            </Link>
+            <div>
+              <h1 className="text-2xl md:text-3xl font-bold">All Categories</h1>
+              <p className="text-muted-foreground">Choose from all available categories</p>
+            </div>
           </div>
         </div>
 
-        {/* All Categories Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {allCategories.map((category, index) => (
+        <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as 'flat' | 'hierarchical')} className="mb-6">
+          <TabsList className="grid w-full max-w-md grid-cols-2">
+            <TabsTrigger value="flat">All Categories</TabsTrigger>
+            <TabsTrigger value="hierarchical">
+              <FolderTree className="h-4 w-4 mr-2" />
+              By Category
+            </TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="flat">
+            {/* All Categories Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {allCategories.map((category, index) => (
             <Card 
               key={category.id}
               className="group cursor-pointer hover:shadow-elegant transition-all duration-300 hover-scale border-0 overflow-hidden bg-gradient-to-br from-white to-muted/50 dark:from-card dark:to-muted/20"
@@ -97,8 +113,26 @@ const AllCategories = () => {
                 </div>
               </div>
             </Card>
-          ))}
-        </div>
+              ))}
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="hierarchical">
+            {/* Hierarchical View */}
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {parentCategories.map((category, index) => (
+                  <ParentCategoryCard
+                    key={category.id}
+                    category={category}
+                    onSubCategorySelect={handleCategoryClick}
+                    delay={index * 100}
+                  />
+                ))}
+              </div>
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );

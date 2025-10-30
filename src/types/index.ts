@@ -9,6 +9,8 @@ export interface Category {
   platforms: Platform[];
   keywords?: string[];
   description?: string;
+  parentId?: string;
+  subCategories?: Category[];
 }
 
 export interface Platform {

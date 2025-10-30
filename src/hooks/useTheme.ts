@@ -5,8 +5,8 @@ export type ThemeMode =
   | 'dark' 
   | 'ocean' 
   | 'earth' 
-  | 'mystic' 
   | 'sunset' 
+  | 'yellow-pale'
   | 'forest';
 
 const themes = {
@@ -42,14 +42,6 @@ const themes = {
     background: '30 20% 95%',
     foreground: '25 30% 20%',
   },
-  mystic: {
-    name: 'Mystic Purple',
-    primary: '280 90% 65%',
-    secondary: '320 80% 60%',
-    accent: '260 100% 70%',
-    background: '280 20% 96%',
-    foreground: '280 40% 15%',
-  },
   sunset: {
     name: 'Sunset Glow',
     primary: '15 90% 60%',
@@ -57,6 +49,14 @@ const themes = {
     accent: '50 100% 65%',
     background: '25 30% 96%',
     foreground: '15 40% 20%',
+  },
+  'yellow-pale': {
+    name: 'Yellow Pale',
+    primary: '48 96% 53%',
+    secondary: '45 100% 80%',
+    accent: '55 92% 65%',
+    background: '50 60% 97%',
+    foreground: '30 25% 20%',
   },
   forest: {
     name: 'Forest Green',

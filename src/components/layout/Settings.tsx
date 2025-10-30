@@ -26,14 +26,22 @@ import {
   Lock,
   Database,
   HelpCircle,
-  Info
+  Info,
+  Type,
+  ZoomIn,
+  ZoomOut,
+  Minus,
+  Plus
 } from 'lucide-react';
 import { useTheme } from '@/hooks/useTheme';
+import { useTextStyle } from '@/hooks/useTextStyle';
+import { useFontSize } from '@/hooks/useFontSize';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
+import { useToast } from '@/hooks/use-toast';
 
 interface SettingsProps {
   children: React.ReactNode;
@@ -41,12 +49,24 @@ interface SettingsProps {
 
 export const Settings = ({ children }: SettingsProps) => {
   const { currentTheme, setTheme, themes } = useTheme();
+  const { currentStyle, setTextStyle, textStyles } = useTextStyle();
+  const { currentSize, increaseSize, decreaseSize, fontSizes } = useFontSize();
+  const { toast } = useToast();
+  
   const [notifications, setNotifications] = useState({
     email: true,
     push: true,
     deals: true,
     updates: false
   });
+
+  const handleNotificationChange = (key: string, value: boolean) => {
+    setNotifications(prev => ({ ...prev, [key]: value }));
+    toast({
+      title: "Notification Settings Updated",
+      description: `${key} notifications ${value ? 'enabled' : 'disabled'}`,
+    });
+  };
 
   const getThemeIcon = (theme: string) => {
     switch (theme) {
@@ -105,6 +125,73 @@ export const Settings = ({ children }: SettingsProps) => {
             </CardContent>
           </Card>
 
+          {/* Text Style Settings */}
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base flex items-center gap-2">
+                <Type className="h-4 w-4" />
+                Text Design
+              </CardTitle>
+              <CardDescription>
+                Choose your preferred text style
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="grid grid-cols-2 gap-2">
+                {textStyles.map((style) => (
+                  <Button
+                    key={style.key}
+                    variant={currentStyle === style.key ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setTextStyle(style.key)}
+                    className="justify-start gap-2"
+                  >
+                    <Type className="h-4 w-4" />
+                    {style.name}
+                  </Button>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Font Size Settings */}
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base flex items-center gap-2">
+                <ZoomIn className="h-4 w-4" />
+                Font Size
+              </CardTitle>
+              <CardDescription>
+                Adjust text size for better readability
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">
+                  Current: {fontSizes.find(s => s.key === currentSize)?.label}
+                </span>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={decreaseSize}
+                    disabled={currentSize === 'small'}
+                  >
+                    <Minus className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={increaseSize}
+                    disabled={currentSize === 'extra-large'}
+                  >
+                    <Plus className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Notification Settings */}
           <Card>
             <CardHeader className="pb-3">
@@ -125,9 +212,7 @@ export const Settings = ({ children }: SettingsProps) => {
                 <Switch
                   id="email-notifications"
                   checked={notifications.email}
-                  onCheckedChange={(checked) => 
-                    setNotifications(prev => ({ ...prev, email: checked }))
-                  }
+                  onCheckedChange={(checked) => handleNotificationChange('email', checked)}
                 />
               </div>
               
@@ -139,9 +224,7 @@ export const Settings = ({ children }: SettingsProps) => {
                 <Switch
                   id="push-notifications"
                   checked={notifications.push}
-                  onCheckedChange={(checked) => 
-                    setNotifications(prev => ({ ...prev, push: checked }))
-                  }
+                  onCheckedChange={(checked) => handleNotificationChange('push', checked)}
                 />
               </div>
               
@@ -153,9 +236,7 @@ export const Settings = ({ children }: SettingsProps) => {
                 <Switch
                   id="deals-notifications"
                   checked={notifications.deals}
-                  onCheckedChange={(checked) => 
-                    setNotifications(prev => ({ ...prev, deals: checked }))
-                  }
+                  onCheckedChange={(checked) => handleNotificationChange('deals', checked)}
                 />
               </div>
               
@@ -167,9 +248,7 @@ export const Settings = ({ children }: SettingsProps) => {
                 <Switch
                   id="updates-notifications"
                   checked={notifications.updates}
-                  onCheckedChange={(checked) => 
-                    setNotifications(prev => ({ ...prev, updates: checked }))
-                  }
+                  onCheckedChange={(checked) => handleNotificationChange('updates', checked)}
                 />
               </div>
             </CardContent>
