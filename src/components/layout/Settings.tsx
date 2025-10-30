@@ -31,17 +31,29 @@ import {
   ZoomIn,
   ZoomOut,
   Minus,
-  Plus
+  Plus,
+  Grid3x3,
+  List,
+  LayoutGrid,
+  ArrowUpDown,
+  DollarSign,
+  RefreshCw,
+  Eye,
+  Star
 } from 'lucide-react';
 import { useTheme } from '@/hooks/useTheme';
 import { useTextStyle } from '@/hooks/useTextStyle';
 import { useFontSize } from '@/hooks/useFontSize';
+import { useViewPreferences } from '@/hooks/useViewPreferences';
+import { useSortPreferences } from '@/hooks/useSortPreferences';
+import { useAppPreferences } from '@/hooks/useAppPreferences';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface SettingsProps {
   children: React.ReactNode;
@@ -51,6 +63,22 @@ export const Settings = ({ children }: SettingsProps) => {
   const { currentTheme, setTheme, themes } = useTheme();
   const { currentStyle, setTextStyle, textStyles } = useTextStyle();
   const { currentSize, increaseSize, decreaseSize, fontSizes } = useFontSize();
+  const { currentView, setViewMode, viewModes } = useViewPreferences();
+  const { currentSort, setSortOption, sortOptions } = useSortPreferences();
+  const { 
+    currency, 
+    updateCurrency, 
+    currencies,
+    dataRefresh,
+    updateDataRefresh,
+    refreshOptions,
+    compactMode,
+    toggleCompactMode,
+    showPrices,
+    toggleShowPrices,
+    showRatings,
+    toggleShowRatings
+  } = useAppPreferences();
   const { toast } = useToast();
   
   const [notifications, setNotifications] = useState({
@@ -76,6 +104,15 @@ export const Settings = ({ children }: SettingsProps) => {
     }
   };
 
+  const getViewIcon = (view: string) => {
+    switch (view) {
+      case 'grid': return Grid3x3;
+      case 'list': return List;
+      case 'compact': return LayoutGrid;
+      default: return Grid3x3;
+    }
+  };
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -92,7 +129,7 @@ export const Settings = ({ children }: SettingsProps) => {
           </SheetDescription>
         </SheetHeader>
 
-        <div className="space-y-6 py-4">
+        <div className="space-y-6 py-4 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2">
           {/* Theme Settings */}
           <Card>
             <CardHeader className="pb-3">
@@ -188,6 +225,220 @@ export const Settings = ({ children }: SettingsProps) => {
                     <Plus className="h-4 w-4" />
                   </Button>
                 </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* View Preferences */}
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base flex items-center gap-2">
+                <LayoutGrid className="h-4 w-4" />
+                View Mode
+              </CardTitle>
+              <CardDescription>
+                Choose how to display content
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="grid grid-cols-3 gap-2">
+                {viewModes.map((view) => {
+                  const IconComponent = getViewIcon(view.key);
+                  return (
+                    <Button
+                      key={view.key}
+                      variant={currentView === view.key ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => {
+                        setViewMode(view.key);
+                        toast({
+                          title: "View Mode Updated",
+                          description: `Switched to ${view.name}`,
+                        });
+                      }}
+                      className="flex-col h-auto py-3 gap-1"
+                    >
+                      <IconComponent className="h-4 w-4" />
+                      <span className="text-xs">{view.name.split(' ')[0]}</span>
+                    </Button>
+                  );
+                })}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Sort Preferences */}
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base flex items-center gap-2">
+                <ArrowUpDown className="h-4 w-4" />
+                Default Sort Order
+              </CardTitle>
+              <CardDescription>
+                Choose default sorting preference
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Select 
+                value={currentSort} 
+                onValueChange={(value) => {
+                  setSortOption(value as any);
+                  toast({
+                    title: "Sort Order Updated",
+                    description: `Default sort set to ${sortOptions.find(s => s.key === value)?.name}`,
+                  });
+                }}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {sortOptions.map((option) => (
+                    <SelectItem key={option.key} value={option.key}>
+                      {option.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </CardContent>
+          </Card>
+
+          {/* Currency & Regional Settings */}
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base flex items-center gap-2">
+                <DollarSign className="h-4 w-4" />
+                Currency
+              </CardTitle>
+              <CardDescription>
+                Select your preferred currency
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Select 
+                value={currency} 
+                onValueChange={(value) => {
+                  updateCurrency(value as any);
+                  toast({
+                    title: "Currency Updated",
+                    description: `Currency set to ${currencies.find(c => c.key === value)?.name}`,
+                  });
+                }}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {currencies.map((curr) => (
+                    <SelectItem key={curr.key} value={curr.key}>
+                      {curr.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </CardContent>
+          </Card>
+
+          {/* Data Refresh Settings */}
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base flex items-center gap-2">
+                <RefreshCw className="h-4 w-4" />
+                Data Refresh
+              </CardTitle>
+              <CardDescription>
+                Control how often data updates
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Select 
+                value={dataRefresh} 
+                onValueChange={(value) => {
+                  updateDataRefresh(value as any);
+                  toast({
+                    title: "Refresh Settings Updated",
+                    description: `Data refresh set to ${refreshOptions.find(r => r.key === value)?.name}`,
+                  });
+                }}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {refreshOptions.map((option) => (
+                    <SelectItem key={option.key} value={option.key}>
+                      {option.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </CardContent>
+          </Card>
+
+          {/* Display Preferences */}
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base flex items-center gap-2">
+                <Eye className="h-4 w-4" />
+                Display Options
+              </CardTitle>
+              <CardDescription>
+                Customize what you see
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <LayoutGrid className="h-4 w-4 text-muted-foreground" />
+                  <Label htmlFor="compact-mode">Compact mode</Label>
+                </div>
+                <Switch
+                  id="compact-mode"
+                  checked={compactMode}
+                  onCheckedChange={(checked) => {
+                    toggleCompactMode(checked);
+                    toast({
+                      title: "Display Updated",
+                      description: `Compact mode ${checked ? 'enabled' : 'disabled'}`,
+                    });
+                  }}
+                />
+              </div>
+              
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <DollarSign className="h-4 w-4 text-muted-foreground" />
+                  <Label htmlFor="show-prices">Show prices</Label>
+                </div>
+                <Switch
+                  id="show-prices"
+                  checked={showPrices}
+                  onCheckedChange={(checked) => {
+                    toggleShowPrices(checked);
+                    toast({
+                      title: "Display Updated",
+                      description: `Prices ${checked ? 'shown' : 'hidden'}`,
+                    });
+                  }}
+                />
+              </div>
+              
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Star className="h-4 w-4 text-muted-foreground" />
+                  <Label htmlFor="show-ratings">Show ratings</Label>
+                </div>
+                <Switch
+                  id="show-ratings"
+                  checked={showRatings}
+                  onCheckedChange={(checked) => {
+                    toggleShowRatings(checked);
+                    toast({
+                      title: "Display Updated",
+                      description: `Ratings ${checked ? 'shown' : 'hidden'}`,
+                    });
+                  }}
+                />
               </div>
             </CardContent>
           </Card>
