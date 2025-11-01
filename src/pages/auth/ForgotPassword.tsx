@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -18,23 +19,25 @@ export const ForgotPassword = () => {
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
+  const { resetPassword } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate email sending process
-    setTimeout(() => {
-      setIsLoading(false);
+    const { error } = await resetPassword(email);
+    
+    setIsLoading(false);
+    
+    if (!error) {
       setIsEmailSent(true);
-    }, 2000);
+    }
   };
 
-  const handleResendEmail = () => {
+  const handleResendEmail = async () => {
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
+    await resetPassword(email);
+    setIsLoading(false);
   };
 
   return (

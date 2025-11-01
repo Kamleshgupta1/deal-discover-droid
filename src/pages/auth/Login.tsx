@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -25,6 +26,7 @@ export const Login = () => {
     password: '',
   });
   const navigate = useNavigate();
+  const { signIn } = useAuth();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -37,11 +39,13 @@ export const Login = () => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate login process
-    setTimeout(() => {
-      setIsLoading(false);
+    const { error } = await signIn(formData.email, formData.password);
+    
+    setIsLoading(false);
+    
+    if (!error) {
       navigate('/');
-    }, 2000);
+    }
   };
 
   return (
