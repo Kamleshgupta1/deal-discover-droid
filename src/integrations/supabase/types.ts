@@ -10,121 +10,17 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "13.0.4"
+    PostgrestVersion: "13.0.5"
   }
   public: {
     Tables: {
-      ai_suggestions: {
-        Row: {
-          content: Json
-          created_at: string | null
-          event_type: string
-          id: string
-          popularity_score: number | null
-          suggestion_type: string
-        }
-        Insert: {
-          content: Json
-          created_at?: string | null
-          event_type: string
-          id?: string
-          popularity_score?: number | null
-          suggestion_type: string
-        }
-        Update: {
-          content?: Json
-          created_at?: string | null
-          event_type?: string
-          id?: string
-          popularity_score?: number | null
-          suggestion_type?: string
-        }
-        Relationships: []
-      }
-      greetings: {
-        Row: {
-          animation_style: string | null
-          background_settings: Json | null
-          border_settings: Json | null
-          created_at: string | null
-          emojis: Json | null
-          event_emoji: string | null
-          event_name: string | null
-          event_type: string
-          frame_style: string | null
-          id: string
-          is_public: boolean | null
-          layout: string | null
-          media: Json | null
-          receiver_name: string
-          sender_name: string
-          slug: string
-          texts: Json | null
-          theme: string | null
-          title: string
-          updated_at: string | null
-          user_id: string | null
-          view_count: number | null
-        }
-        Insert: {
-          animation_style?: string | null
-          background_settings?: Json | null
-          border_settings?: Json | null
-          created_at?: string | null
-          emojis?: Json | null
-          event_emoji?: string | null
-          event_name?: string | null
-          event_type: string
-          frame_style?: string | null
-          id?: string
-          is_public?: boolean | null
-          layout?: string | null
-          media?: Json | null
-          receiver_name: string
-          sender_name: string
-          slug: string
-          texts?: Json | null
-          theme?: string | null
-          title?: string
-          updated_at?: string | null
-          user_id?: string | null
-          view_count?: number | null
-        }
-        Update: {
-          animation_style?: string | null
-          background_settings?: Json | null
-          border_settings?: Json | null
-          created_at?: string | null
-          emojis?: Json | null
-          event_emoji?: string | null
-          event_name?: string | null
-          event_type?: string
-          frame_style?: string | null
-          id?: string
-          is_public?: boolean | null
-          layout?: string | null
-          media?: Json | null
-          receiver_name?: string
-          sender_name?: string
-          slug?: string
-          texts?: Json | null
-          theme?: string | null
-          title?: string
-          updated_at?: string | null
-          user_id?: string | null
-          view_count?: number | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      generate_greeting_slug: {
-        Args: { event_name: string; receiver_name: string; sender_name: string }
-        Returns: string
-      }
+      [_ in never]: never
     }
     Enums: {
       [_ in never]: never
