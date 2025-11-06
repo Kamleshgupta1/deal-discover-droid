@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { 
@@ -9,8 +9,10 @@ import {
   Bell, 
   Settings,
   LogOut,
-  Shield
+  Shield,
+  LayoutDashboard
 } from 'lucide-react';
+import { useAuth } from '@/hooks/useAuth';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,6 +32,12 @@ export const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
+  const { user, isAdmin, signOut } = useAuth();
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
+  };
 
   const navigationItems = [
     { label: 'Home', path: '/' },
@@ -121,21 +129,35 @@ export const Header = () => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuLabel>
+                  {user ? user.email : 'My Account'}
+                </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => handleNavigation('/login')}>
-                  <User className="h-4 w-4 mr-2" />
-                  Sign In
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleNavigation('/register')}>
-                  <Shield className="h-4 w-4 mr-2" />
-                  Sign Up
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <LogOut className="h-4 w-4 mr-2" />
-                  Logout
-                </DropdownMenuItem>
+                {user ? (
+                  <>
+                    {isAdmin && (
+                      <DropdownMenuItem onClick={() => handleNavigation('/admin/dashboard')}>
+                        <LayoutDashboard className="h-4 w-4 mr-2" />
+                        Admin Dashboard
+                      </DropdownMenuItem>
+                    )}
+                    <DropdownMenuItem onClick={handleSignOut}>
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Logout
+                    </DropdownMenuItem>
+                  </>
+                ) : (
+                  <>
+                    <DropdownMenuItem onClick={() => handleNavigation('/login')}>
+                      <User className="h-4 w-4 mr-2" />
+                      Sign In
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleNavigation('/register')}>
+                      <Shield className="h-4 w-4 mr-2" />
+                      Sign Up
+                    </DropdownMenuItem>
+                  </>
+                )}
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
@@ -189,14 +211,40 @@ export const Header = () => {
 
               {/* Mobile Actions */}
               <div className="px-2 pt-4 border-t border-border space-y-4">
-                <div className="flex items-center justify-between">
-                  <Button variant="outline" size="sm" onClick={() => handleNavigation('/login')}>
-                    Sign In
-                  </Button>
-                  <Button size="sm" onClick={() => handleNavigation('/register')}>
-                    Sign Up
-                  </Button>
-                </div>
+                {user ? (
+                  <div className="space-y-2">
+                    <p className="text-sm text-muted-foreground px-2">{user.email}</p>
+                    {isAdmin && (
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="w-full"
+                        onClick={() => handleNavigation('/admin/dashboard')}
+                      >
+                        <LayoutDashboard className="h-4 w-4 mr-2" />
+                        Admin Dashboard
+                      </Button>
+                    )}
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="w-full"
+                      onClick={handleSignOut}
+                    >
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Logout
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-between">
+                    <Button variant="outline" size="sm" onClick={() => handleNavigation('/login')}>
+                      Sign In
+                    </Button>
+                    <Button size="sm" onClick={() => handleNavigation('/register')}>
+                      Sign Up
+                    </Button>
+                  </div>
+                )}
                 
                 <div className="flex items-center justify-between">
                   {/* Mobile Notifications */}

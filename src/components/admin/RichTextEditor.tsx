@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
@@ -17,9 +18,19 @@ import {
   Undo,
   Redo,
   ImageIcon,
-  Table as TableIcon
+  Table as TableIcon,
+  GitCompare,
+  Image as MediaIcon
 } from 'lucide-react';
 import { Card } from '@/components/ui/card';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { ComparisonBuilder } from './ComparisonBuilder';
+import { MediaManager } from './MediaManager';
 
 interface RichTextEditorProps {
   content: any;
@@ -27,6 +38,9 @@ interface RichTextEditorProps {
 }
 
 export const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
+  const [showComparison, setShowComparison] = useState(false);
+  const [showMedia, setShowMedia] = useState(false);
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -62,6 +76,16 @@ export const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
 
   const insertTable = () => {
     editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run();
+  };
+
+  const insertComparisonTable = (html: string) => {
+    editor.chain().focus().insertContent(html).run();
+    setShowComparison(false);
+  };
+
+  const insertMedia = (url: string) => {
+    editor.chain().focus().setImage({ src: url }).run();
+    setShowMedia(false);
   };
 
   return (
@@ -128,9 +152,9 @@ export const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
           type="button"
           size="sm"
           variant="ghost"
-          onClick={addImage}
+          onClick={() => setShowMedia(true)}
         >
-          <ImageIcon className="h-4 w-4" />
+          <MediaIcon className="h-4 w-4" />
         </Button>
         <Button
           type="button"
@@ -139,6 +163,14 @@ export const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
           onClick={insertTable}
         >
           <TableIcon className="h-4 w-4" />
+        </Button>
+        <Button
+          type="button"
+          size="sm"
+          variant="ghost"
+          onClick={() => setShowComparison(true)}
+        >
+          <GitCompare className="h-4 w-4" />
         </Button>
         <div className="w-px h-8 bg-border mx-1" />
         <Button
@@ -161,6 +193,26 @@ export const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
 
       {/* Editor Content */}
       <EditorContent editor={editor} />
+
+      {/* Comparison Builder Dialog */}
+      <Dialog open={showComparison} onOpenChange={setShowComparison}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Create Comparison Table</DialogTitle>
+          </DialogHeader>
+          <ComparisonBuilder onInsert={insertComparisonTable} />
+        </DialogContent>
+      </Dialog>
+
+      {/* Media Manager Dialog */}
+      <Dialog open={showMedia} onOpenChange={setShowMedia}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Add Media</DialogTitle>
+          </DialogHeader>
+          <MediaManager onInsert={insertMedia} />
+        </DialogContent>
+      </Dialog>
     </Card>
   );
 };

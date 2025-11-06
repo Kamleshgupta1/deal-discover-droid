@@ -39,7 +39,8 @@ import {
   DollarSign,
   RefreshCw,
   Eye,
-  Star
+  Star,
+  Languages
 } from 'lucide-react';
 import { useTheme } from '@/hooks/useTheme';
 import { useTextStyle } from '@/hooks/useTextStyle';
@@ -47,6 +48,7 @@ import { useFontSize } from '@/hooks/useFontSize';
 import { useViewPreferences } from '@/hooks/useViewPreferences';
 import { useSortPreferences } from '@/hooks/useSortPreferences';
 import { useAppPreferences } from '@/hooks/useAppPreferences';
+import { useLanguage } from '@/hooks/useLanguage';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
@@ -65,6 +67,7 @@ export const Settings = ({ children }: SettingsProps) => {
   const { currentSize, increaseSize, decreaseSize, fontSizes } = useFontSize();
   const { currentView, setViewMode, viewModes } = useViewPreferences();
   const { currentSort, setSortOption, sortOptions } = useSortPreferences();
+  const { currentLanguage, changeLanguage, languages } = useLanguage();
   const { 
     currency, 
     updateCurrency, 
@@ -296,6 +299,42 @@ export const Settings = ({ children }: SettingsProps) => {
                   {sortOptions.map((option) => (
                     <SelectItem key={option.key} value={option.key}>
                       {option.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </CardContent>
+          </Card>
+
+          {/* Language Settings */}
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base flex items-center gap-2">
+                <Languages className="h-4 w-4" />
+                Language
+              </CardTitle>
+              <CardDescription>
+                Choose your preferred language
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Select 
+                value={currentLanguage} 
+                onValueChange={(value) => {
+                  changeLanguage(value);
+                  toast({
+                    title: "Language Updated",
+                    description: `Language set to ${languages.find(l => l.code === value)?.name}`,
+                  });
+                }}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {languages.map((lang) => (
+                    <SelectItem key={lang.code} value={lang.code}>
+                      {lang.flag} {lang.name}
                     </SelectItem>
                   ))}
                 </SelectContent>
