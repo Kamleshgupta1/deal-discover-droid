@@ -44,15 +44,58 @@ export type Database = {
         }
         Relationships: []
       }
+      post_tags: {
+        Row: {
+          created_at: string
+          id: string
+          post_id: string
+          tag_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          post_id: string
+          tag_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          post_id?: string
+          tag_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_tags_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "post_tags_tag_id_fkey"
+            columns: ["tag_id"]
+            isOneToOne: false
+            referencedRelation: "tags"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       posts: {
         Row: {
           author_id: string
           category_id: string | null
           content: Json
           created_at: string
+          excerpt: string | null
           featured_image: string | null
           id: string
+          meta_description: string | null
+          meta_keywords: string[] | null
+          og_description: string | null
+          og_image: string | null
+          og_title: string | null
           published: boolean | null
+          reading_time: number | null
           slug: string
           title: string
           updated_at: string
@@ -62,9 +105,16 @@ export type Database = {
           category_id?: string | null
           content?: Json
           created_at?: string
+          excerpt?: string | null
           featured_image?: string | null
           id?: string
+          meta_description?: string | null
+          meta_keywords?: string[] | null
+          og_description?: string | null
+          og_image?: string | null
+          og_title?: string | null
           published?: boolean | null
+          reading_time?: number | null
           slug: string
           title: string
           updated_at?: string
@@ -74,9 +124,16 @@ export type Database = {
           category_id?: string | null
           content?: Json
           created_at?: string
+          excerpt?: string | null
           featured_image?: string | null
           id?: string
+          meta_description?: string | null
+          meta_keywords?: string[] | null
+          og_description?: string | null
+          og_image?: string | null
+          og_title?: string | null
           published?: boolean | null
+          reading_time?: number | null
           slug?: string
           title?: string
           updated_at?: string
@@ -116,6 +173,27 @@ export type Database = {
           full_name?: string | null
           id?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      tags: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          slug: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          slug: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          slug?: string
         }
         Relationships: []
       }

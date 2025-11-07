@@ -17,6 +17,10 @@ import { PostEditor } from "./pages/admin/PostEditor";
 import { PrivacyPolicy } from "./pages/legal/PrivacyPolicy";
 import { TermsOfService } from "./pages/legal/TermsOfService";
 import { ContactUs } from "./pages/ContactUs";
+import { BlogListing } from "./pages/BlogListing";
+import { BlogPost } from "./pages/BlogPost";
+import { CategoryBlog } from "./pages/CategoryBlog";
+import { TagBlog } from "./pages/TagBlog";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,8 +37,12 @@ const App = () => (
           <Header />
           <main className="flex-1">
             <Routes>
-              <Route path="/" element={<Index />} />
+            <Route path="/" element={<Index />} />
               <Route path="/categories" element={<AllCategories />} />
+              <Route path="/blog" element={<BlogListing />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/category/:slug" element={<CategoryBlog />} />
+              <Route path="/tag/:slug" element={<TagBlog />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
