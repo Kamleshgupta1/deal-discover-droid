@@ -2,193 +2,33 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
 const resources = {
-  en: {
-    translation: {
-      // Navigation
-      home: 'Home',
-      deals: 'Deals',
-      about: 'About',
-      contact: 'Contact',
-      categories: 'Categories',
-      
-      // Auth
-      signIn: 'Sign In',
-      signUp: 'Sign Up',
-      logout: 'Logout',
-      emailAddress: 'Email',
-      password: 'Password',
-      forgotPassword: 'Forgot Password?',
-      register: 'Register',
-      loginAction: 'Login',
-      fullName: 'Full Name',
-      
-      // Admin
-      adminDashboard: 'Admin Dashboard',
-      manageContent: 'Manage your content',
-      viewSite: 'View Site',
-      posts: 'Posts',
-      categoriesAdmin: 'Categories',
-      createPost: 'Create Post',
-      editPost: 'Edit Post',
-      
-      // Settings
-      settings: 'Settings',
-      appearance: 'Appearance',
-      languageSetting: 'Language',
-      notifications: 'Notifications',
-      
-      // Common
-      search: 'Search',
-      save: 'Save',
-      cancel: 'Cancel',
-      deleteAction: 'Delete',
-      editAction: 'Edit',
-      loading: 'Loading...',
-    }
-  },
-  es: {
-    translation: {
-      // Navigation
-      home: 'Inicio',
-      deals: 'Ofertas',
-      about: 'Acerca de',
-      contact: 'Contacto',
-      categories: 'Categorías',
-      
-      // Auth
-      signIn: 'Iniciar Sesión',
-      signUp: 'Registrarse',
-      logout: 'Cerrar Sesión',
-      emailAddress: 'Correo Electrónico',
-      password: 'Contraseña',
-      forgotPassword: '¿Olvidaste tu contraseña?',
-      register: 'Registrarse',
-      loginAction: 'Iniciar Sesión',
-      fullName: 'Nombre Completo',
-      
-      // Admin
-      adminDashboard: 'Panel de Administración',
-      manageContent: 'Administrar contenido',
-      viewSite: 'Ver Sitio',
-      posts: 'Publicaciones',
-      categoriesAdmin: 'Categorías',
-      createPost: 'Crear Publicación',
-      editPost: 'Editar Publicación',
-      
-      // Settings
-      settings: 'Configuración',
-      appearance: 'Apariencia',
-      languageSetting: 'Idioma',
-      notifications: 'Notificaciones',
-      
-      // Common
-      search: 'Buscar',
-      save: 'Guardar',
-      cancel: 'Cancelar',
-      deleteAction: 'Eliminar',
-      editAction: 'Editar',
-      loading: 'Cargando...',
-    }
-  },
-  fr: {
-    translation: {
-      // Navigation
-      home: 'Accueil',
-      deals: 'Offres',
-      about: 'À propos',
-      contact: 'Contact',
-      categories: 'Catégories',
-      
-      // Auth
-      signIn: 'Se connecter',
-      signUp: "S'inscrire",
-      logout: 'Déconnexion',
-      emailAddress: 'E-mail',
-      password: 'Mot de passe',
-      forgotPassword: 'Mot de passe oublié?',
-      register: "S'inscrire",
-      loginAction: 'Connexion',
-      fullName: 'Nom Complet',
-      
-      // Admin
-      adminDashboard: "Tableau de bord d'administration",
-      manageContent: 'Gérer votre contenu',
-      viewSite: 'Voir le site',
-      posts: 'Publications',
-      categoriesAdmin: 'Catégories',
-      createPost: 'Créer une publication',
-      editPost: 'Modifier la publication',
-      
-      // Settings
-      settings: 'Paramètres',
-      appearance: 'Apparence',
-      languageSetting: 'Langue',
-      notifications: 'Notifications',
-      
-      // Common
-      search: 'Rechercher',
-      save: 'Enregistrer',
-      cancel: 'Annuler',
-      deleteAction: 'Supprimer',
-      editAction: 'Modifier',
-      loading: 'Chargement...',
-    }
-  },
-  de: {
-    translation: {
-      // Navigation
-      home: 'Startseite',
-      deals: 'Angebote',
-      about: 'Über uns',
-      contact: 'Kontakt',
-      categories: 'Kategorien',
-      
-      // Auth
-      signIn: 'Anmelden',
-      signUp: 'Registrieren',
-      logout: 'Abmelden',
-      emailAddress: 'E-Mail',
-      password: 'Passwort',
-      forgotPassword: 'Passwort vergessen?',
-      register: 'Registrieren',
-      loginAction: 'Anmelden',
-      fullName: 'Vollständiger Name',
-      
-      // Admin
-      adminDashboard: 'Admin-Dashboard',
-      manageContent: 'Verwalten Sie Ihre Inhalte',
-      viewSite: 'Website ansehen',
-      posts: 'Beiträge',
-      categoriesAdmin: 'Kategorien',
-      createPost: 'Beitrag erstellen',
-      editPost: 'Beitrag bearbeiten',
-      
-      // Settings
-      settings: 'Einstellungen',
-      appearance: 'Erscheinungsbild',
-      languageSetting: 'Sprache',
-      notifications: 'Benachrichtigungen',
-      
-      // Common
-      search: 'Suchen',
-      save: 'Speichern',
-      cancel: 'Abbrechen',
-      deleteAction: 'Löschen',
-      editAction: 'Bearbeiten',
-      loading: 'Lädt...',
-    }
-  }
+  en: { translation: { home: 'Home', deals: 'Deals', about: 'About', contact: 'Contact', categories: 'Categories', signIn: 'Sign In', signUp: 'Sign Up', logout: 'Logout', emailAddress: 'Email', password: 'Password', forgotPassword: 'Forgot Password?', register: 'Register', loginAction: 'Login', fullName: 'Full Name', rememberMe: 'Remember Me', adminDashboard: 'Admin Dashboard', manageContent: 'Manage your content', viewSite: 'View Site', posts: 'Posts', categoriesAdmin: 'Categories', createPost: 'Create Post', editPost: 'Edit Post', settings: 'Settings', appearance: 'Appearance', languageSetting: 'Language', notifications: 'Notifications', search: 'Search', save: 'Save', cancel: 'Cancel', deleteAction: 'Delete', editAction: 'Edit', loading: 'Loading...' } },
+  es: { translation: { home: 'Inicio', deals: 'Ofertas', about: 'Acerca de', contact: 'Contacto', categories: 'Categorías', signIn: 'Iniciar Sesión', signUp: 'Registrarse', logout: 'Cerrar Sesión', emailAddress: 'Correo Electrónico', password: 'Contraseña', forgotPassword: '¿Olvidaste tu contraseña?', register: 'Registrarse', loginAction: 'Iniciar Sesión', fullName: 'Nombre Completo', rememberMe: 'Recuérdame', adminDashboard: 'Panel de Administración', manageContent: 'Administrar contenido', viewSite: 'Ver Sitio', posts: 'Publicaciones', categoriesAdmin: 'Categorías', createPost: 'Crear Publicación', editPost: 'Editar Publicación', settings: 'Configuración', appearance: 'Apariencia', languageSetting: 'Idioma', notifications: 'Notificaciones', search: 'Buscar', save: 'Guardar', cancel: 'Cancelar', deleteAction: 'Eliminar', editAction: 'Editar', loading: 'Cargando...' } },
+  fr: { translation: { home: 'Accueil', deals: 'Offres', about: 'À propos', contact: 'Contact', categories: 'Catégories', signIn: 'Se connecter', signUp: "S'inscrire", logout: 'Déconnexion', emailAddress: 'E-mail', password: 'Mot de passe', forgotPassword: 'Mot de passe oublié?', register: "S'inscrire", loginAction: 'Connexion', fullName: 'Nom Complet', rememberMe: 'Se souvenir de moi', adminDashboard: "Tableau de bord d'administration", manageContent: 'Gérer votre contenu', viewSite: 'Voir le site', posts: 'Publications', categoriesAdmin: 'Catégories', createPost: 'Créer une publication', editPost: 'Modifier la publication', settings: 'Paramètres', appearance: 'Apparence', languageSetting: 'Langue', notifications: 'Notifications', search: 'Rechercher', save: 'Enregistrer', cancel: 'Annuler', deleteAction: 'Supprimer', editAction: 'Modifier', loading: 'Chargement...' } },
+  de: { translation: { home: 'Startseite', deals: 'Angebote', about: 'Über uns', contact: 'Kontakt', categories: 'Kategorien', signIn: 'Anmelden', signUp: 'Registrieren', logout: 'Abmelden', emailAddress: 'E-Mail', password: 'Passwort', forgotPassword: 'Passwort vergessen?', register: 'Registrieren', loginAction: 'Anmelden', fullName: 'Vollständiger Name', rememberMe: 'Angemeldet bleiben', adminDashboard: 'Admin-Dashboard', manageContent: 'Verwalten Sie Ihre Inhalte', viewSite: 'Website ansehen', posts: 'Beiträge', categoriesAdmin: 'Kategorien', createPost: 'Beitrag erstellen', editPost: 'Beitrag bearbeiten', settings: 'Einstellungen', appearance: 'Erscheinungsbild', languageSetting: 'Sprache', notifications: 'Benachrichtigungen', search: 'Suchen', save: 'Speichern', cancel: 'Abbrechen', deleteAction: 'Löschen', editAction: 'Bearbeiten', loading: 'Lädt...' } },
+  hi: { translation: { home: 'होम', deals: 'डील्स', about: 'हमारे बारे में', contact: 'संपर्क', categories: 'श्रेणियाँ', signIn: 'साइन इन करें', signUp: 'साइन अप करें', logout: 'लॉग आउट', emailAddress: 'ईमेल', password: 'पासवर्ड', forgotPassword: 'पासवर्ड भूल गए?', register: 'रजिस्टर करें', loginAction: 'लॉगिन', fullName: 'पूरा नाम', rememberMe: 'मुझे याद रखें', adminDashboard: 'एडमिन डैशबोर्ड', manageContent: 'अपनी सामग्री प्रबंधित करें', viewSite: 'साइट देखें', posts: 'पोस्ट', categoriesAdmin: 'श्रेणियाँ', createPost: 'पोस्ट बनाएं', editPost: 'पोस्ट संपादित करें', settings: 'सेटिंग्स', appearance: 'दिखावट', languageSetting: 'भाषा', notifications: 'सूचनाएं', search: 'खोजें', save: 'सहेजें', cancel: 'रद्द करें', deleteAction: 'हटाएं', editAction: 'संपादित करें', loading: 'लोड हो रहा है...' } },
+  ta: { translation: { home: 'முகப்பு', deals: 'ஒப்பந்தங்கள்', about: 'எங்களைப் பற்றி', contact: 'தொடர்பு', categories: 'வகைகள்', signIn: 'உள்நுழைக', signUp: 'பதிவு செய்க', logout: 'வெளியேறு', emailAddress: 'மின்னஞ்சல்', password: 'கடவுச்சொல்', forgotPassword: 'கடவுச்சொல் மறந்துவிட்டதா?', register: 'பதிவு செய்க', loginAction: 'உள்நுழைக', fullName: 'முழு பெயர்', rememberMe: 'என்னை நினைவில் வைத்திரு', adminDashboard: 'நிர்வாக டாஷ்போர்டு', manageContent: 'உங்கள் உள்ளடக்கத்தை நிர்வகிக்கவும்', viewSite: 'தளத்தைப் பார்க்க', posts: 'இடுகைகள்', categoriesAdmin: 'வகைகள்', createPost: 'இடுகை உருவாக்கவும்', editPost: 'இடுகையைத் திருத்தவும்', settings: 'அமைப்புகள்', appearance: 'தோற்றம்', languageSetting: 'மொழி', notifications: 'அறிவிப்புகள்', search: 'தேடு', save: 'சேமி', cancel: 'ரத்துசெய்', deleteAction: 'நீக்கு', editAction: 'திருத்து', loading: 'ஏற்றுகிறது...' } },
+  kn: { translation: { home: 'ಮುಖಪುಟ', deals: 'ಒಪ್ಪಂದಗಳು', about: 'ನಮ್ಮ ಬಗ್ಗೆ', contact: 'ಸಂಪರ್ಕ', categories: 'ವರ್ಗಗಳು', signIn: 'ಸೈನ್ ಇನ್', signUp: 'ಸೈನ್ ಅಪ್', logout: 'ಲಾಗ್ ಔಟ್', emailAddress: 'ಇಮೇಲ್', password: 'ಪಾಸ್‌ವರ್ಡ್', forgotPassword: 'ಪಾಸ್‌ವರ್ಡ್ ಮರೆತಿರುವಿರಾ?', register: 'ನೋಂದಾಯಿಸಿ', loginAction: 'ಲಾಗಿನ್', fullName: 'ಪೂರ್ಣ ಹೆಸರು', rememberMe: 'ನನ್ನನ್ನು ನೆನಪಿಡು', adminDashboard: 'ನಿರ್ವಹಣಾ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್', manageContent: 'ನಿಮ್ಮ ವಿಷಯವನ್ನು ನಿರ್ವಹಿಸಿ', viewSite: 'ಸೈಟ್ ವೀಕ್ಷಿಸಿ', posts: 'ಪೋಸ್ಟ್‌ಗಳು', categoriesAdmin: 'ವರ್ಗಗಳು', createPost: 'ಪೋಸ್ಟ್ ರಚಿಸಿ', editPost: 'ಪೋಸ್ಟ್ ಸಂಪಾದಿಸಿ', settings: 'ಸೆಟ್ಟಿಂಗ್‌ಗಳು', appearance: 'ನೋಟ', languageSetting: 'ಭಾಷೆ', notifications: 'ಅಧಿಸೂಚನೆಗಳು', search: 'ಹುಡುಕು', save: 'ಉಳಿಸು', cancel: 'ರದ್ದುಮಾಡು', deleteAction: 'ಅಳಿಸು', editAction: 'ಸಂಪಾದಿಸು', loading: 'ಲೋಡ್ ಆಗುತ್ತಿದೆ...' } },
+  ml: { translation: { home: 'ഹോം', deals: 'ഡീലുകൾ', about: 'ഞങ്ങളെക്കുറിച്ച്', contact: 'ബന്ധപ്പെടുക', categories: 'വിഭാഗങ്ങൾ', signIn: 'സൈൻ ഇൻ', signUp: 'സൈൻ അപ്പ്', logout: 'ലോഗൗട്ട്', emailAddress: 'ഇമെയിൽ', password: 'പാസ്‌വേഡ്', forgotPassword: 'പാസ്‌വേഡ് മറന്നോ?', register: 'രജിസ്റ്റർ ചെയ്യുക', loginAction: 'ലോഗിൻ', fullName: 'മുഴുവൻ പേര്', rememberMe: 'എന്നെ ഓർമ്മിക്കുക', adminDashboard: 'അഡ്മിൻ ഡാഷ്‌ബോർഡ്', manageContent: 'നിങ്ങളുടെ ഉള്ളടക്കം നിയന്ത്രിക്കുക', viewSite: 'സൈറ്റ് കാണുക', posts: 'പോസ്റ്റുകൾ', categoriesAdmin: 'വിഭാഗങ്ങൾ', createPost: 'പോസ്റ്റ് സൃഷ്‌ടിക്കുക', editPost: 'പോസ്റ്റ് എഡിറ്റ് ചെയ്യുക', settings: 'ക്രമീകരണങ്ങൾ', appearance: 'രൂപം', languageSetting: 'ഭാഷ', notifications: 'അറിയിപ്പുകൾ', search: 'തിരയുക', save: 'സേവ് ചെയ്യുക', cancel: 'റദ്ദാക്കുക', deleteAction: 'ഇല്ലാതാക്കുക', editAction: 'എഡിറ്റ് ചെയ്യുക', loading: 'ലോഡ് ചെയ്യുന്നു...' } },
+  ur: { translation: { home: 'ہوم', deals: 'ڈیلز', about: 'ہمارے بارے میں', contact: 'رابطہ', categories: 'زمرے', signIn: 'سائن ان', signUp: 'سائن اپ', logout: 'لاگ آؤٹ', emailAddress: 'ای میل', password: 'پاس ورڈ', forgotPassword: 'پاس ورڈ بھول گئے؟', register: 'رجسٹر', loginAction: 'لاگ ان', fullName: 'پورا نام', rememberMe: 'مجھے یاد رکھیں', adminDashboard: 'ایڈمن ڈیش بورڈ', manageContent: 'اپنا مواد منظم کریں', viewSite: 'سائٹ دیکھیں', posts: 'پوسٹس', categoriesAdmin: 'زمرے', createPost: 'پوسٹ بنائیں', editPost: 'پوسٹ میں ترمیم کریں', settings: 'ترتیبات', appearance: 'ظہور', languageSetting: 'زبان', notifications: 'اطلاعات', search: 'تلاش کریں', save: 'محفوظ کریں', cancel: 'منسوخ کریں', deleteAction: 'حذف کریں', editAction: 'ترمیم کریں', loading: 'لوڈ ہو رہا ہے...' } },
+  te: { translation: { home: 'హోమ్', deals: 'డీల్స్', about: 'మా గురించి', contact: 'సంప్రదించండి', categories: 'వర్గాలు', signIn: 'సైన్ ఇన్', signUp: 'సైన్ అప్', logout: 'లాగౌట్', emailAddress: 'ఇమెయిల్', password: 'పాస్‌వర్డ్', forgotPassword: 'పాస్‌వర్డ్ మర్చిపోయారా?', register: 'నమోదు చేసుకోండి', loginAction: 'లాగిన్', fullName: 'పూర్తి పేరు', rememberMe: 'నన్ను గుర్తుంచుకోండి', adminDashboard: 'అడ్మిన్ డాష్‌బోర్డ్', manageContent: 'మీ కంటెంట్‌ను నిర్వహించండి', viewSite: 'సైట్ చూడండి', posts: 'పోస్ట్‌లు', categoriesAdmin: 'వర్గాలు', createPost: 'పోస్ట్ సృష్టించండి', editPost: 'పోస్ట్ సవరించండి', settings: 'సెట్టింగ్‌లు', appearance: 'రూపం', languageSetting: 'భాష', notifications: 'నోటిఫికేషన్‌లు', search: 'వెతకండి', save: 'సేవ్ చేయండి', cancel: 'రద్దు చేయండి', deleteAction: 'తొలగించండి', editAction: 'సవరించండి', loading: 'లోడ్ అవుతోంది...' } },
+  mr: { translation: { home: 'मुख्यपृष्ठ', deals: 'डील्स', about: 'आमच्या विषयी', contact: 'संपर्क', categories: 'श्रेणी', signIn: 'साइन इन', signUp: 'साइन अप', logout: 'लॉग आउट', emailAddress: 'ईमेल', password: 'पासवर्ड', forgotPassword: 'पासवर्ड विसरलात?', register: 'नोंदणी करा', loginAction: 'लॉगिन', fullName: 'पूर्ण नाव', rememberMe: 'मला लक्षात ठेवा', adminDashboard: 'प्रशासक डॅशबोर्ड', manageContent: 'आपली सामग्री व्यवस्थापित करा', viewSite: 'साइट पहा', posts: 'पोस्ट', categoriesAdmin: 'श्रेणी', createPost: 'पोस्ट तयार करा', editPost: 'पोस्ट संपादित करा', settings: 'सेटिंग्ज', appearance: 'देखावा', languageSetting: 'भाषा', notifications: 'सूचना', search: 'शोधा', save: 'जतन करा', cancel: 'रद्द करा', deleteAction: 'हटवा', editAction: 'संपादित करा', loading: 'लोड होत आहे...' } },
+  bn: { translation: { home: 'হোম', deals: 'ডিল', about: 'আমাদের সম্পর্কে', contact: 'যোগাযোগ', categories: 'বিভাগসমূহ', signIn: 'সাইন ইন', signUp: 'সাইন আপ', logout: 'লগআউট', emailAddress: 'ইমেইল', password: 'পাসওয়ার্ড', forgotPassword: 'পাসওয়ার্ড ভুলে গেছেন?', register: 'নিবন্ধন করুন', loginAction: 'লগইন', fullName: 'পূর্ণ নাম', rememberMe: 'আমাকে মনে রাখুন', adminDashboard: 'অ্যাডমিন ড্যাশবোর্ড', manageContent: 'আপনার কন্টেন্ট পরিচালনা করুন', viewSite: 'সাইট দেখুন', posts: 'পোস্ট', categoriesAdmin: 'বিভাগসমূহ', createPost: 'পোস্ট তৈরি করুন', editPost: 'পোস্ট সম্পাদনা করুন', settings: 'সেটিংস', appearance: 'চেহারা', languageSetting: 'ভাষা', notifications: 'বিজ্ঞপ্তি', search: 'অনুসন্ধান', save: 'সংরক্ষণ', cancel: 'বাতিল', deleteAction: 'মুছুন', editAction: 'সম্পাদনা', loading: 'লোড হচ্ছে...' } },
+  zh: { translation: { home: '主页', deals: '交易', about: '关于我们', contact: '联系', categories: '类别', signIn: '登录', signUp: '注册', logout: '登出', emailAddress: '电子邮件', password: '密码', forgotPassword: '忘记密码？', register: '注册', loginAction: '登录', fullName: '全名', rememberMe: '记住我', adminDashboard: '管理仪表板', manageContent: '管理您的内容', viewSite: '查看网站', posts: '帖子', categoriesAdmin: '类别', createPost: '创建帖子', editPost: '编辑帖子', settings: '设置', appearance: '外观', languageSetting: '语言', notifications: '通知', search: '搜索', save: '保存', cancel: '取消', deleteAction: '删除', editAction: '编辑', loading: '加载中...' } },
+  ja: { translation: { home: 'ホーム', deals: 'ディール', about: '私たちについて', contact: '連絡先', categories: 'カテゴリー', signIn: 'サインイン', signUp: 'サインアップ', logout: 'ログアウト', emailAddress: 'メール', password: 'パスワード', forgotPassword: 'パスワードをお忘れですか？', register: '登録', loginAction: 'ログイン', fullName: 'フルネーム', rememberMe: '私を覚えておいてください', adminDashboard: '管理ダッシュボード', manageContent: 'コンテンツを管理', viewSite: 'サイトを表示', posts: '投稿', categoriesAdmin: 'カテゴリー', createPost: '投稿を作成', editPost: '投稿を編集', settings: '設定', appearance: '外観', languageSetting: '言語', notifications: '通知', search: '検索', save: '保存', cancel: 'キャンセル', deleteAction: '削除', editAction: '編集', loading: '読み込み中...' } },
+  ar: { translation: { home: 'الصفحة الرئيسية', deals: 'الصفقات', about: 'معلومات عنا', contact: 'اتصل', categories: 'الفئات', signIn: 'تسجيل الدخول', signUp: 'التسجيل', logout: 'تسجيل الخروج', emailAddress: 'البريد الإلكتروني', password: 'كلمة المرور', forgotPassword: 'هل نسيت كلمة المرور؟', register: 'التسجيل', loginAction: 'تسجيل الدخول', fullName: 'الاسم الكامل', rememberMe: 'تذكرني', adminDashboard: 'لوحة الإدارة', manageContent: 'إدارة المحتوى الخاص بك', viewSite: 'عرض الموقع', posts: 'المنشورات', categoriesAdmin: 'الفئات', createPost: 'إنشاء منشور', editPost: 'تحرير المنشور', settings: 'الإعدادات', appearance: 'المظهر', languageSetting: 'اللغة', notifications: 'الإشعارات', search: 'بحث', save: 'حفظ', cancel: 'إلغاء', deleteAction: 'حذف', editAction: 'تحرير', loading: 'جاري التحميل...' } },
+  pt: { translation: { home: 'Início', deals: 'Ofertas', about: 'Sobre', contact: 'Contato', categories: 'Categorias', signIn: 'Entrar', signUp: 'Inscrever-se', logout: 'Sair', emailAddress: 'E-mail', password: 'Senha', forgotPassword: 'Esqueceu a senha?', register: 'Registrar', loginAction: 'Entrar', fullName: 'Nome Completo', rememberMe: 'Lembrar de mim', adminDashboard: 'Painel do Administrador', manageContent: 'Gerenciar seu conteúdo', viewSite: 'Ver Site', posts: 'Postagens', categoriesAdmin: 'Categorias', createPost: 'Criar Postagem', editPost: 'Editar Postagem', settings: 'Configurações', appearance: 'Aparência', languageSetting: 'Idioma', notifications: 'Notificações', search: 'Pesquisar', save: 'Salvar', cancel: 'Cancelar', deleteAction: 'Excluir', editAction: 'Editar', loading: 'Carregando...' } },
+  ru: { translation: { home: 'Главная', deals: 'Предложения', about: 'О нас', contact: 'Контакт', categories: 'Категории', signIn: 'Войти', signUp: 'Зарегистрироваться', logout: 'Выйти', emailAddress: 'Эл. почта', password: 'Пароль', forgotPassword: 'Забыли пароль?', register: 'Регистрация', loginAction: 'Войти', fullName: 'Полное имя', rememberMe: 'Запомнить меня', adminDashboard: 'Панель администратора', manageContent: 'Управление контентом', viewSite: 'Посмотреть сайт', posts: 'Посты', categoriesAdmin: 'Категории', createPost: 'Создать пост', editPost: 'Редактировать пост', settings: 'Настройки', appearance: 'Внешний вид', languageSetting: 'Язык', notifications: 'Уведомления', search: 'Поиск', save: 'Сохранить', cancel: 'Отмена', deleteAction: 'Удалить', editAction: 'Редактировать', loading: 'Загрузка...' } },
+  it: { translation: { home: 'Home', deals: 'Offerte', about: 'Chi siamo', contact: 'Contatto', categories: 'Categorie', signIn: 'Accedi', signUp: 'Iscriviti', logout: 'Esci', emailAddress: 'Email', password: 'Password', forgotPassword: 'Password dimenticata?', register: 'Registrati', loginAction: 'Accedi', fullName: 'Nome Completo', rememberMe: 'Ricordami', adminDashboard: 'Dashboard Admin', manageContent: 'Gestisci i tuoi contenuti', viewSite: 'Visualizza Sito', posts: 'Post', categoriesAdmin: 'Categorie', createPost: 'Crea Post', editPost: 'Modifica Post', settings: 'Impostazioni', appearance: 'Aspetto', languageSetting: 'Lingua', notifications: 'Notifiche', search: 'Cerca', save: 'Salva', cancel: 'Annulla', deleteAction: 'Elimina', editAction: 'Modifica', loading: 'Caricamento...' } },
 };
 
-i18n
-  .use(initReactI18next)
-  .init({
-    resources,
-    lng: localStorage.getItem('language') || 'en',
-    fallbackLng: 'en',
-    interpolation: {
-      escapeValue: false
-    }
-  });
+const savedLanguage = localStorage.getItem('app-language') || 'en';
+
+i18n.use(initReactI18next).init({
+  resources,
+  lng: savedLanguage,
+  fallbackLng: 'en',
+  interpolation: { escapeValue: false },
+});
 
 export default i18n;

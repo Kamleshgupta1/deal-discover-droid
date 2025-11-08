@@ -61,8 +61,9 @@ export const SEOHead = ({
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       
-      {/* RSS Feed */}
-      <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/api/rss" />
+      {/* RSS & Sitemap */}
+      <link rel="alternate" type="application/rss+xml" title="RSS Feed" href={`${siteUrl}/api/rss`} />
+      <link rel="sitemap" type="application/xml" title="Sitemap" href={`${siteUrl}/api/sitemap`} />
       
       {/* Preconnect for performance */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />

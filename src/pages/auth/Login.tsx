@@ -21,9 +21,15 @@ import appIcon from '@/assets/app-icon.png';
 export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+  const [rememberMe, setRememberMe] = useState(
+    () => localStorage.getItem('rememberMe') === 'true'
+  );
+  const [formData, setFormData] = useState(() => {
+    const savedEmail = localStorage.getItem('rememberedEmail');
+    return {
+      email: rememberMe && savedEmail ? savedEmail : '',
+      password: '',
+    };
   });
   const navigate = useNavigate();
   const { signIn } = useAuth();
@@ -38,6 +44,14 @@ export const Login = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+
+    if (rememberMe) {
+      localStorage.setItem('rememberMe', 'true');
+      localStorage.setItem('rememberedEmail', formData.email);
+    } else {
+      localStorage.removeItem('rememberMe');
+      localStorage.removeItem('rememberedEmail');
+    }
     
     const { error } = await signIn(formData.email, formData.password);
     
@@ -131,6 +145,20 @@ export const Login = () => {
                     )}
                   </Button>
                 </div>
+              </div>
+
+              {/* Remember Me Checkbox */}
+              <div className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  id="remember"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                  className="rounded border-muted"
+                />
+                <Label htmlFor="remember" className="text-sm cursor-pointer">
+                  Remember me
+                </Label>
               </div>
 
               {/* Forgot Password Link */}
