@@ -8,6 +8,8 @@ import { Separator } from '@/components/ui/separator';
 import { SocialShare } from '@/components/blog/SocialShare';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
+import { RelatedPosts } from '@/components/blog/RelatedPosts';
+import { Comments } from '@/components/blog/Comments';
 import { format } from 'date-fns';
 
 interface Post {
@@ -20,6 +22,7 @@ interface Post {
   reading_time: number;
   published: boolean;
   created_at: string;
+  category_id: string;
   meta_description: string;
   meta_keywords: string[];
   og_title: string;
@@ -38,6 +41,22 @@ export const BlogPost = () => {
   useEffect(() => {
     fetchPost();
   }, [slug]);
+
+  useEffect(() => {
+    if (post) {
+      trackPostView();
+    }
+  }, [post]);
+
+  const trackPostView = async () => {
+    try {
+      await supabase.from('post_views').insert({
+        post_id: post!.id,
+      });
+    } catch (error) {
+      console.error('Error tracking view:', error);
+    }
+  };
 
   const fetchPost = async () => {
     try {
@@ -214,6 +233,13 @@ export const BlogPost = () => {
               />
             </div>
           </Card>
+
+          <RelatedPosts 
+            currentPostId={post.id}
+            categoryId={post.category_id}
+          />
+
+          <Comments postId={post.id} />
         </div>
       </article>
     </>

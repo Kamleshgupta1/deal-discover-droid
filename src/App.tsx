@@ -21,18 +21,21 @@ import { BlogListing } from "./pages/BlogListing";
 import { BlogPost } from "./pages/BlogPost";
 import { CategoryBlog } from "./pages/CategoryBlog";
 import { TagBlog } from "./pages/TagBlog";
+import { AuthorProfile } from "./pages/AuthorProfile";
+import { ErrorBoundary } from "@/components/common/ErrorBoundary";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <SecurityHeaders />
-      <Toaster />
-      <Sonner />
-      <InstallPrompt />
-      <BrowserRouter>
+  <ErrorBoundary>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <SecurityHeaders />
+        <Toaster />
+        <Sonner />
+        <InstallPrompt />
+        <BrowserRouter>
         <div className="flex flex-col min-h-screen">
           <Header />
           <main className="flex-1">
@@ -40,9 +43,10 @@ const App = () => (
             <Route path="/" element={<Index />} />
               <Route path="/categories" element={<AllCategories />} />
               <Route path="/blog" element={<BlogListing />} />
-              <Route path="/blog/:slug" element={<BlogPost />} />
-              <Route path="/category/:slug" element={<CategoryBlog />} />
-              <Route path="/tag/:slug" element={<TagBlog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/category/:slug" element={<CategoryBlog />} />
+            <Route path="/tag/:slug" element={<TagBlog />} />
+            <Route path="/author/:authorId" element={<AuthorProfile />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -57,9 +61,10 @@ const App = () => (
           </main>
           <Footer />
         </div>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </ErrorBoundary>
 );
 
 export default App;

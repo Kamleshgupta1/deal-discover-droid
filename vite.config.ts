@@ -17,27 +17,29 @@ export default defineConfig(({ mode }) => ({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
-        name: 'First Look - Best Deals Comparison',
-        short_name: 'First Look',
-        description: 'Get your first look at the best deals! Compare prices across all major platforms.',
+        name: 'Deal Discover Droid - Price Comparison',
+        short_name: 'DealDroid',
+        description: 'Your ultimate price comparison and deal discovery platform with blog and comparisons',
         theme_color: '#8B5CF6',
         background_color: '#ffffff',
         display: 'standalone',
-        orientation: 'portrait-primary',
-        scope: '/',
+        orientation: 'portrait',
         start_url: '/',
+        scope: '/',
         icons: [
           {
-            src: '/icons/icon-192x192.png',
-            sizes: '192x192',
-            type: 'image/png',
-            purpose: 'any maskable'
-          },
-          {
-            src: '/icons/icon-512x512.png',
+            src: '/app-icon.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable'
+          }
+        ],
+        categories: ['shopping', 'lifestyle', 'utilities', 'news'],
+        screenshots: [
+          {
+            src: '/app-icon.png',
+            sizes: '512x512',
+            type: 'image/png'
           }
         ]
       },
@@ -45,16 +47,13 @@ export default defineConfig(({ mode }) => ({
         globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,jpeg,webp}'],
         runtimeCaching: [
           {
-            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+            urlPattern: /^https:\/\/.*\.(png|jpg|jpeg|svg|gif|webp)$/,
             handler: 'CacheFirst',
             options: {
-              cacheName: 'google-fonts-cache',
+              cacheName: 'images',
               expiration: {
-                maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365 // 1 year
-              },
-              cacheableResponse: {
-                statuses: [0, 200]
+                maxEntries: 100,
+                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
               }
             }
           },
@@ -62,15 +61,28 @@ export default defineConfig(({ mode }) => ({
             urlPattern: /^https:\/\/cfnwpbhurcvijkfvyzgc\.supabase\.co\/.*/i,
             handler: 'NetworkFirst',
             options: {
-              cacheName: 'supabase-api-cache',
+              cacheName: 'api-cache',
               expiration: {
                 maxEntries: 50,
                 maxAgeSeconds: 60 * 5 // 5 minutes
               },
               networkTimeoutSeconds: 10
             }
+          },
+          {
+            urlPattern: /\/blog\/.*/,
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'blog-pages',
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 60 * 60 * 24 // 24 hours
+              }
+            }
           }
-        ]
+        ],
+        navigateFallback: '/index.html',
+        navigateFallbackDenylist: [/^\/api/]
       }
     })
   ].filter(Boolean),

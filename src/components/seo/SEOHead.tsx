@@ -55,6 +55,18 @@ export const SEOHead = ({
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       <meta name="language" content="English" />
+      
+      {/* Mobile App Capable */}
+      <meta name="mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+      
+      {/* RSS Feed */}
+      <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/api/rss" />
+      
+      {/* Preconnect for performance */}
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     </Helmet>
   );
 };

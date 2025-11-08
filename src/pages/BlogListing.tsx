@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 import { SEOHead } from '@/components/seo/SEOHead';
+import { TrendingPosts } from '@/components/blog/TrendingPosts';
 import { Calendar, Clock, Search, Tag } from 'lucide-react';
 import { format } from 'date-fns';
 
@@ -129,6 +130,8 @@ export const BlogListing = () => {
               ))}
             </div>
           </div>
+
+          <TrendingPosts />
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredPosts.map((post) => (
