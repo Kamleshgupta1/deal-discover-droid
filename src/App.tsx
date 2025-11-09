@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -25,47 +26,69 @@ import { TagBlog } from "./pages/TagBlog";
 import { AuthorProfile } from "./pages/AuthorProfile";
 import { ErrorBoundary } from "@/components/common/ErrorBoundary";
 import NotFound from "./pages/NotFound";
+import { HelmetProvider } from 'react-helmet-async';
+import { I18nextProvider } from 'react-i18next';
+import i18n from '@/i18n/config';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const queryClient = new QueryClient();
 
+// Language synchronization component
+const LanguageSync = () => {
+  const { currentLanguage } = useLanguage();
+  
+  useEffect(() => {
+    if (i18n.language !== currentLanguage) {
+      i18n.changeLanguage(currentLanguage);
+    }
+  }, [currentLanguage]);
+  
+  return null;
+};
+
 const App = () => (
   <ErrorBoundary>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <SecurityHeaders />
-        <Toaster />
-        <Sonner />
-        <InstallPrompt />
-        <PageTranslator />
-        <BrowserRouter>
-        <div className="flex flex-col min-h-screen">
-          <Header />
-          <main className="flex-1">
-            <Routes>
-            <Route path="/" element={<Index />} />
-              <Route path="/categories" element={<AllCategories />} />
-              <Route path="/blog" element={<BlogListing />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/category/:slug" element={<CategoryBlog />} />
-            <Route path="/tag/:slug" element={<TagBlog />} />
-            <Route path="/author/:authorId" element={<AuthorProfile />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/admin/dashboard" element={<Dashboard />} />
-            <Route path="/admin/posts/new" element={<PostEditor />} />
-            <Route path="/admin/posts/edit/:id" element={<PostEditor />} />
-              <Route path="/privacy" element={<PrivacyPolicy />} />
-              <Route path="/terms" element={<TermsOfService />} />
-              <Route path="/contact" element={<ContactUs />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <HelmetProvider>
+      <I18nextProvider i18n={i18n}>
+        <QueryClientProvider client={queryClient}>
+          <TooltipProvider>
+            <SecurityHeaders />
+            <Toaster />
+            <Sonner />
+            <InstallPrompt />
+            <PageTranslator />
+            <LanguageSync />
+            <BrowserRouter>
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <main className="flex-1">
+                <Routes>
+                <Route path="/" element={<Index />} />
+                  <Route path="/categories" element={<AllCategories />} />
+                  <Route path="/blog" element={<BlogListing />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
+                <Route path="/category/:slug" element={<CategoryBlog />} />
+                <Route path="/tag/:slug" element={<TagBlog />} />
+                <Route path="/author/:authorId" element={<AuthorProfile />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/admin/dashboard" element={<Dashboard />} />
+                <Route path="/admin/posts/new" element={<PostEditor />} />
+                <Route path="/admin/posts/edit/:id" element={<PostEditor />} />
+                  <Route path="/privacy" element={<PrivacyPolicy />} />
+                  <Route path="/terms" element={<TermsOfService />} />
+                  <Route path="/contact" element={<ContactUs />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </main>
+              <Footer />
+            </div>
+            </BrowserRouter>
+          </TooltipProvider>
+        </QueryClientProvider>
+      </I18nextProvider>
+    </HelmetProvider>
   </ErrorBoundary>
 );
 

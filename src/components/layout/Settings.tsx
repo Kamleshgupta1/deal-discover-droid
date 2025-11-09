@@ -56,6 +56,7 @@ import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { TranslationCacheManager } from '@/components/layout/TranslationCacheManager';
 
 interface SettingsProps {
   children: React.ReactNode;
@@ -543,6 +544,9 @@ export const Settings = ({ children }: SettingsProps) => {
               </div>
             </CardContent>
           </Card>
+
+          {/* Translation Cache Manager */}
+          <TranslationCacheManager />
 
           <Separator />
 
