@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SecurityHeaders } from "@/components/security/SecurityHeaders";
 import { InstallPrompt } from "@/components/pwa/InstallPrompt";
+import { PageTranslator } from "@/components/features/PageTranslator";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import Index from "./pages/Index";
@@ -35,6 +36,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <InstallPrompt />
+        <PageTranslator />
         <BrowserRouter>
         <div className="flex flex-col min-h-screen">
           <Header />
