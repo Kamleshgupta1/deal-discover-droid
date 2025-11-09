@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from './useLanguage';
-import { translateText } from '@/utils/translateUtils';
+import { translateText, translateBatch } from '@/utils/translateUtils';
 
 interface TranslationCache {
   [key: string]: {
@@ -99,10 +99,12 @@ export const useTranslation = () => {
 
     setIsTranslating(true);
     try {
-      const translations = await Promise.all(
-        texts.map(text => translate(text, targetLang, sourceLanguage))
-      );
+      // Use batch translation with rate limiting
+      const translations = await translateBatch(texts, targetLang, sourceLanguage);
       return translations;
+    } catch (error) {
+      console.error('Batch translation error:', error);
+      return texts;
     } finally {
       setIsTranslating(false);
     }
