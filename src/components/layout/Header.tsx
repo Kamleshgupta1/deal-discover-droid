@@ -119,30 +119,6 @@ export const Header = () => {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-3">
-            {/* Language Switcher */}
-            <Select 
-              value={currentLanguage} 
-              onValueChange={(value) => {
-                changeLanguage(value);
-                toast({
-                  title: 'Language Changed',
-                  description: `Language set to ${languages.find(l => l.code === value)?.name}`,
-                });
-              }}
-            >
-              <SelectTrigger className="w-[140px] h-9">
-                <Languages className="h-4 w-4 mr-2" />
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {languages.map((lang) => (
-                  <SelectItem key={lang.code} value={lang.code}>
-                    {lang.flag} {lang.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-
             {/* Notifications */}
             <Button variant="ghost" size="sm" className="h-9 w-9 p-0 relative">
               <Bell className="h-4 w-4" />
@@ -172,6 +148,10 @@ export const Header = () => {
                 <DropdownMenuSeparator />
                 {user ? (
                   <>
+                    <DropdownMenuItem onClick={() => handleNavigation('/profile')}>
+                      <User className="h-4 w-4 mr-2" />
+                      Profile
+                    </DropdownMenuItem>
                     {isAdmin && (
                       <DropdownMenuItem onClick={() => handleNavigation('/admin/dashboard')}>
                         <LayoutDashboard className="h-4 w-4 mr-2" />
@@ -248,36 +228,18 @@ export const Header = () => {
 
               {/* Mobile Actions */}
               <div className="px-2 pt-4 border-t border-border space-y-4">
-                {/* Mobile Language Switcher */}
-                <div className="space-y-2">
-                  <Label className="text-xs text-muted-foreground px-2">Language</Label>
-                  <Select 
-                    value={currentLanguage} 
-                    onValueChange={(value) => {
-                      changeLanguage(value);
-                      toast({
-                        title: 'Language Changed',
-                        description: `Language set to ${languages.find(l => l.code === value)?.name}`,
-                      });
-                    }}
-                  >
-                    <SelectTrigger className="w-full">
-                      <Languages className="h-4 w-4 mr-2" />
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {languages.map((lang) => (
-                        <SelectItem key={lang.code} value={lang.code}>
-                          {lang.flag} {lang.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
                 {user ? (
                   <div className="space-y-2">
                     <p className="text-sm text-muted-foreground px-2">{user.email}</p>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="w-full"
+                      onClick={() => handleNavigation('/profile')}
+                    >
+                      <User className="h-4 w-4 mr-2" />
+                      Profile
+                    </Button>
                     {isAdmin && (
                       <Button 
                         variant="outline" 

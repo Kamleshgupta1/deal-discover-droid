@@ -24,6 +24,7 @@ import { BlogPost } from "./pages/BlogPost";
 import { CategoryBlog } from "./pages/CategoryBlog";
 import { TagBlog } from "./pages/TagBlog";
 import { AuthorProfile } from "./pages/AuthorProfile";
+import { UserProfile } from "./pages/UserProfile";
 import { ErrorBoundary } from "@/components/common/ErrorBoundary";
 import NotFound from "./pages/NotFound";
 import { HelmetProvider } from 'react-helmet-async';
@@ -65,6 +66,7 @@ const App = () => (
                 <Routes>
                 <Route path="/" element={<Index />} />
                   <Route path="/categories" element={<AllCategories />} />
+                  <Route path="/profile" element={<UserProfile />} />
                   <Route path="/blog" element={<BlogListing />} />
                 <Route path="/blog/:slug" element={<BlogPost />} />
                 <Route path="/category/:slug" element={<CategoryBlog />} />
