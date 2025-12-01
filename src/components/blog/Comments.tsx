@@ -69,12 +69,26 @@ export const Comments = ({ postId }: CommentsProps) => {
 
     if (!newComment.trim()) return;
 
+    // Validate comment length
+    const MAX_COMMENT_LENGTH = 2000;
+    if (newComment.length > MAX_COMMENT_LENGTH) {
+      toast({
+        title: 'Comment too long',
+        description: `Please limit to ${MAX_COMMENT_LENGTH} characters`,
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    // Sanitize comment by removing HTML tags
+    const sanitizedComment = newComment.trim().replace(/<[^>]*>/g, '');
+
     setLoading(true);
     try {
       const { error } = await supabase.from('comments').insert({
         post_id: postId,
         user_id: user.id,
-        content: newComment.trim(),
+        content: sanitizedComment,
       });
 
       if (error) throw error;
