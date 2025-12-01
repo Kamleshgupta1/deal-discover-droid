@@ -4,6 +4,7 @@ export type ThemeMode =
   | 'light' 
   | 'dark' 
   | 'ocean' 
+  | 'earth' 
   | 'sunset' 
   | 'yellow-pale'
   | 'forest';
@@ -32,6 +33,14 @@ const themes = {
     accent: '220 100% 70%',
     background: '200 30% 96%',
     foreground: '200 50% 15%',
+  },
+  earth: {
+    name: 'Earth Tone',
+    primary: '25 60% 45%',
+    secondary: '40 50% 55%',
+    accent: '15 70% 50%',
+    background: '30 20% 95%',
+    foreground: '25 30% 20%',
   },
   sunset: {
     name: 'Sunset Glow',
