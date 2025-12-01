@@ -15,10 +15,14 @@ import {
   User,
   ArrowLeft,
   Sparkles,
-  Shield
+  Shield,
+  AlertCircle
 } from 'lucide-react';
 import { APP_CONFIG } from '@/constants';
 import appIcon from '@/assets/app-icon.png';
+import { validatePassword } from '@/utils/passwordValidation';
+import { PasswordStrengthIndicator } from '@/components/auth/PasswordStrengthIndicator';
+import { toast } from 'sonner';
 
 export const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -31,24 +35,38 @@ export const Register = () => {
     password: '',
     confirmPassword: '',
   });
+  const [passwordValidation, setPasswordValidation] = useState(validatePassword(''));
   const navigate = useNavigate();
   const { signUp } = useAuth();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
+
+    // Validate password in real-time
+    if (name === 'password') {
+      setPasswordValidation(validatePassword(value));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
     if (!agreedToTerms) {
-      alert('Please agree to the Terms & Privacy Policy');
+      toast.error('Please agree to the Terms & Privacy Policy');
       return;
     }
+    
+    if (!passwordValidation.isValid) {
+      toast.error('Please meet all password requirements');
+      return;
+    }
+    
     if (formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match');
+      toast.error('Passwords do not match');
       return;
     }
     
@@ -146,7 +164,7 @@ export const Register = () => {
                     id="password"
                     name="password"
                     type={showPassword ? 'text' : 'password'}
-                    placeholder="Create a password"
+                    placeholder="Create a strong password"
                     value={formData.password}
                     onChange={handleInputChange}
                     className="pl-10 pr-10 h-12 bg-muted/50 border-muted focus:bg-background"
@@ -166,6 +184,16 @@ export const Register = () => {
                     )}
                   </Button>
                 </div>
+                
+                {/* Password Strength Indicator */}
+                {formData.password && (
+                  <div className="mt-3 p-3 bg-muted/50 rounded-lg border border-border">
+                    <PasswordStrengthIndicator 
+                      validation={passwordValidation}
+                      password={formData.password}
+                    />
+                  </div>
+                )}
               </div>
 
               {/* Confirm Password Field */}
@@ -217,11 +245,21 @@ export const Register = () => {
                 </Label>
               </div>
 
+              {/* Security Notice */}
+              {formData.password && !passwordValidation.isValid && (
+                <div className="flex gap-2 p-3 bg-destructive/10 border border-destructive/20 rounded-lg">
+                  <AlertCircle className="h-4 w-4 text-destructive flex-shrink-0 mt-0.5" />
+                  <p className="text-xs text-destructive">
+                    Please meet all password requirements above to ensure account security.
+                  </p>
+                </div>
+              )}
+
               {/* Submit Button */}
               <Button
                 type="submit"
                 className="w-full h-12 btn-gradient font-semibold"
-                disabled={isLoading || !agreedToTerms}
+                disabled={isLoading || !agreedToTerms || !passwordValidation.isValid}
               >
                 {isLoading ? (
                   <div className="flex items-center gap-2">
