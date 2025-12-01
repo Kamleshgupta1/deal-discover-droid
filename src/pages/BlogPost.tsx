@@ -11,6 +11,7 @@ import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 import { RelatedPosts } from '@/components/blog/RelatedPosts';
 import { Comments } from '@/components/blog/Comments';
 import { format } from 'date-fns';
+import DOMPurify from 'dompurify';
 
 interface Post {
   id: string;
@@ -85,7 +86,11 @@ export const BlogPost = () => {
     if (!content) return null;
     
     if (typeof content === 'string') {
-      return <div dangerouslySetInnerHTML={{ __html: content }} />;
+      const sanitized = DOMPurify.sanitize(content, {
+        ALLOWED_TAGS: ['p', 'b', 'i', 'em', 'strong', 'a', 'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'code', 'pre', 'img', 'table', 'thead', 'tbody', 'tr', 'th', 'td', 'br', 'hr', 'div', 'span'],
+        ALLOWED_ATTR: ['href', 'title', 'src', 'alt', 'class', 'id']
+      });
+      return <div dangerouslySetInnerHTML={{ __html: sanitized }} />;
     }
 
     // Render TipTap JSON content
